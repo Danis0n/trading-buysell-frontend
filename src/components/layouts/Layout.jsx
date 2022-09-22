@@ -1,22 +1,27 @@
 import React, {useContext} from 'react'
 import { Outlet } from 'react-router-dom'
 import Footer from '../Footer'
-import Navbar from '../Navbar'
 import { useAuth } from '../hook/useAuth'
-import NotAuthNavbar from '../NotAuthNavbar'
-import { AuthContext } from '../hook/useAuth'
+import AuthorizedNavbar from '../ui/navbar/AuthorizedNavbar'
+import NoAuthorizedNavbar from '../ui/navbar/NoAuthorizedNavbar'
 
-const Layout = () => {
+const Layout = ({isAuth}) => {
 
   // TODO : implement navbar of two types - auth&notauth
   const {store} = useAuth();
 
-  console.log(store);
-  console.log(store.isAuth);
+  if (store.isLoading) {
+    return <div>Loading</div>
+  }
 
   return (
     <>
-    {store.isAuth ? <Navbar/> : <NotAuthNavbar/>}
+    {isAuth
+     ? 
+     <AuthorizedNavbar/>
+     :
+     <NoAuthorizedNavbar/>
+    }
     
     <main>
         <Outlet/>

@@ -5,20 +5,31 @@ import {privateRoutes, publicRoutes} from "../router";
 import NoAuthorizedNavbar from '../components/ui/navbar/NoAuthorizedNavbar';
 import AuthorizedNavbar from '../components/ui/navbar/AuthorizedNavbar';
 import { useAuth } from '../hook/useAuth';
+import Layout from '../components/layouts/Layout';
+import HomePage from './HomePage';
 
 const AppRouter = () => {
     const {store} = useAuth()
 
-    if (store.isLoading) {
-        // return <Loader/>
-    }
+    // console.log(store.isAuth);
 
+    if(store.isLoading){
+        return <div>Loading</div>
+    }
+    
     return (
-        store.isAuth
-        ?
-        <AuthorizedNavbar/>
-        :
-        <NoAuthorizedNavbar/>
+        // store.isAuth
+        // ?
+        // <AuthorizedNavbar/>
+        // :
+        // <NoAuthorizedNavbar/>
+
+        <Routes>
+            <Route path='/' element={<Layout isAuth={store.isAuth}/>}>
+                <Route index element={<HomePage/>}/>
+            </Route>
+        </Routes>
+
     );
 };
 

@@ -15,21 +15,9 @@ function App() {
   const {store} = useAuth()
   const [users, setUsers] = useState<User[]>([])
 
-  async function getUsers(){
-    try {
-      const response = await UserService.fetchUsers();
-      setUsers(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   if(store.isLoading){
     return <div>Loading</div>
   }
-
-  // сделать ссылку на страницу логина/регистрации?
-  // потом загружать нужный navbar?
 
   return (
     <AppRouter/>

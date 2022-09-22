@@ -33,6 +33,7 @@ export default class Store {
 
     // todo : fix it bug
     async login(username: string, password: string){
+        this.setLoading(true);
         try {
             const response = await AuthService.login(username,password);
             
@@ -41,7 +42,11 @@ export default class Store {
             this.setUser(response.data.user)
         } catch (error) {
             console.log(error);
+        } finally{
+            this.setLoading(false);
+            window.location.reload();
         }
+
     }
     
     // TODO : refactor this! & check it on backend
@@ -58,6 +63,7 @@ export default class Store {
     }
 
     async logout(){
+        this.setLoading(true);
         try {
             const response = await AuthService.logout();
             console.log(response);
@@ -67,6 +73,9 @@ export default class Store {
             this.setUser({} as User);  
         } catch (error) {
             console.log(error);
+        } finally{
+            this.setLoading(false);
+            window.location.reload();
         }
     }
 
