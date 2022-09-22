@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { useState, useContext } from 'react'
 // import { Context } from '..'
 import { observer } from 'mobx-react-lite';
-import { AuthContext, useAuth } from '../hook/useAuth';
+import { AuthContext, useAuth } from './hook/useAuth';
 
 const LoginForm : FC = () => {
 

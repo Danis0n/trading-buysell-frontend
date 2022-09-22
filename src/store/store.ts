@@ -1,9 +1,9 @@
-import { User } from "../models/User";
+import { User } from "../model/User";
 import {makeAutoObservable} from 'mobx'
 import AuthService from "../service/AuthService";
 import axios from "axios";
-import { AuthResponse } from "../models/response/AuthResponse";
-import { API_URL } from "../http";
+import { AuthResponse } from "../response/AuthResponse";
+import { API_URL } from "../components/http";
 
 export default class Store {
 

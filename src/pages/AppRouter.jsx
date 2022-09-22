@@ -4,7 +4,7 @@ import {privateRoutes, publicRoutes} from "../router";
 // import { Context } from '..';
 import NoAuthorizedNavbar from '../components/ui/navbar/NoAuthorizedNavbar';
 import AuthorizedNavbar from '../components/ui/navbar/AuthorizedNavbar';
-import { useAuth } from '../hook/useAuth';
+import { useAuth } from '../components/hook/useAuth';
 import Layout from '../components/layouts/Layout';
 import HomePage from './HomePage';
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useContext, useState } from 'react'
 // import { Context } from '../../..'
-import { useAuth } from '../../../hook/useAuth'
+import { useAuth } from '../../hook/useAuth'
 import Button from '../button/Button'
 
 

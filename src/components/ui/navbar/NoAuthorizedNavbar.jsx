@@ -4,7 +4,7 @@ import { Context } from '../../..'
 import Button from '../button/Button'
 import Modal from '../modal/Modal'
 import LoginForm from '../../LoginForm'
-import { useAuth } from '../../../hook/useAuth'
+import { useAuth } from '../../hook/useAuth'
 
 const NoAuthorizedNavbar = () => {
 

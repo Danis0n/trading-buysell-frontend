@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import { Outlet } from 'react-router-dom'
 import Footer from '../Footer'
-import { useAuth } from '../../hook/useAuth'
+import { useAuth } from '../hook/useAuth'
 import AuthorizedNavbar from '../ui/navbar/AuthorizedNavbar'
 import NoAuthorizedNavbar from '../ui/navbar/NoAuthorizedNavbar'
 
