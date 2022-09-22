@@ -1,6 +1,6 @@
 import { User } from "../models/User";
 import {makeAutoObservable} from 'mobx'
-import AuthService from "../services/AuthService";
+import AuthService from "../service/AuthService";
 import axios from "axios";
 import { AuthResponse } from "../models/response/AuthResponse";
 import { API_URL } from "../http";
@@ -44,7 +44,7 @@ export default class Store {
             console.log(error);
         } finally{
             this.setLoading(false);
-            window.location.reload();
+            // window.location.reload();
         }
 
     }

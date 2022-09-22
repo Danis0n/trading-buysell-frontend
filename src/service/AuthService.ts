@@ -1,4 +1,4 @@
-import $api from '../components/http';
+import $api from '../http';
 import {AxiosResponse} from 'axios'
 import { AuthResponse } from '../response/AuthResponse';
 

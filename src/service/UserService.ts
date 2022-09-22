@@ -1,6 +1,6 @@
-import $api from '../components/http';
+import $api from '../http';
 import {AxiosResponse} from 'axios'
-import { User } from "../components/model/User";
+import { User } from '../models/User';
 
 export default class UserService {
     static fetchUsers() : Promise<AxiosResponse<User[]>> {

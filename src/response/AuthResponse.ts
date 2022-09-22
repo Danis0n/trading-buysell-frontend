@@ -1,4 +1,4 @@
-import { User } from "../components/model/User";
+import { User } from "../models/User";
 
 export interface AuthResponse{
     accessToken: string;

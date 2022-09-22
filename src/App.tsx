@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import LoginForm from './components/LoginForm';
 import Navbar from './components/ui/navbar/Navbar';
 import { User } from './models/User';
-import UserService from './services/UserService';
+import UserService from './service/UserService';
 import './styles/App.css';
 import AppRouter from './pages/AppRouter';
 import { BrowserRouter } from 'react-router-dom';
