@@ -1,9 +1,9 @@
-import { User } from "../model/User";
+import { User } from "../models/User";
 import {makeAutoObservable} from 'mobx'
+import AuthService from "../services/AuthService";
 import axios from "axios";
-import AuthService from "../../service/AuthService";
+import { AuthResponse } from "../models/response/AuthResponse";
 import { API_URL } from "../http";
-import { AuthResponse } from "../../response/AuthResponse";
 
 export default class Store {
 
@@ -31,13 +31,14 @@ export default class Store {
         return this.isAuth
     }
 
+    // todo : fix it bug
     async login(username: string, password: string){
         try {
             const response = await AuthService.login(username,password);
+            
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user)
-            
         } catch (error) {
             console.log(error);
         }
@@ -51,7 +52,6 @@ export default class Store {
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user)
-            
         } catch (error) {
             console.log(error);
         }
@@ -60,8 +60,8 @@ export default class Store {
     async logout(){
         try {
             const response = await AuthService.logout();
+            console.log(response);
             localStorage.removeItem('token');
-            localStorage.removeItem('auth');
             this.setAuth(false);
             
             this.setUser({} as User);  
@@ -71,20 +71,20 @@ export default class Store {
     }
 
     async checkAuth() {
-        // this.setLoading(true);
+        this.setLoading(true);
         try {
             const response = await axios.get<AuthResponse>(
                 `${API_URL}/api/auth`, 
                 {withCredentials: true}
             );
+             
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
-
             this.setUser(response.data.user);
         } catch (error) {
             console.log(error);
         } finally{
-            // this.setLoading(false);
+            this.setLoading(false);
         }
     }
 }

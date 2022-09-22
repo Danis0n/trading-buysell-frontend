@@ -1,16 +1,25 @@
 import React from 'react'
+import { AuthContext } from '..';
+import { useAuth } from './hook/useAuth'
 
 const Navbar = () => {
 
-    const Style = {
-        textAlign: 'center',   
-    }
+  const Style = {
+      textAlign: 'center',   
+  }
+
+  const {store} = useAuth();
 
   return (
     <div
      style={Style}
     >
-        Каталог Поиск Войти
+      <button
+       onClick={() => store.logout()}
+      >
+        Выйти
+      </button>
+        {/* Каталог Поиск Выйти */}
     </div>
   )
 }
