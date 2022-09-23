@@ -9,17 +9,15 @@ const AdvertsPage = () => {
 
     const [adverts, setAdverts] = useState([])
     
+    async function fetchData() {
+        const response = await axios.get(`${API_URL}/api/advert/get/all`)
+        setAdverts(response.data);
+        console.log(response);
+    }
+
     useEffect(() =>  {
-        async function fetchData() {
-            const response = await axios.get(`${API_URL}/api/advert/get/all`)
-            setAdverts(response.data);
-            console.log(response);
-        }
         fetchData();
     }, [])
-    
-
-   
 
     return (
         <div>

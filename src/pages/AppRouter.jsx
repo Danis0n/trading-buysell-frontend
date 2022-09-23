@@ -8,6 +8,7 @@ import { useAuth } from '../components/hook/useAuth';
 import Layout from '../components/layouts/Layout';
 import HomePage from './HomePage';
 import AdvertsPage from './AdvertsPage';
+import AdvertPage from './AdvertPage';
 
 const AppRouter = () => {
     const {store} = useAuth()
@@ -21,7 +22,8 @@ const AppRouter = () => {
         <Routes>
             <Route path='/' element={<Layout isAuth={store.isAuth}/>}>
                 <Route index element={<HomePage/>}/>
-                <Route path='/adverts' element={<AdvertsPage/>}/>
+                <Route path='adverts' element={<AdvertsPage/>}/>
+                <Route path='adverts/:id' element={<AdvertPage/>}/>    
             </Route>
         </Routes>
 

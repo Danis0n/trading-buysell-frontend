@@ -1,5 +1,9 @@
 import { Advert } from "../model/Advert";
 
-export interface AuthResponse{
+export interface AdvertsResponse {
     adverts: Advert[];
+}
+
+export interface AdvertResponse {
+    advert: Advert;
 }

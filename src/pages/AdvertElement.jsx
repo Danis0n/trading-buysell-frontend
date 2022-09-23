@@ -1,4 +1,5 @@
 import React from 'react'
+import { Advert } from '../model/Advert';
 
 const AdvertElement = ({a}) => {
 
@@ -14,12 +15,6 @@ const AdvertElement = ({a}) => {
     >
         {a.id} {a.title} {a.type.name} 
         <img src={a.images[0].url} alt='logo'/>
-        {/* {a.images.map((img) => (
-            <div key={img.id}>
-                {img.url}
-                <img src={img.url} alt='logo'/>
-            </div>
-        ))} */}
     </div>
   )
 }

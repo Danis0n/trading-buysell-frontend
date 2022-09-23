@@ -13,12 +13,6 @@ const AuthProvider = ({children }) => {
       }
     }, []);
   
-    console.log(store);
-
-    if(store.isLoading) {
-      return <div>Loading...</div>
-    }
-
   return (
     <AuthContext.Provider value={{store}}>
         {children}
