@@ -7,26 +7,21 @@ import AuthorizedNavbar from '../components/ui/navbar/AuthorizedNavbar';
 import { useAuth } from '../components/hook/useAuth';
 import Layout from '../components/layouts/Layout';
 import HomePage from './HomePage';
+import AdvertsPage from './AdvertsPage';
 
 const AppRouter = () => {
     const {store} = useAuth()
-
-    // console.log(store.isAuth);
 
     if(store.isLoading){
         return <div>Loading</div>
     }
     
     return (
-        // store.isAuth
-        // ?
-        // <AuthorizedNavbar/>
-        // :
-        // <NoAuthorizedNavbar/>
 
         <Routes>
             <Route path='/' element={<Layout isAuth={store.isAuth}/>}>
                 <Route index element={<HomePage/>}/>
+                <Route path='/adverts' element={<AdvertsPage/>}/>
             </Route>
         </Routes>
 

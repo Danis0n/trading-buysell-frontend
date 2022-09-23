@@ -26,7 +26,7 @@ const Layout = ({isAuth}) => {
     <main>
         <Outlet/>
     </main>
-    <Footer/>
+    {/* <Footer/> */}
     </>
   )
 }
