@@ -1,5 +1,4 @@
 import React from 'react'
-import { Advert } from '../model/Advert';
 
 const AdvertElement = ({a}) => {
 

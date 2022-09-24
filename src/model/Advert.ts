@@ -6,7 +6,7 @@ export interface Advert {
     userId: string;
     dateOfCreation: string;
     price: string;
-    images: Image[];
+    images: Image[];    
     type: Type;
 }
 

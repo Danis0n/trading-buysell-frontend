@@ -1,8 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Advert } from '../model/Advert'
-import { useDispatch, useSelector } from "react-redux";
-import axios from 'axios';
-import { API_URL } from '../components/http';
+import AdvertService from '../service/AdvertService';
 import AdvertElement from './AdvertElement';
 
 const AdvertsPage = () => {
@@ -10,9 +7,12 @@ const AdvertsPage = () => {
     const [adverts, setAdverts] = useState([])
     
     async function fetchData() {
-        const response = await axios.get(`${API_URL}/api/advert/get/all`)
-        setAdverts(response.data);
-        console.log(response);
+        try {
+            const response = await AdvertService.getAll();
+            setAdverts(response.data);
+        } catch (error) {
+            console.log(error.message);            
+        }   
     }
 
     useEffect(() =>  {

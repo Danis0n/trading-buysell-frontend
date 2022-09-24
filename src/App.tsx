@@ -13,7 +13,6 @@ import { useAuth } from './components/hook/useAuth';
 function App() {
 
   const {store} = useAuth()
-  const [users, setUsers] = useState<User[]>([])
 
   if(store.isLoading){
     return <div>Loading</div>

@@ -1,15 +1,6 @@
-import { useState } from 'react'
+import './gallery.css'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faCircleChevronLeft, 
-  faCircleChevronRight, 
-  faCircleXmark
-} from '@fortawesome/free-solid-svg-icons'
-
-import './wsp-gallery.css'
-
-const WSPGallery = ({galleryImages}) => {
+const Gallery = ({galleryImages}) => {
 
   return (
     <div>
@@ -31,4 +22,4 @@ const WSPGallery = ({galleryImages}) => {
   )
 }
 
-export default WSPGallery
+export default Gallery

@@ -46,7 +46,6 @@ export default class Store {
             this.setLoading(false);
             // window.location.reload();
         }
-
     }
     
     // TODO : refactor this! & check it on backend
