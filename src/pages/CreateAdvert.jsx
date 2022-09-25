@@ -1,12 +1,12 @@
 import React, {useCallback, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
-import $api from '../components/http';
 import AdvertService from '../service/AdvertService';
-import { API_URL } from '../components/http';
 
 const CreateAdvert = () => {
 
   const [selectedImages, setSelectedImages] = useState([]);
+  const [imagesToRender, setImagesToRender] = useState([]);
+
   const [title, setTitle] = useState('test')
   const [location, setLocation] = useState('test')
   const [description, setDescription] = useState('test')
@@ -14,24 +14,10 @@ const CreateAdvert = () => {
   const [type, setType] = useState('job')
 
   const [isLoading, setIsLoading] = useState(false)
-
-  const onSelectFile = (event) => {
-    const selectedFiles = event.target.files;
-
-    const selectedFilesArray = Array.from(selectedFiles);
-
-    const imagesArray = selectedFilesArray.map((file) => {
-      return URL.createObjectURL(file);
-    });
-
-    setSelectedImages((previousImages) => previousImages.concat(imagesArray));
-
-    // FOR BUG IN CHROME
-    event.target.value = "";
-  };
  
-  const deleteHandler = (image) =>  {
-    setSelectedImages(selectedImages.filter((e) => e !== image));
+  const deleteHandler = (image, index) =>  {
+    setSelectedImages(selectedImages.filter((_,index) => index !== 0));
+    setImagesToRender(imagesToRender.filter((e) => e !== image));
     URL.revokeObjectURL(image);
   }
 
@@ -44,9 +30,8 @@ const CreateAdvert = () => {
       formData.append('description',description);
       formData.append('price',price);
       
-      // сделать на бэке стрингой файл
       selectedImages.map(file => {
-          formData.append('files',file);
+        formData.append('files',file);
       })
       formData.append('type',type);
       
@@ -59,14 +44,19 @@ const CreateAdvert = () => {
   }
 
   const onDrop = useCallback(acceptedFiles => {
-    setIsLoading(true);
+    // setIsLoading(true);
     const Files = acceptedFiles;
     setSelectedImages(...selectedImages,Files);
-    setIsLoading(false)
-  }, [])
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
-  console.log(selectedImages);
+    const imagesArray = Files.map((file) => {
+      return URL.createObjectURL(file);
+    });
+    setImagesToRender((previousImages) => previousImages.concat(imagesArray));
+
+    // setIsLoading(false)
+  }, [])
+
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   if(isLoading){
     return <div>Loading</div>
@@ -75,12 +65,24 @@ const CreateAdvert = () => {
     return (
       <section>
         <div {...getRootProps()}>
-              <input {...getInputProps()} />
+              <input {...getInputProps()}/>
               {
                 isDragActive ?
                   <p>Drop the files here ...</p> :
                   <p>Drag 'n' drop some files here, or click to select files</p>
               }
+        </div>
+
+        <div>
+          {imagesToRender && imagesToRender.map((image,index) => {
+            return (
+              <div key={image}>
+                <img src={image} height='200' alt='img'/>
+                <button onClick={() => deleteHandler(image,index)}>delete image</button>
+                <p>{index + 1}</p>
+              </div>
+            )
+          })}
         </div>
 
         <div>
