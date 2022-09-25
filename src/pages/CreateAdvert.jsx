@@ -12,8 +12,6 @@ const CreateAdvert = () => {
   const [description, setDescription] = useState('test')
   const [price, setPrice] = useState('test')
   const [type, setType] = useState('job')
-
-  const [isLoading, setIsLoading] = useState(false)
  
   const deleteHandler = (image, index) =>  {
     setSelectedImages(selectedImages.filter((_,index) => index !== 0));
@@ -44,7 +42,6 @@ const CreateAdvert = () => {
   }
 
   const onDrop = useCallback(acceptedFiles => {
-    // setIsLoading(true);
     const Files = acceptedFiles;
     setSelectedImages(...selectedImages,Files);
 
@@ -53,108 +50,103 @@ const CreateAdvert = () => {
     });
     setImagesToRender((previousImages) => previousImages.concat(imagesArray));
 
-    // setIsLoading(false)
   }, [])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
-  if(isLoading){
-    return <div>Loading</div>
-  }
+  return (
+    <section>
+      <div {...getRootProps()}>
+            <input {...getInputProps()}/>
+            {
+              isDragActive ?
+                <p>Drop the files here ...</p> :
+                <p>Drag 'n' drop some files here, or click to select files</p>
+            }
+      </div>
 
-    return (
-      <section>
-        <div {...getRootProps()}>
-              <input {...getInputProps()}/>
-              {
-                isDragActive ?
-                  <p>Drop the files here ...</p> :
-                  <p>Drag 'n' drop some files here, or click to select files</p>
-              }
-        </div>
+      <div>
+        {imagesToRender && imagesToRender.map((image,index) => {
+          return (
+            <div key={image}>
+              <img src={image} height='200' alt='img'/>
+              <button onClick={() => deleteHandler(image,index)}>delete image</button>
+              <p>{index + 1}</p>
+            </div>
+          )
+        })}
+      </div>
 
-        <div>
-          {imagesToRender && imagesToRender.map((image,index) => {
-            return (
-              <div key={image}>
-                <img src={image} height='200' alt='img'/>
-                <button onClick={() => deleteHandler(image,index)}>delete image</button>
-                <p>{index + 1}</p>
-              </div>
-            )
-          })}
-        </div>
+      <div>
+        <label>
+          Title
+          <br />
+          <input
+            type="text"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            placeholder='title'
+          />
+        </label>
+      </div>
 
-        <div>
-          <label>
-            Title
-            <br />
-            <input
-              type="text"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-              placeholder='title'
-            />
-          </label>
-        </div>
+      <div>
+        <label>
+          location
+          <br />
+          <input
+            type="text"
+            value={location}
+            onChange={e => setLocation(e.target.value)}
+            placeholder='location'
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          description
+          <br />
+          <input
+            type="text"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            placeholder='description'
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          price
+          <br />
+          <input
+            type="text"
+            value={price}
+            onChange={e => setPrice(e.target.value)}
+            placeholder='price'
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          type
+          <br />
+          <input
+            type="text"
+            value={type}
+            onChange={e => setType(e.target.value)}
+            placeholder='type'
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          <button onClick={handleSubmit}>submit</button>
+          <br />
+        </label>
+      </div>
 
-        <div>
-          <label>
-            location
-            <br />
-            <input
-              type="text"
-              value={location}
-              onChange={e => setLocation(e.target.value)}
-              placeholder='location'
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            description
-            <br />
-            <input
-              type="text"
-              value={description}
-              onChange={e => setDescription(e.target.value)}
-              placeholder='description'
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            price
-            <br />
-            <input
-              type="text"
-              value={price}
-              onChange={e => setPrice(e.target.value)}
-              placeholder='price'
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            type
-            <br />
-            <input
-              type="text"
-              value={type}
-              onChange={e => setType(e.target.value)}
-              placeholder='type'
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            <button onClick={handleSubmit}>submit</button>
-            <br />
-          </label>
-        </div>
-
-      </section>
-    );
+    </section>
+  );
 }
 
 export default CreateAdvert;

@@ -44,7 +44,6 @@ export default class Store {
             console.log(error);
         } finally{
             this.setLoading(false);
-            // window.location.reload();
         }
     }
     

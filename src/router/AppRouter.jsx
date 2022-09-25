@@ -2,10 +2,10 @@ import React from 'react';
 import {Routes, Route} from "react-router-dom";
 import { useAuth } from '../components/hook/useAuth';
 import Layout from '../components/layouts/Layout';
-import HomePage from './HomePage';
-import AdvertsPage from './AdvertsPage';
-import AdvertPage from './AdvertPage';
-import CreateAdvert from './CreateAdvert';
+import HomePage from '../pages/HomePage';
+import AdvertsPage from '../pages/AdvertsPage';
+import AdvertPage from '../pages/AdvertPage';
+import CreateAdvert from '../pages/CreateAdvert';
 
 const AppRouter = () => {
     const {store} = useAuth()
