@@ -4,12 +4,14 @@ import AdvertService from '../service/AdvertService'
 import { API_URL } from '../components/http'
 import { useParams } from 'react-router-dom'
 import Gallery from '../components/Gallery'
+import { Link } from 'react-router-dom'
+
 
 const AdvertPage = () => {
 
     const [advert, setAdvert] = useState();
     const {id} = useParams();
-    
+
     async function fetchData() {
         try {
             const response = await AdvertService.getId(id);
@@ -23,6 +25,7 @@ const AdvertPage = () => {
         fetchData();
     }, [])
 
+    
     return (
         <div>
             <div>
@@ -57,8 +60,10 @@ const AdvertPage = () => {
              galleryImages={advert?.images}
             />
 
+            <Link to='edit'>Edit</Link>
+
         </div>
     )
 }
 
-export default AdvertPage
+export default AdvertPage;

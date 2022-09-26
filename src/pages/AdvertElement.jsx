@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AdvertElement = ({a}) => {
+const AdvertElement = (props) => {
 
     const style = {
         // todo : fill with style
@@ -10,10 +10,10 @@ const AdvertElement = ({a}) => {
   return (
     <div
      style={style} 
-     key={a.id}
+     key={props.advert.id}
     >
-        {a.id} {a.title} {a.type.name} 
-        <img src={a.images[0].url} alt='logo'/>
+        {props.advert.id} {props.advert.title} {props.advert.type.name} 
+        <img src={props.advert.images[0].url} alt='logo'/>
     </div>
   )
 }

@@ -21,8 +21,8 @@ const AdvertsPage = () => {
 
     return (
         <div>
-            {adverts.map((a) => (
-               <AdvertElement key={a.id} a={a}/> 
+            {adverts.map((advert) => (
+               <AdvertElement key={advert.id} advert={advert}/> 
             ))}
         </div>
     )

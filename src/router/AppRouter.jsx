@@ -6,6 +6,7 @@ import HomePage from '../pages/HomePage';
 import AdvertsPage from '../pages/AdvertsPage';
 import AdvertPage from '../pages/AdvertPage';
 import CreateAdvert from '../pages/CreateAdvert';
+import EditAdvert from '../pages/EditAdvert';
 
 const AppRouter = () => {
     const {store} = useAuth()
@@ -20,6 +21,7 @@ const AppRouter = () => {
                 <Route index element={<HomePage/>}/>
                 <Route path='adverts' element={<AdvertsPage/>}/>
                 <Route path='adverts/:id' element={<AdvertPage/>}/>
+                <Route path='adverts/:id/edit' element={<EditAdvert/>}/>
                 <Route path='adverts/create' element={<CreateAdvert/>}/>
             </Route>
         </Routes>
