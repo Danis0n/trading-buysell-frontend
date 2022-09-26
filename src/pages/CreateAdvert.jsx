@@ -49,7 +49,6 @@ const CreateAdvert = () => {
       return URL.createObjectURL(file);
     });
     setImagesToRender((previousImages) => previousImages.concat(imagesArray));
-
   }, [])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})

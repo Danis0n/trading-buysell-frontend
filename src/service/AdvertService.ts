@@ -14,7 +14,11 @@ export default class AdvertService {
         return axios.get(`${API_URL}/api/advert/get/${id}`);
     }
 
-    static async create(formData: FormData) :Promise<void> {
+    static async create(formData: FormData) : Promise<void> {
         return $api.post(`${API_URL}/api/advert/create`, formData);
+    }
+
+    static async update(id: string, formData: FormData) : Promise<void> {
+        return $api.post(`${API_URL}/api/advert/update/${id}`, formData);
     }
 }
