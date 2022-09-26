@@ -50,17 +50,15 @@ const EditAdvert = () => {
     setType(advert?.type?.name);
 
     advert?.images.map( async (image) => {
-      
       let file = await fetch(image.url)
       .then(r => r.blob())
       .then(blobFile => new File(
         [blobFile],
-        image.name, { type: "image/png" }
+        image.name,
+        { type: "image/png" }
         ));
-        console.log(file);
         setSelectedImages((prevImage) => prevImage.concat(file));
     });
-
 
     advert?.images.map((image) => {
       setImagesToRender((prevImage) => prevImage.concat(image.url));
@@ -98,11 +96,6 @@ const EditAdvert = () => {
   }, [])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
-
-  // console.log('selectedImages');
-  // console.log(selectedImages);
-  // console.log('imagesToRender');
-  // console.log(imagesToRender);
 
   return (
     <div>

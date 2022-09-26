@@ -21,4 +21,8 @@ export default class AdvertService {
     static async update(id: string, formData: FormData) : Promise<void> {
         return $api.post(`${API_URL}/api/advert/update/${id}`, formData);
     }
+
+    static async delete(id: string) : Promise<void> {
+        return $api.delete(`${API_URL}/api/advert/delete/${id}`);
+    }
 }
