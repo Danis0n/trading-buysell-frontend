@@ -1,24 +1,30 @@
 import React, {useState, useCallback, useEffect} from 'react'
 import AdvertService from '../service/AdvertService';
 import { useDropzone } from 'react-dropzone';
-import $api from '../components/http';
 import { useParams } from 'react-router-dom';
-import Gallery from '../components/Gallery';
+import { getFile } from '../utils/FileUtil';
 
 const EditAdvert = () => {
 
   const {id} = useParams();
-  const [advert, setAdvert] = useState(null)
-  const [title, setTitle] = useState('')
-
+  
   const [selectedImages, setSelectedImages] = useState([]);
   const [imagesToRender, setImagesToRender] = useState([]);
-
-
+    
+  const [title, setTitle] = useState('')
   const [location, setLocation] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
   const [type, setType] = useState('')
+
+  const sendResponse = async (id, formData) => {
+    try {
+      const response = await AdvertService.update(id,formData);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,19 +34,13 @@ const EditAdvert = () => {
     formData.append('location',location);
     formData.append('description',description);
     formData.append('price',price);
-    
     selectedImages.map(file => {
-      formData.append('files',file);
+      return formData.append('files',file);
     })
     formData.append('type',type);
     
-    try {
-      const response = await AdvertService.update(id,formData);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-}
+    sendResponse(id, formData);
+  }
 
   async function setStates(advert){
     setTitle(advert?.title);
@@ -49,19 +49,13 @@ const EditAdvert = () => {
     setPrice(advert?.price);
     setType(advert?.type?.name);
 
-    advert?.images.map( async (image) => {
-      let file = await fetch(image.url)
-      .then(r => r.blob())
-      .then(blobFile => new File(
-        [blobFile],
-        image.name,
-        { type: "image/png" }
-        ));
-        setSelectedImages((prevImage) => prevImage.concat(file));
+    advert?.images.map(async (image) => {
+      const file = await getFile(image);
+      setSelectedImages((prevImage) => prevImage.concat(file));
     });
 
     advert?.images.map((image) => {
-      setImagesToRender((prevImage) => prevImage.concat(image.url));
+      return setImagesToRender((prevImage) => prevImage.concat(image.url));
     });
   }
 
@@ -70,12 +64,10 @@ const EditAdvert = () => {
     setSelectedImages((previousImages) => previousImages.concat(Files));
 
     const imagesArray = Files.map((file) => {
-      console.log(file);
-      console.log(URL.createObjectURL(file));
       return URL.createObjectURL(file);
     });
-    setImagesToRender((previousImages) => previousImages.concat(imagesArray));
 
+    setImagesToRender((previousImages) => previousImages.concat(imagesArray));
   }, [])
 
   const deleteHandler = (image, index) =>  {
@@ -84,10 +76,9 @@ const EditAdvert = () => {
     URL.revokeObjectURL(image);
   }
 
-  async function fetchAdvert(id) {
+  const fetchAdvert = async (id) => {
     const response = await AdvertService.getId(id);
     const data = response.data;
-    setAdvert(data);
     setStates(data);
   }
 
@@ -99,7 +90,6 @@ const EditAdvert = () => {
 
   return (
     <div>
-
       <div>
         <label>
           Title
@@ -188,12 +178,6 @@ const EditAdvert = () => {
           )
         })}
       </div>
-
-      {/* <Gallery
-        galleryImages={advert?.images}
-      /> */}
-
-
     </div>
   )
 }

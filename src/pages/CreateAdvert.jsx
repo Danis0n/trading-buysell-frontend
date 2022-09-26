@@ -29,7 +29,7 @@ const CreateAdvert = () => {
       formData.append('price',price);
       
       selectedImages.map(file => {
-        formData.append('files',file);
+        return formData.append('files',file);
       })
       formData.append('type',type);
       
