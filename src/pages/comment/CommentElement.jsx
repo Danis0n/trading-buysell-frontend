@@ -17,10 +17,6 @@ const CommentElement = ({comment, id}) => {
         deleteComment(comment.id);
     }
 
-    const handleSubmitEdit = async (e) => {
-
-    }
-
     return (
         <div>
             {comment.title}
