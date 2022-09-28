@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import { useAuth } from '../components/hook/useAuth'
-import AuthService from '../service/AuthService'
-import { API_EMAIL_NOT_VALID, API_USERNAME_NOT_VALID } from '../components/http'
+import { useAuth } from '../../components/hook/useAuth'
+import AuthService from '../../service/AuthService'
+import { API_EMAIL_NOT_VALID, API_USERNAME_NOT_VALID } from '../../components/http'
 
 const RegisterUser = () => {
 

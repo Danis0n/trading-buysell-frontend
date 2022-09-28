@@ -1,8 +1,8 @@
 import React, {useState, useCallback, useEffect} from 'react'
-import AdvertService from '../service/AdvertService';
+import AdvertService from '../../service/AdvertService';
 import { useDropzone } from 'react-dropzone';
 import { useParams } from 'react-router-dom';
-import { getFile } from '../utils/FileUtil';
+import { getFile } from '../../utils/FileUtil';
 
 const EditAdvert = () => {
 

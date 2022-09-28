@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
-import AdvertService from '../service/AdvertService';
+import AdvertService from '../../service/AdvertService';
 
 const CreateAdvert = () => {
 

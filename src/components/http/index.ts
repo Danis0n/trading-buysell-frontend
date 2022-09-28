@@ -1,5 +1,4 @@
 import axios from "axios";
-import { config } from "process";
 
 export const API_URL = `http://localhost:8080`
 export const API_EMAIL_NOT_VALID = `email is not valid`

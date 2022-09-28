@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import AdvertService from '../service/AdvertService'
+import AdvertService from '../../service/AdvertService'
 import { useParams } from 'react-router-dom'
-import Gallery from '../components/Gallery'
+import Gallery from '../../components/Gallery'
 import { Link } from 'react-router-dom'
 
 const AdvertPage = () => {
@@ -67,6 +67,9 @@ const AdvertPage = () => {
 
             <Link to='edit'>Edit</Link>
             <button onClick={handleDelete}>Delete</button>
+
+            
+
 
         </div>
     )

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import AdvertService from '../service/AdvertService';
+import AdvertService from '../../service/AdvertService';
 import AdvertElement from './AdvertElement';
 
 const AdvertsPage = () => {

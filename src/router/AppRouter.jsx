@@ -3,11 +3,12 @@ import {Routes, Route} from "react-router-dom";
 import { useAuth } from '../components/hook/useAuth';
 import Layout from '../components/layouts/Layout';
 import HomePage from '../pages/HomePage';
-import AdvertsPage from '../pages/AdvertsPage';
-import AdvertPage from '../pages/AdvertPage';
-import CreateAdvert from '../pages/CreateAdvert';
-import EditAdvert from '../pages/EditAdvert';
-import RegisterUser from '../pages/RegisterUser';
+import AdvertsPage from '../pages/advert/AdvertsPage';
+import AdvertPage from '../pages/advert/AdvertPage';
+import CreateAdvert from '../pages/advert/CreateAdvert';
+import EditAdvert from '../pages/advert/EditAdvert';
+import RegisterUser from '../pages/user/RegisterUser';
+import UserPage from '../pages/user/UserPage';
 
 const AppRouter = () => {
     const {store} = useAuth()
@@ -25,6 +26,7 @@ const AppRouter = () => {
                 <Route path='adverts/:id/edit' element={<EditAdvert/>}/>
                 <Route path='adverts/create' element={<CreateAdvert/>}/>
                 <Route path='register' element={<RegisterUser/>}/>
+                <Route path='user/:id' element={<UserPage/>}/>
             </Route>
         </Routes>
     );
