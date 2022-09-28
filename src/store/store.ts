@@ -1,9 +1,6 @@
 import { User } from "../model/User";
 import {makeAutoObservable} from 'mobx'
 import AuthService from "../service/AuthService";
-import axios from "axios";
-import { AuthResponse } from "../response/AuthResponse";
-import { API_URL } from "../components/http";
 
 export default class Store {
 
@@ -44,19 +41,21 @@ export default class Store {
             console.log(error);
         } finally{
             this.setLoading(false);
+            window.location.reload();
         }
     }
     
     // TODO : refactor this! & check it on backend
-    async registration(username: string, name: string,
+    async register(name: string, username: string,
          password: string, email: string, phone: string ) {
+        this.setLoading(true);
         try {
-            const response = await AuthService.registration(username,name,password,email,phone);
-            localStorage.setItem('token', response.data.accessToken);
-            this.setAuth(true);
-            this.setUser(response.data.user)
+            const response = await AuthService.register(name,username,password,email,phone);
+            console.log(response);
         } catch (error) {
             console.log(error);
+        }finally{
+            this.setLoading(false);
         }
     }
 
@@ -79,11 +78,7 @@ export default class Store {
     async checkAuth() {
         this.setLoading(true);
         try {
-            const response = await axios.get<AuthResponse>(
-                `${API_URL}/api/auth`, 
-                {withCredentials: true}
-            );
-             
+            const response = await AuthService.checkAuth();
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
