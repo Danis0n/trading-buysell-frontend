@@ -1,0 +1,29 @@
+.registerWord {
+    text-align: center;
+    padding: 0 0 22px;
+    font-size: 40px;
+}
+
+.bottomLine {
+    width: 80px;
+    margin: auto;
+    background: #000;
+}
+
+.bottomLine hr {
+    margin-top: 15px;
+    height: 4px;
+}
+
+.registerForm {
+    align-items: center;
+    padding: 200px 200px;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+}
+
+.registerForm input {
+    border-radius: 4px;
+    padding: 0px 100px;
+    background-color: #F9F8F8;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.15);
+}

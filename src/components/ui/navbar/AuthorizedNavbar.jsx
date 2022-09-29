@@ -8,7 +8,6 @@ import Button from '../button/Button'
 const AuthorizedNavbar = () => {
 
     const {store} = useAuth()
-    const [loginModale, setLoginModale] = useState(false)
 
   return (
     <div className='navbar'>

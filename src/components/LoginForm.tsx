@@ -1,8 +1,7 @@
 import React, { FC } from 'react'
-import { useState, useContext } from 'react'
-// import { Context } from '..'
+import { useState} from 'react'
 import { observer } from 'mobx-react-lite';
-import { AuthContext, useAuth } from './hook/useAuth';
+import { useAuth } from './hook/useAuth';
 
 const LoginForm : FC = () => {
 

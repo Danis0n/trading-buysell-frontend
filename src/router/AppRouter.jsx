@@ -1,4 +1,3 @@
-import React from 'react';
 import {Routes, Route} from "react-router-dom";
 import { useAuth } from '../components/hook/useAuth';
 import Layout from '../components/layouts/Layout';
@@ -7,7 +6,7 @@ import AdvertsPage from '../pages/advert/AdvertsPage';
 import AdvertPage from '../pages/advert/AdvertPage';
 import CreateAdvert from '../pages/advert/CreateAdvert';
 import EditAdvert from '../pages/advert/EditAdvert';
-import RegisterUser from '../pages/user/RegisterUser';
+import RegisterUser from '../pages/user/registration/RegisterUser';
 import UserPage from '../pages/user/UserPage';
 
 const AppRouter = () => {
