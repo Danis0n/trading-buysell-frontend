@@ -14,13 +14,19 @@ const NoAuthorizedNavbar = () => {
   return (
     <div className='navbar'>
         <div className='navbar__links__area'>
+
             <div className='navbar__catalog'>
-              Каталог(кнопка)
+              Лого
             </div>
 
-            <div className='navbar__search'>
-              Поиск
+            <div className='navbar__catalog'>
+              Главная
             </div>
+
+            <div className='navbar__catalog'>
+              Контакты
+            </div>
+
               <div>
                 <Button style={{marginTop: 0}} onClick={() => setLoginModale(true)}>
                   Войти
