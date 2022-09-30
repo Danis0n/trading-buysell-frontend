@@ -13,10 +13,6 @@ const LoginForm = ({handleLogin}) => {
   const [password, setPassword] = useState('')
   const {store} = useAuth();
 
-  const submitRegistration = () => {
-
-  }
-
   return (
     <div className={cl.loginForm}>
 
@@ -43,7 +39,7 @@ const LoginForm = ({handleLogin}) => {
 
       <Button
        onClick={() => {
-        store.login(username, password);
+        store.login(username,password);
       }}
       >
         Войти

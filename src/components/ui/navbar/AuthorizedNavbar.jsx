@@ -1,30 +1,40 @@
 import React from 'react'
-import { useContext, useState } from 'react'
-// import { Context } from '../../..'
 import { useAuth } from '../../hook/useAuth'
 import Button from '../button/Button'
+import CustomLink from '../link/CustomLink'
 
 
 const AuthorizedNavbar = () => {
 
-    const {store} = useAuth()
+  const {store} = useAuth()
+
+  const submitLogout = (e) => {
+    e.preventDefault();
+    store.logout();
+  }
 
   return (
-    <div className='navbar'>
-        <div className='navbar__links__area'>
-            <div className='navbar__catalog'>
-              Каталог(кнопка)
-            </div>
-            <div className='navbar__search'>
-              Поиск
-            </div>
-            <div>
-              <Button onClick={() => store.logout()}>
-                Выйти
-              </Button>
-            </div>
+    <header className='navbar'>
+      <div className='navbar__links__area'>
+        <div className='navbar__catalog'>
+          Лого
         </div>
-    </div>
+
+        <div className='navbar__catalog'>
+          <CustomLink to='/'>Главная</CustomLink>
+        </div>
+
+        <div className='navbar__catalog'>
+          <CustomLink to='/about'>Контакты</CustomLink>
+        </div>
+
+        <div>
+          <Button onClick={submitLogout}>
+            Выйти
+          </Button>
+        </div>
+      </div>
+    </header>
   )
 }
 

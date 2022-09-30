@@ -3,6 +3,22 @@
   font-size: 20px;
 }
 
+:root {
+  --color-panel-bg: #DB7307;
+  --color-active: red;
+  --color-background : #F0E7DB;
+}
+
+.navbar__catalog > a {
+  color: black;
+  text-decoration: none;
+  padding: 0 1rem;
+}
+
+.navbar__catalog > a:hover {
+  text-decoration: underline;
+}
+
 /* input {
   writing-mode: horizontal-tb !important;
   text-rendering: auto;

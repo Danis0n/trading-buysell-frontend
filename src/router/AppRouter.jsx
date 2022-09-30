@@ -8,6 +8,7 @@ import CreateAdvert from '../pages/advert/CreateAdvert';
 import EditAdvert from '../pages/advert/EditAdvert';
 import RegisterUser from '../pages/user/registration/RegisterUser';
 import UserPage from '../pages/user/UserPage';
+import AboutPage from "../pages/AboutPage";
 
 const AppRouter = () => {
     const {store} = useAuth()
@@ -26,6 +27,7 @@ const AppRouter = () => {
                 <Route path='adverts/create' element={<CreateAdvert/>}/>
                 <Route path='register' element={<RegisterUser/>}/>
                 <Route path='user/:id' element={<UserPage/>}/>
+                <Route path='about' element={<AboutPage/>}/>
             </Route>
         </Routes>
     );

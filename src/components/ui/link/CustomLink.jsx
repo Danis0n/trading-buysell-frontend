@@ -1,8 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import { Link, useMatch } from 'react-router-dom'
 
 const CustomLink = ({children, to, ...props}) => {
+
+    const [isHover, setIsHover] = useState(false)
+
+    const handleMouseEnter = () => {
+        setIsHover(true);
+    }
+    
+    const handleMouseLeave = () => {
+        setIsHover(false);
+    }
 
     const match = useMatch({
         path: to,
@@ -10,7 +20,7 @@ const CustomLink = ({children, to, ...props}) => {
     });
 
     const LinkStyle = {
-      color: match ? 'var(--color-active)' : 'white ',
+    //   textDecoration : match ? 'underline' : 'none',
       background: 'var(--color-bg)'
     }
 

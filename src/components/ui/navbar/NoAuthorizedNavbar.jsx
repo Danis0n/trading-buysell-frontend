@@ -5,6 +5,7 @@ import Button from '../button/Button'
 import Modal from '../modal/Modal'
 import LoginForm from '../login/LoginForm'
 import { useAuth } from '../../hook/useAuth'
+import CustomLink from '../link/CustomLink'
 
 const NoAuthorizedNavbar = () => {
 
@@ -16,31 +17,30 @@ const NoAuthorizedNavbar = () => {
     }
 
   return (
-    <div className='navbar'>
+    <header className='navbar'>
         <div className='navbar__links__area'>
+          <div className='navbar__catalog'>
+            Лого
+          </div>
 
-            <div className='navbar__catalog'>
-              Лого
-            </div>
+          <div className='navbar__catalog'>
+            <CustomLink to='/'>Главная</CustomLink>
+          </div>
 
-            <div className='navbar__catalog'>
-              Главная
-            </div>
+          <div className='navbar__catalog'>
+            <CustomLink to='/about'>Контакты</CustomLink>
+          </div>
 
-            <div className='navbar__catalog'>
-              Контакты
-            </div>
-
-              <div>
-                <Button style={{marginTop: 0}} onClick={() => setLoginModale(true)}>
-                  Войти
-                </Button>
-                <Modal visible={loginModale} setVisible={setLoginModale}>
-                  <LoginForm handleLogin={handleLogin}/>
-                </Modal>
-              </div>
+          <div>
+            <Button style={{marginTop: 0}} onClick={() => setLoginModale(true)}>
+              Войти
+            </Button>
+            <Modal visible={loginModale} setVisible={setLoginModale}>
+              <LoginForm handleLogin={handleLogin}/>
+            </Modal>
+          </div>
         </div>
-    </div>
+    </header>
   )
 }
 
