@@ -3,13 +3,17 @@ import { useContext, useState } from 'react'
 import { Context } from '../../..'
 import Button from '../button/Button'
 import Modal from '../modal/Modal'
-import LoginForm from '../../LoginForm'
+import LoginForm from '../login/LoginForm'
 import { useAuth } from '../../hook/useAuth'
 
 const NoAuthorizedNavbar = () => {
 
     const {store} = useAuth()
     const [loginModale, setLoginModale] = useState(false)
+
+    const handleLogin = () => {
+      setLoginModale(false);
+    }
 
   return (
     <div className='navbar'>
@@ -32,7 +36,7 @@ const NoAuthorizedNavbar = () => {
                   Войти
                 </Button>
                 <Modal visible={loginModale} setVisible={setLoginModale}>
-                  <LoginForm/>
+                  <LoginForm handleLogin={handleLogin}/>
                 </Modal>
               </div>
         </div>

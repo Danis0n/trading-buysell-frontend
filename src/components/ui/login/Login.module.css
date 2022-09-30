@@ -1,0 +1,38 @@
+.loginForm{
+    padding: 30px 45px;
+}
+
+.loginWord {
+    text-align: center;
+    padding: 0 0 22px;
+    font-size: 40px;
+}
+
+.bottomLine {
+    width: 80px;
+    margin: auto;
+    background: #000;
+}
+
+.bottomLine hr {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    height: 4px;
+}
+
+.loginForm input {
+    padding: 10px 10px;
+}
+
+.registerForm {
+    margin-top: 20px;
+}
+
+.registerForm > a {
+    text-decoration: none;  
+    color: blue;
+}
+
+.registerForm > a:hover {
+    text-decoration: underline;
+}

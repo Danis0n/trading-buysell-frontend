@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react'
 import { Context } from '../../..';
-import LoginForm from '../../LoginForm';
+import LoginForm from '../login/LoginForm';
 import Button from '../button/Button';
 import Modal from '../modal/Modal';
 

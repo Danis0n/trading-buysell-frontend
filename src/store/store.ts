@@ -33,7 +33,6 @@ export default class Store {
         this.setLoading(true);
         try {
             const response = await AuthService.login(username,password);
-            
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user)
@@ -41,7 +40,6 @@ export default class Store {
             console.log(error);
         } finally{
             this.setLoading(false);
-            window.location.reload();
         }
     }
     
@@ -63,7 +61,6 @@ export default class Store {
         this.setLoading(true);
         try {
             const response = await AuthService.logout();
-            console.log(response);
             localStorage.removeItem('token');
             this.setAuth(false);
             this.setUser({} as User);  
@@ -71,7 +68,6 @@ export default class Store {
             console.log(error);
         } finally{
             this.setLoading(false);
-            window.location.reload();
         }
     }
 
