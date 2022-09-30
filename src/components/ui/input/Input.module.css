@@ -1,0 +1,14 @@
+.form {
+    margin-bottom: 45px;
+    padding: 12px 100px;
+    border : 1px solid #F2F2F2;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    background-color: #F9F8F8;
+}
+
+.form input {
+
+}

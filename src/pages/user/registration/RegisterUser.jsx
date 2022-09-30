@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import cl from '../../../styles/registration/RegisterUser.module.css'
 import { useAuth } from '../../../components/hook/useAuth'
 import { API_EMAIL_NOT_VALID, API_USERNAME_NOT_VALID } from '../../../components/http'
+import Input from '../../../components/ui/input/Input'
+import Button from '../../../components/ui/button/Button'
 
 const RegisterUser = () => {
 
@@ -10,6 +12,7 @@ const RegisterUser = () => {
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
 
@@ -37,6 +40,9 @@ const RegisterUser = () => {
     if(store.isLoading){
       return <div>Loading</div>
     }
+    // check on backend mobile phone (only digits/check if already exists)
+    // TODO : implement all checks (double password(~), mobile phone
+    //  (only digits) in special util class)
 
   return (
     <div>
@@ -49,67 +55,54 @@ const RegisterUser = () => {
       </div>
 
       <div className={cl.registerForm}>
-        <div>
-          <label>
-            <br />
-            <input
-              type="text"
-              value={name}
-              onChange={e => setName(e.target.value)}
-              placeholder='name'
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            <br />
-            <input
-              type="text"
-              value={username}
-              onChange={e => setUsername(e.target.value)}
-              placeholder='username'
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            <br />
-            <input
-              type="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              placeholder='password'
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            <br />
-            <input
-              type="text"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder='email'
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            <br />
-            <input
-              type="text"
-              value={phone}
-              onChange={e => setPhone(e.target.value)}
-              placeholder='phone'
-            />
-          </label>
-        </div>
 
-        {/* <button onClick={handleSubmit}>submit</button> */}
+        <Input
+          type='text'
+          value={name}
+          placeholder='Имя'
+          onChange={e => setName(e.target.value)}
+        />
+
+        <Input
+          type='text'
+          value={username}
+          placeholder='Логин'
+          onChange={e => setUsername(e.target.value)}
+        />
+
+        <Input
+          type='password'
+          value={password}
+          placeholder='Пароль'
+          onChange={e => setPassword(e.target.value)}
+        />
+
+        <Input
+          type='password'
+          value={confirmPassword}
+          placeholder='Повторите пароль'
+          onChange={e => setConfirmPassword(e.target.value)}
+        />
+
+        <Input
+          type='text'
+          value={email}
+          placeholder='E-mail'
+          onChange={e => setEmail(e.target.value)}
+        />
+
+        <Input
+          type='text'
+          value={phone}
+          placeholder='Мобильный телефон'
+          onChange={e => setPhone(e.target.value)}
+        />
+
+        <div className={cl.button}>
+          <Button onClick={handleSubmit}>Регистрация</Button>
+        </div>
 
       </div>
-
-    
     </div>
   )
 }

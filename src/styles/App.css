@@ -19,7 +19,8 @@
     align-items: center;
     display: grid;
     padding: 0 15px;
-    background: rgb(182, 128, 182);
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+
 }
 
 .navbar__links {
@@ -39,7 +40,3 @@
 .navbar__search {
     margin-top: 5px;
 }
-
-/* .navbar__login {
-
-} */
