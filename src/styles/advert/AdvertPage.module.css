@@ -1,0 +1,71 @@
+.advertWrapper{
+    padding-top: 20px;
+    display: flex;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+    width: 1200px;
+    height: 800px;
+}
+
+.itemMainInfo {
+    margin-right: auto;
+    margin-left: 20px;
+    width: 850px;
+    height: 700px;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+}
+
+.itemRightInfo{
+    margin-left: auto;
+    margin-right: 40px;
+}
+
+.itemAdvertInfo {
+    padding: 30px 30px;
+    text-align: center;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+.itemUserInfo {
+    font-weight: 600;
+    padding: 30px 30px;
+    text-align: center;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+}
+
+.itemUserInfo a {
+    text-decoration: none;
+}
+
+.itemUserInfo a:hover {
+    text-decoration: underline;
+}
+
+.itemName {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.itemNumbers{
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.itemRating {
+    font-weight: 400;
+}
+
+.itemTitle {
+    padding-top: 20px;
+    font-size: 30px;
+}
+
+.itemDate {
+    font-size: 18px;
+}
+
+.itemPrice {
+    padding-top: 20px;
+    font-size: 23px;
+    font-weight: 700;
+}
