@@ -46,16 +46,23 @@
   pointer-events: none;
 }
 .prev {
+  opacity: 20%;
   top: 50%;
   left: 20px;
   transform: translateY(-60%);
 }
+.prev:hover{
+  opacity: 70%;
+}
 .next {
+  opacity: 20%;
   top: 50%;
   right: 20px;
   transform: translateY(-60%);
 }
-
+.next:hover{
+  opacity: 70%;
+}
 
 .container-dots {
   position: absolute;
@@ -71,6 +78,9 @@
   border: 3px solid #f1f1f1;
   margin: 0 5px;
   background: #f1f1f1;
+}
+.dot:hover{
+  cursor: pointer;
 }
 .dot.active {
   background: rgb(32, 32, 32);
