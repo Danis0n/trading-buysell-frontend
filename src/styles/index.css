@@ -5,7 +5,7 @@
 
 :root {
   --color-panel-bg: #DB7307;
-  --color-active: red;
+  --color-active: #AE2519;
   --color-background : #F0E7DB;
 }
 
@@ -18,27 +18,3 @@
 .navbar__catalog > a:hover {
   text-decoration: underline;
 }
-
-/* input {
-  writing-mode: horizontal-tb !important;
-  text-rendering: auto;
-  color: fieldtext;
-  letter-spacing: normal;
-  word-spacing: normal;
-  line-height: normal;
-  text-transform: none;
-  text-indent: 0px;
-  text-shadow: none;
-  display: inline-block;
-  text-align: end;
-  appearance: auto;
-  -webkit-rtl-ordering: logical;
-  cursor: text;
-  background-color: field;
-  margin: 0em;
-  padding: 1px 2px;
-  border-width: 2px;
-  border-style: inset;
-  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-  border-image: initial;
-} */

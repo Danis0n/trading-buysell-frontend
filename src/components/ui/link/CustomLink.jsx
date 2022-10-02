@@ -20,7 +20,7 @@ const CustomLink = ({children, to, ...props}) => {
     });
 
     const LinkStyle = {
-    //   textDecoration : match ? 'underline' : 'none',
+      color: match ? 'var(--color-active)' : 'black ',
       background: 'var(--color-bg)'
     }
 
