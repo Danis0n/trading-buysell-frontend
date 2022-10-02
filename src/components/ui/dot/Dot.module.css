@@ -1,0 +1,24 @@
+.dot{
+    height: 54px;
+    width: 54px;
+    background-color: #AE2519;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.dot:hover {
+    background-color: red;
+}
+
+.dot img {
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: auto !important;
+    border: 0;
+}

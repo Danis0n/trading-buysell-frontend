@@ -4,6 +4,7 @@ import { useAuth } from '../../../components/hook/useAuth'
 import { API_EMAIL_NOT_VALID, API_USERNAME_NOT_VALID } from '../../../components/http'
 import Input from '../../../components/ui/input/Input'
 import Button from '../../../components/ui/button/Button'
+import Hr from '../../../components/ui/hr/Hr'
 
 const RegisterUser = () => {
 
@@ -49,9 +50,7 @@ const RegisterUser = () => {
 
       <div className={cl.registerWord}>
         Регистрация
-        <div className={cl.bottomLine}>
-          <hr />
-        </div>
+        <Hr/>
       </div>
 
       <div className={cl.registerForm}>

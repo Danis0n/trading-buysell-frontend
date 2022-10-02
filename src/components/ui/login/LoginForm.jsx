@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import cl from './Login.module.css'
 import Input from '../input/Input';
 import Button from '../button/Button';
+import Hr from '../hr/Hr';
 
 const LoginForm = ({handleLogin}) => {
 
@@ -18,9 +19,7 @@ const LoginForm = ({handleLogin}) => {
 
       <div className={cl.loginWord}>
         Войти
-        <div className={cl.bottomLine}>
-          <hr />
-        </div>
+        <Hr/>
       </div>
 
       <Input

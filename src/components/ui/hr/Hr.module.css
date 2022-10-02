@@ -1,0 +1,11 @@
+.bottomLine {
+    width: 80px;
+    margin: auto;
+    background: #000;
+}
+
+.bottomLine hr {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    height: 4px;
+}

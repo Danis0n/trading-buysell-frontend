@@ -1,22 +1,18 @@
 .advertWrapper{
     padding-top: 20px;
     display: flex;
-    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
     width: 1200px;
-    height: 800px;
 }
 
-.itemMainInfo {
-    margin-right: auto;
-    margin-left: 20px;
-    width: 850px;
-    height: 700px;
-    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
-}
+/* Post info */
 
 .itemRightInfo{
     margin-left: auto;
-    margin-right: 40px;
+    margin-right: 30px;
+}
+
+.itemType {
+    margin-top: -54px;
 }
 
 .itemAdvertInfo {
@@ -26,9 +22,27 @@
     margin-bottom: 30px;
 }
 
+.itemTitle {
+    padding-top: 20px;
+    font-size: 30px;
+}
+
+.itemDate {
+    font-size: 18px;
+}
+
+.itemPrice {
+    padding-top: 20px;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+/* User info */
+
 .itemUserInfo {
     font-weight: 600;
     padding: 30px 30px;
+    margin-bottom: 30px;
     text-align: center;
     box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
 }
@@ -48,6 +62,7 @@
 
 .itemNumbers{
     font-weight: 400;
+    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -55,17 +70,34 @@
     font-weight: 400;
 }
 
+.itemControl{
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+    padding: 15px 30px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.itemControl a {
+    padding-right: 30px;
+    text-decoration: none;
+}
+
+.itemControl a:hover {
+    text-decoration: underline;
+}
+
+.itemMainInfo {
+    margin-right: auto;
+    margin-left: 20px;
+    width: 850px;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+}
+
+.itemGallery {
+    margin-bottom: 40px;
+}
+
 .itemTitle {
-    padding-top: 20px;
+    text-align: center;
     font-size: 30px;
-}
-
-.itemDate {
-    font-size: 18px;
-}
-
-.itemPrice {
-    padding-top: 20px;
-    font-size: 23px;
-    font-weight: 700;
 }
