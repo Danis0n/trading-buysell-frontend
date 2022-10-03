@@ -66,7 +66,7 @@ const CreateAdvert = () => {
       </div>
       <div className={cl.itemField}>
         <Select>
-          <option disabled selected>Выберете категорию</option>
+          <option disabled defaultValue='Выберете категорию'>Выберете категорию</option>
           <option>Работа</option>
           <option>Авто</option>
           <option>Животные</option>
@@ -89,11 +89,12 @@ const CreateAdvert = () => {
         Описание *
       </div>
       <Textarea
+         value={description}
+         onChange={e => setDescription(e.target.value)}
          rows={5}
-         cols={44}
+         cols={50}
          name='text'
       />
-
       <div className={cl.itemTitle}>
         Добавить изображения *
       </div>
