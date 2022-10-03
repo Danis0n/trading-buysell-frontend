@@ -3,7 +3,6 @@ import AdvertService from '../../service/AdvertService'
 import { useParams } from 'react-router-dom'
 import { useAuth } from '../../components/hook/useAuth'
 import UserService from '../../service/UserService'
-import Gallery from '../../components/Gallery'
 import Button from '../../components/ui/button/Button'
 import NoAvatar from '../../images/no-avatar.png'
 import CellPhone from '../../images/icons/phone.svg'
@@ -57,12 +56,6 @@ const AdvertPage = () => {
     useEffect(() =>  {
         fetchData();
     }, [])
-
-    const containerStyles = {
-        width: "700px",
-        height: "480px",
-        margin: "0 auto",
-      };
 
     return (
         <div className={cl.advertWrapper}>

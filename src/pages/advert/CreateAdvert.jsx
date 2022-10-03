@@ -1,17 +1,21 @@
 import React, {useCallback, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
+import Input from '../../components/ui/input/Input';
+import Select from '../../components/ui/select/Select';
+import Textarea from '../../components/ui/textarea/Textarea';
 import AdvertService from '../../service/AdvertService';
+import cl from '../../styles/advert/CreateAdvert.module.css'
 
 const CreateAdvert = () => {
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [imagesToRender, setImagesToRender] = useState([]);
 
-  const [title, setTitle] = useState('test')
-  const [location, setLocation] = useState('test')
-  const [description, setDescription] = useState('test')
-  const [price, setPrice] = useState('test')
-  const [type, setType] = useState('job')
+  const [title, setTitle] = useState('')
+  const [location, setLocation] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState('')
+  const [type, setType] = useState('')
  
   const deleteHandler = (image, index) =>  {
     setSelectedImages(selectedImages.filter((_,index) => index !== 0));
@@ -54,13 +58,51 @@ const CreateAdvert = () => {
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   return (
-    <section>
-      <div {...getRootProps()}>
+    <div className={cl.advertWrapper}>
+
+      {/* TODO : implement choice */}
+      <div className={cl.itemTitle}>
+        Категория *
+      </div>
+      <div className={cl.itemField}>
+        <Select>
+          <option disabled selected>Выберете категорию</option>
+          <option>Работа</option>
+          <option>Авто</option>
+          <option>Животные</option>
+        </Select>
+      </div>
+
+      <div className={cl.itemTitle}>
+        Название *
+      </div>
+      <div className={cl.itemField}>
+        <Input 
+         type="text"
+         value={title}
+         onChange={e => setTitle(e.target.value)}
+         placeholder=''
+        />
+      </div>
+
+      <div className={cl.itemTitle}>
+        Описание *
+      </div>
+      <Textarea
+         rows={5}
+         cols={44}
+         name='text'
+      />
+
+      <div className={cl.itemTitle}>
+        Добавить изображения *
+      </div>
+      <div className={cl.itemFileArea} {...getRootProps()}>
             <input {...getInputProps()}/>
             {
               isDragActive ?
                 <p>Drop the files here ...</p> :
-                <p>Drag 'n' drop some files here, or click to select files</p>
+                <p>Нажмите или перетащите для загрузки изображений</p>
             }
       </div>
 
@@ -76,67 +118,22 @@ const CreateAdvert = () => {
         })}
       </div>
 
-      <div>
-        <label>
-          Title
-          <br />
-          <input
-            type="text"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            placeholder='title'
-          />
-        </label>
+
+      <div className={cl.itemTitle}>
+        Цена *
+      </div>
+      <div className={cl.itemField}>
+        <Input 
+         type="text"
+         value={title}
+         onChange={e => setTitle(e.target.value)}
+         placeholder=''
+        />
       </div>
 
-      <div>
-        <label>
-          location
-          <br />
-          <input
-            type="text"
-            value={location}
-            onChange={e => setLocation(e.target.value)}
-            placeholder='location'
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          description
-          <br />
-          <input
-            type="text"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-            placeholder='description'
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          price
-          <br />
-          <input
-            type="text"
-            value={price}
-            onChange={e => setPrice(e.target.value)}
-            placeholder='price'
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          type
-          <br />
-          <input
-            type="text"
-            value={type}
-            onChange={e => setType(e.target.value)}
-            placeholder='type'
-          />
-        </label>
-      </div>
+
+      
+      
       <div>
         <label>
           <button onClick={handleSubmit}>submit</button>
@@ -144,7 +141,7 @@ const CreateAdvert = () => {
         </label>
       </div>
 
-    </section>
+    </div>
   );
 }
 

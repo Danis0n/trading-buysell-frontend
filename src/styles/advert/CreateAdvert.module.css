@@ -1,0 +1,21 @@
+.advertWrapper{
+    padding: 30px 60px;
+    width: 650px;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+}
+
+.itemTitle{  
+    margin-bottom: 24px;
+}
+
+.itemField{
+    text-align: start;
+}
+
+.itemFileArea {
+    padding: 20px 20px;
+    margin-bottom: 24px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #F9F8F8;
+    border : 1px solid #F2F2F2;
+}
