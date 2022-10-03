@@ -109,12 +109,12 @@ const CreateAdvert = () => {
         Добавить изображения *
       </div>
       <div className={cl.itemFileArea} {...getRootProps()}>
-            <input {...getInputProps()}/>
-            {
-              isDragActive ?
-                <p>Перетащите файлы сюда ...</p> :
-                <p>Нажмите или перетащите для загрузки изображений</p>
-            }
+        <input {...getInputProps()}/>
+        {
+          isDragActive ?
+            <p>Перетащите файлы сюда ...</p> :
+            <p>Нажмите или перетащите для загрузки изображений</p>
+        }
       </div>
 
       <div>

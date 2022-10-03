@@ -83,7 +83,7 @@ const AdvertPage = () => {
                         Eius corporis sunt id ratione doloribus!
                     </Paragraph>
 
-                    <div className={cl.itemTitle}>Местоположение</div>
+                    <div className={cl.itemTitle}>Адрес</div>
                     <Hr/>
                     <Paragraph>
                         <div>{advert?.location}</div>
