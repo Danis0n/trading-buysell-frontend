@@ -1,9 +1,9 @@
 import React from 'react'
 import cl from './Select.module.css'
 
-const Select = ({children}) => {
+const Select = ({children, ...props}) => {
   return (
-    <select className={cl.form}>{children}</select>
+    <select {...props} className={cl.form}>{children}</select>
   )
 }
 

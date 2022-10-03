@@ -19,3 +19,41 @@
     background-color: #F9F8F8;
     border : 1px solid #F2F2F2;
 }
+
+.titleWord{
+    text-align: center;
+    padding: 0 0 22px;
+    font-size: 40px;
+}
+
+.imagePreviewArea {
+    margin: 5px;
+    text-align: center;
+    background-color: #F9F8F8;
+    padding: 9px;
+    border : 1px solid #F2F2F2;
+    display: inline-block;
+}
+
+.imagePreviewArea img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.previewButton {
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #AE2519;
+    border: none;
+    background-color: #F9F8F8;
+}
+
+.previewButton:hover {
+    text-decoration: underline;
+}
+
+.itemButton{
+    text-align: center;
+}

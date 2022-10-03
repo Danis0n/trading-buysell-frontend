@@ -96,7 +96,7 @@ const AdvertPage = () => {
                     <div className={cl.itemType}>
                         <CustomLink to={`/adverts/type/${advert?.type?.name}`}>
                             <Dot>
-                                <Image src={map.get(advert?.type?.name)} alt='typeLogo'/>
+                              <Image src={map.get(advert?.type?.name)} alt='typeLogo'/>
                             </Dot>
                         </CustomLink>
                     </div>

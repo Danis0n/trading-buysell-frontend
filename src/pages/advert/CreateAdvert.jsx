@@ -1,10 +1,14 @@
 import React, {useCallback, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
+import Image from '../../components/ui/img/Image';
+import Button from '../../components/ui/button/Button'
 import Input from '../../components/ui/input/Input';
 import Select from '../../components/ui/select/Select';
 import Textarea from '../../components/ui/textarea/Textarea';
 import AdvertService from '../../service/AdvertService';
 import cl from '../../styles/advert/CreateAdvert.module.css'
+import Hr from '../../components/ui/hr/Hr';
+
 
 const CreateAdvert = () => {
 
@@ -15,7 +19,7 @@ const CreateAdvert = () => {
   const [location, setLocation] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
-  const [type, setType] = useState('')
+  const [type, setType] = useState('none')
  
   const deleteHandler = (image, index) =>  {
     setSelectedImages(selectedImages.filter((_,index) => index !== 0));
@@ -58,18 +62,24 @@ const CreateAdvert = () => {
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   return (
-    <div className={cl.advertWrapper}>
+    <div>
 
-      {/* TODO : implement choice */}
+      <div className={cl.titleWord}>
+        Опубликовать объявление
+        <Hr/>
+      </div>
+
+      <div className={cl.advertWrapper}>
+
       <div className={cl.itemTitle}>
         Категория *
       </div>
       <div className={cl.itemField}>
-        <Select>
-          <option disabled defaultValue='Выберете категорию'>Выберете категорию</option>
-          <option>Работа</option>
-          <option>Авто</option>
-          <option>Животные</option>
+        <Select value={type} onChange={(e) => setType(e.target.value)}>
+          <option disabled defaultValue value='none'>Выберете категорию</option>
+          <option value='job'>Работа</option>
+          <option value='auto'>Авто</option>
+          <option value='animal'>Животные</option>
         </Select>
       </div>
 
@@ -89,11 +99,11 @@ const CreateAdvert = () => {
         Описание *
       </div>
       <Textarea
-         value={description}
-         onChange={e => setDescription(e.target.value)}
-         rows={5}
-         cols={50}
-         name='text'
+        value={description}
+        onChange={e => setDescription(e.target.value)}
+        rows={5}
+        cols={50}
+        name='text'
       />
       <div className={cl.itemTitle}>
         Добавить изображения *
@@ -102,7 +112,7 @@ const CreateAdvert = () => {
             <input {...getInputProps()}/>
             {
               isDragActive ?
-                <p>Drop the files here ...</p> :
+                <p>Перетащите файлы сюда ...</p> :
                 <p>Нажмите или перетащите для загрузки изображений</p>
             }
       </div>
@@ -110,10 +120,9 @@ const CreateAdvert = () => {
       <div>
         {imagesToRender && imagesToRender.map((image,index) => {
           return (
-            <div key={image}>
-              <img src={image} height='200' alt='img'/>
-              <button onClick={() => deleteHandler(image,index)}>delete image</button>
-              <p>{index + 1}</p>
+            <div key={image} className={cl.imagePreviewArea}>
+              <button className={cl.previewButton} onClick={() => deleteHandler(image,index)}>Удалить</button>
+              <Image src={image} height='100' alt='img'/>
             </div>
           )
         })}
@@ -126,22 +135,29 @@ const CreateAdvert = () => {
       <div className={cl.itemField}>
         <Input 
          type="text"
-         value={title}
-         onChange={e => setTitle(e.target.value)}
+         value={price}
+         onChange={e => setPrice(e.target.value)}
          placeholder=''
         />
       </div>
 
-
+      <div className={cl.itemTitle}>
+        Адрес *
+      </div>
+      <div className={cl.itemField}>
+        <Input 
+        type="text"
+        value={location}
+        onChange={e => setLocation(e.target.value)}
+        placeholder=''
+        />
+      </div>
       
-      
-      <div>
-        <label>
-          <button onClick={handleSubmit}>submit</button>
-          <br />
-        </label>
+      <div className={cl.itemButton}>
+        <Button onClick={handleSubmit}>Опубликовать</Button>
       </div>
 
+      </div>
     </div>
   );
 }

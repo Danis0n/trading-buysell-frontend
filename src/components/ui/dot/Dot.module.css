@@ -12,7 +12,6 @@
 }
 
 .dot img {
-    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
     position: absolute;
     top: 0;
     left: 0;
