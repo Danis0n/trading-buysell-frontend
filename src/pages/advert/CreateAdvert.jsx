@@ -105,6 +105,7 @@ const CreateAdvert = () => {
         cols={50}
         name='text'
       />
+      
       <div className={cl.itemTitle}>
         Добавить изображения *
       </div>

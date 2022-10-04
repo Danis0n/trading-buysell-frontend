@@ -3,6 +3,12 @@ import AdvertService from '../../service/AdvertService';
 import { useDropzone } from 'react-dropzone';
 import { useParams } from 'react-router-dom';
 import { getFile } from '../../utils/FileUtil';
+import cl from '../../styles/advert/CreateAdvert.module.css'
+import Image from '../../components/ui/img/Image';
+import Button from '../../components/ui/button/Button';
+import Hr from '../../components/ui/hr/Hr';
+import Textarea from '../../components/ui/textarea/Textarea';
+import Input from '../../components/ui/input/Input';
 
 const EditAdvert = () => {
 
@@ -90,93 +96,85 @@ const EditAdvert = () => {
 
   return (
     <div>
-      <div>
-        <label>
-          Title
-          <br />
-          <input
-            type="text"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            placeholder='title'
-          />
-        </label>
+
+      <div className={cl.titleWord}>
+        Редактировать объявление
+        <Hr/>
       </div>
 
-      <div>
-        <label>
-          location
-          <br />
-          <input
-            type="text"
-            value={location}
-            onChange={e => setLocation(e.target.value)}
-            placeholder='location'
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          description
-          <br />
-          <input
-            type="text"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-            placeholder='description'
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          price
-          <br />
-          <input
-            type="text"
-            value={price}
-            onChange={e => setPrice(e.target.value)}
-            placeholder='price'
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          type
-          <br />
-          <input
-            type="text"
-            value={type}
-            onChange={e => setType(e.target.value)}
-            placeholder='type'
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          <button onClick={handleSubmit}>submit</button>
-          <br />
-        </label>
-      </div>
+      <div className={cl.advertWrapper}>
 
-      <div {...getRootProps()}>
-            <input {...getInputProps()}/>
-            {
-              isDragActive ?
-                <p>Drop the files here ...</p> :
-                <p>Drag 'n' drop some files here, or click to select files</p>
+        <div className={cl.itemTitle}>
+         Название
+        </div>
+        <Input
+         type="text"
+         onChange={e => setTitle(e.target.value)}
+         placeholder={title}
+        />
+
+        <div className={cl.itemTitle}>
+          Описание
+        </div>
+        <Textarea
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+          rows={5}
+          cols={50}
+          name='text'
+        />
+
+        <div className={cl.itemTitle}>
+          Цена
+        </div>
+        <div className={cl.itemField}>
+          <Input 
+          type="text"
+          onChange={e => setPrice(e.target.value)}
+          placeholder={price}
+          />
+        </div>
+
+        <div className={cl.itemTitle}>
+          Адрес
+        </div>
+        <div className={cl.itemField}>
+          <Input 
+          type="text"
+          onChange={e => setLocation(e.target.value)}
+          placeholder={location}
+          />
+        </div>
+
+        <div className={cl.itemTitle}>
+          Добавить/Удалить изображения
+        </div>
+        <div className={cl.itemFileArea} {...getRootProps()}>
+          <input {...getInputProps()}/>
+          {
+            isDragActive ?
+            <p>Перетащите файлы сюда ...</p> :
+            <p>Нажмите или перетащите для загрузки изображений</p>
             }
-      </div>
+        </div>
 
-      <div>
-        {imagesToRender && imagesToRender.map((image, index) => {
-          return (
-            <div key={image}>
-              <img src={image} height='200' alt='img'/>
-              <button onClick={() => deleteHandler(image,index)}>delete image</button>
-              <p>{index + 1}</p>
-            </div>
-          )
-        })}
+        <div className={cl.itemTitle}>
+          {imagesToRender && imagesToRender.map((image,index) => {
+            return (
+              <div key={image} className={cl.imagePreviewArea}>
+                <button className={cl.previewButton} onClick={() => deleteHandler(image,index)}>Удалить</button>
+                <Image src={image} height='100' alt='img'/>
+              </div>
+            )
+          })}
+        </div>
+
+        <div className={cl.itemButton}>
+          <Button onClick={handleSubmit}>Изменить</Button>
+        </div>
+
+
+
       </div>
     </div>
   )

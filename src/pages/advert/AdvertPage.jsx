@@ -74,12 +74,7 @@ const AdvertPage = () => {
                     <div className={cl.itemTitle}>Описание</div>
                     <Hr/>
                     <Paragraph>
-                        {advert?.description}
-                        {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat quisquam quo, ea optio porro natus, 
-                        reprehenderit incidunt temporibus quod eos magnam, harum repellendus? Non, sapiente culpa. Quibusdam obcaecati modi,
-                        nisi, a voluptas eius eveniet quia delectus odit laudantium aliquam corrupti mollitia impedit repellat deserunt, culpa minus asperiores!
-                        Impedit ipsum, eum vel mollitia, ut voluptas maxime ad explicabo accusamus perspiciatis facere eius iusto rem sequi. 
-                        Eius corporis sunt id ratione doloribus! */}
+                      {advert?.description}
                     </Paragraph>
 
                     <div className={cl.itemTitle}>Адрес</div>

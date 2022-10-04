@@ -9,7 +9,7 @@ export default function Slider({images}) {
     const nextSlide = () => {
         if(slideIndex !== images.length){
             setSlideIndex(slideIndex + 1)
-        } 
+        }
         else if (slideIndex === images.length){
             setSlideIndex(1)
         }
@@ -33,11 +33,11 @@ export default function Slider({images}) {
             {images.map((image, index) => {
                 return (
                     <div
-                    key={image.id}
-                    className={slideIndex === index + 1 ? "slide active-anim" : "slide"}
+                     key={image.id}
+                     className={slideIndex === index + 1 ? "slide active-anim" : "slide"}
                     >
-                        <img 
-                        src={image.url} alt='img'
+                        <img key={image.id}
+                         src={image.url} alt='img'
                         />
                     </div>
                 )
@@ -52,6 +52,7 @@ export default function Slider({images}) {
                 <div className="container-dots">
                     {Array.from({length: images.length}).map((item, index) => (
                         <div 
+                        key={index}
                         onClick={() => moveDot(index + 1)}
                         className={slideIndex === index + 1 ? "dot active" : "dot"}
                         ></div>
