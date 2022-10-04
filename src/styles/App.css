@@ -1,9 +1,9 @@
 .navbar {
     margin-bottom: 25px;
     height: 60px;
+    display: grid;
     width: 99vw;
     align-items: center;
-    display: grid;
     padding: 0 15px;
     box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
 

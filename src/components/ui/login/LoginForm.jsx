@@ -14,6 +14,10 @@ const LoginForm = ({handleLogin}) => {
   const [password, setPassword] = useState('')
   const {store} = useAuth();
 
+  const style = {
+    width: '250px'
+  }
+
   return (
     <div className={cl.loginForm}>
 
@@ -23,6 +27,7 @@ const LoginForm = ({handleLogin}) => {
       </div>
 
       <Input
+        style={style}
         onChange={(e) => setUsername(e.target.value)}
         value={username}
         type='text'
@@ -30,6 +35,7 @@ const LoginForm = ({handleLogin}) => {
       />
 
       <Input
+        style={style}
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         type='password'

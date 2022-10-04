@@ -61,6 +61,10 @@ const CreateAdvert = () => {
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
+  const style = {
+    width: '350px'
+  }
+
   return (
     <div>
 
@@ -75,7 +79,7 @@ const CreateAdvert = () => {
         Категория *
       </div>
       <div className={cl.itemField}>
-        <Select value={type} onChange={(e) => setType(e.target.value)}>
+        <Select style={style} value={type} onChange={(e) => setType(e.target.value)}>
           <option disabled defaultValue value='none'>Выберете категорию</option>
           <option value='job'>Работа</option>
           <option value='auto'>Авто</option>
@@ -88,6 +92,7 @@ const CreateAdvert = () => {
       </div>
       <div className={cl.itemField}>
         <Input 
+         style={style}
          type="text"
          value={title}
          onChange={e => setTitle(e.target.value)}
@@ -135,6 +140,7 @@ const CreateAdvert = () => {
       </div>
       <div className={cl.itemField}>
         <Input 
+         style={style}
          type="text"
          value={price}
          onChange={e => setPrice(e.target.value)}
@@ -147,6 +153,7 @@ const CreateAdvert = () => {
       </div>
       <div className={cl.itemField}>
         <Input 
+        style={style}
         type="text"
         value={location}
         onChange={e => setLocation(e.target.value)}

@@ -1,0 +1,48 @@
+.advertWrapper{
+    padding-top: 20px;
+    display: flex;
+    min-width: 1200px;
+}
+
+.titleWord {
+    text-align: center;
+    padding: 0 0 22px;
+    font-size: 40px;
+}
+
+.searchArea {
+    box-sizing: border-box;
+    display: block;
+    width: 250px;
+    height: 600px;
+    padding: 20px;
+    margin-right: auto;
+    margin-left: 20px;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+}
+
+.searchButton {
+    text-align: center;
+}
+
+.titleSector {
+    margin-bottom: 20px;
+}
+
+.advertArea {
+    margin-left: auto;
+    max-width: 900px;
+}
+
+.precisionSearchArea {
+    display: flex;
+    padding: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+    width: 880px;
+}
+
+.item {
+    margin-left: 10px;
+    margin-right: 10px;
+}

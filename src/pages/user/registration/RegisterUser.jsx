@@ -45,6 +45,10 @@ const RegisterUser = () => {
     // TODO : implement all checks (double password(~), mobile phone
     //  (only digits) in special util class)
 
+    const style = {
+      width: '350px'
+    }
+
   return (
     <div>
 
@@ -56,6 +60,7 @@ const RegisterUser = () => {
       <div className={cl.registerForm}>
 
         <Input
+          style={style}
           type='text'
           value={name}
           placeholder='Имя'
@@ -63,6 +68,7 @@ const RegisterUser = () => {
         />
 
         <Input
+          style={style}
           type='text'
           value={username}
           placeholder='Логин'
@@ -70,6 +76,7 @@ const RegisterUser = () => {
         />
 
         <Input
+          style={style}
           type='password'
           value={password}
           placeholder='Пароль'
@@ -77,6 +84,7 @@ const RegisterUser = () => {
         />
 
         <Input
+          style={style}
           type='password'
           value={confirmPassword}
           placeholder='Повторите пароль'
@@ -84,6 +92,7 @@ const RegisterUser = () => {
         />
 
         <Input
+          style={style}
           type='text'
           value={email}
           placeholder='E-mail'
@@ -91,6 +100,7 @@ const RegisterUser = () => {
         />
 
         <Input
+          style={style}
           type='text'
           value={phone}
           placeholder='Мобильный телефон'

@@ -114,8 +114,13 @@ const AdvertPage = () => {
                 {advert?.userId === store.user.id
                 ?
                 <div className={cl.itemControl}>
-                    <CustomLink to='edit'>Edit</CustomLink>
-                    <Button onClick={handleDelete}>Delete</Button>
+                    <div>
+                      <CustomLink to='edit'>Изменить</CustomLink>
+                    </div>
+                    
+                    <div>
+                      <Button onClick={handleDelete}>Удалить</Button>
+                    </div>
                 </div>
                 :
                 <></>}

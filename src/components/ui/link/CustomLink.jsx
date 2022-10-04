@@ -15,8 +15,8 @@ const CustomLink = ({children, to, ...props}) => {
     }
 
     const match = useMatch({
-        path: to,
-        end: to.length === 1,
+      path: to,
+      end: to.length === 1,
     });
 
     const LinkStyle = {

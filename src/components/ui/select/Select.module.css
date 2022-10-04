@@ -1,6 +1,6 @@
 .form {
+    cursor: pointer;
     margin-bottom: 45px;
-    width: 350px;
     height: 50px;
     padding: 0px 20px;
     border : 1px solid #F2F2F2;
@@ -9,4 +9,12 @@
     font-weight: 300;
     font-family: 'Roboto', sans-serif;
     background-color: #F9F8F8;
+}
+
+.precision{
+    cursor: pointer;
+    background-color: white;
+    padding: 10px;
+    font: 18px 'lato', sans-serif;
+    border: 1px solid #f2f2f2;
 }

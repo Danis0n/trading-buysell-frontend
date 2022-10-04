@@ -39,6 +39,7 @@ const NoAuthorizedNavbar = () => {
               <LoginForm handleLogin={handleLogin}/>
             </Modal>
           </div>
+          
         </div>
     </header>
   )
