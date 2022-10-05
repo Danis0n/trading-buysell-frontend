@@ -7,7 +7,6 @@ import Input from '../../components/ui/input/Input';
 import Select from '../../components/ui/select/Select';
 import PrecisionSelect from '../../components/ui/select/PrecisionSelect';
 import Button from '../../components/ui/button/Button';
-import Pagination from '../../components/ui/pagination/Pagination';
 import SearchedAdverts from './SearchedAdverts';
 
 
@@ -17,7 +16,7 @@ const AdvertsPage = () => {
     const [searchedAdverts, setSearchedAdverts] = useState([])
     const [filter, setFilter] = useState({sort: '', query: ''})
     const [currentPage, setCurrentPage] = useState(1);
-    const [advertsPerPage] = useState(10);
+    const [advertsPerPage] = useState(9);
     
     const fetchData = async () => {
         try {
