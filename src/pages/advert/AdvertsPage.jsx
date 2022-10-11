@@ -8,48 +8,78 @@ import PrecisionSelect from '../../components/ui/select/PrecisionSelect';
 import Button from '../../components/ui/button/Button';
 import SearchedAdverts from './SearchedAdverts';
 
-
 const AdvertsPage = () => {
 
     const minValue = 50;
     const maxValue = 10000000;
 
     const [adverts, setAdverts] = useState([])
-    const [title, setTitle] = useState('none');
-    const [location, setLocation] = useState('none');
+    const [title, setTitle] = useState('');
+    const [location, setLocation] = useState('');
     const [minPrice, setMinPrice] = useState(minValue);
     const [maxPrice, setMaxPrice] = useState(maxValue);
-    const [type, setType] = useState('none');
+    const [type, setType] = useState('');
 
-    const [searchedAdverts, setSearchedAdverts] = useState([])
+    const [loading, setLoading] = useState(false);
+
     const [currentPage, setCurrentPage] = useState(1);
     const [advertsPerPage] = useState(9);
     
     const fetchDataByParams = async (title, type, location, minPrice, maxPrice) => {
+        setLoading(true);
         try {
             const response = await AdvertService.getParams(
-                title,type,location,
-                minPrice,maxPrice);
-            console.log(response);
-
+            { title, type, location, minPrice, maxPrice });
+            setAdverts(response.data);
         } catch (error) {
             console.log(error);
+        } finally{
+            setLoading(false);
         }
     }
 
     const fetchData = async () => {
+        setLoading(true);
         try {
             const response = await AdvertService.getAll();
             setAdverts(response.data);
-            setSearchedAdverts(response.data);
         } catch (error) {
             console.log(error.message);            
-        }   
+        } finally{
+            setLoading(false);
+        }
+    }
+
+    const getRealValue = (value) => {
+        if(value === ''){
+            return 'none';
+        }
+        return value
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetchDataByParams(title,type, location, minPrice, maxPrice);
+        fetchDataByParams(getRealValue(title),type, getRealValue(location), minPrice, maxPrice);
+    }
+
+    const handleDefault = (e) => {
+        e.preventDefault();
+        if(title === '' && location === '' && type === 'none' ){
+            return;
+        }
+        fetchData();        
+        setType('none');
+        setTitle('')
+        setLocation('')
+    }
+
+    const checkStates = () => {
+        if(title === ''){
+            setTitle('none')
+        }
+        if(location === ''){
+            setLocation('none')
+        }
     }
 
     useEffect(() =>  {
@@ -58,7 +88,7 @@ const AdvertsPage = () => {
     
     const indexOfLastAdvert = currentPage * advertsPerPage;
     const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
-    const currentAdverts = searchedAdverts.slice(indexOfFirstAdvert, indexOfLastAdvert);
+    const currentAdverts = adverts.slice(indexOfFirstAdvert, indexOfLastAdvert);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -82,6 +112,8 @@ const AdvertsPage = () => {
         textAlign :'center',
     }
 
+    // checkStates();
+
     return (
         <div>
             <div className={cl.titleWord}>
@@ -98,6 +130,7 @@ const AdvertsPage = () => {
                         style={style}
                         type="text"
                         placeholder='напр. работа'
+                        value={title}
                         onChange={e => setTitle(e.target.value)}
                     />
 
@@ -106,7 +139,7 @@ const AdvertsPage = () => {
                     </div>
                     <div className={cl.itemField}>
                         <Select style={style} value={type} onChange={(e) => setType(e.target.value)}>
-                            <option disabled defaultValue value='none'>Категория</option>
+                            <option defaultValue value='none'>Категория</option>
                             <option value='job'>Работа</option>
                             <option value='auto'>Авто</option>
                             <option value='animal'>Животные</option>
@@ -120,6 +153,7 @@ const AdvertsPage = () => {
                         style={style}
                         type="text"
                         placeholder='напр. Брянск'
+                        value={location}
                         onChange={e => setLocation(e.target.value)}
                     />
 
@@ -151,23 +185,31 @@ const AdvertsPage = () => {
                 <div className={cl.rightArea}>
     
                     <div className={cl.precisionSearchArea}>
-                        {/* TODO : implement some sort here */}
                         <div className={cl.item}>
-                        {/* TODO : implement it with useState value */}
                             <PrecisionSelect>
                                 <option value='new'>Новые объявления</option>
                                 <option value='more'>Более низкая цена первая</option>
                                 <option value='less'>Более высокая цена первая</option>
                             </PrecisionSelect>
                         </div>
+                        <div className={cl.Default}>
+                            <Button style={buttonDefaults} onClick={handleDefault}>Сбросить</Button>
+                        </div>
                     </div>
 
-                    <SearchedAdverts
+                    {loading
+                    ?
+                        <div>
+                            {/* Spinner */}
+                        </div>
+                    :
+                        <SearchedAdverts
                         currentAdverts={currentAdverts}
                         advertsPerPage={advertsPerPage}
                         adverts={adverts}
                         paginate={paginate}
-                    />
+                        />
+                    }
                 </div>
             </div>
         </div>
