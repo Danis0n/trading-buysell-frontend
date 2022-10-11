@@ -1,6 +1,5 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect} from 'react'
 import AdvertService from '../../service/AdvertService';
-import AdvertElement from './AdvertElement';
 import cl from '../../styles/advert/AdvertsPage.module.css'
 import Hr from '../../components/ui/hr/Hr';
 import Input from '../../components/ui/input/Input';
@@ -12,12 +11,32 @@ import SearchedAdverts from './SearchedAdverts';
 
 const AdvertsPage = () => {
 
+    const minValue = 50;
+    const maxValue = 10000000;
+
     const [adverts, setAdverts] = useState([])
+    const [title, setTitle] = useState('none');
+    const [location, setLocation] = useState('none');
+    const [minPrice, setMinPrice] = useState(minValue);
+    const [maxPrice, setMaxPrice] = useState(maxValue);
+    const [type, setType] = useState('none');
+
     const [searchedAdverts, setSearchedAdverts] = useState([])
-    const [filter, setFilter] = useState({sort: '', query: ''})
     const [currentPage, setCurrentPage] = useState(1);
     const [advertsPerPage] = useState(9);
     
+    const fetchDataByParams = async (title, type, location, minPrice, maxPrice) => {
+        try {
+            const response = await AdvertService.getParams(
+                title,type,location,
+                minPrice,maxPrice);
+            console.log(response);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const fetchData = async () => {
         try {
             const response = await AdvertService.getAll();
@@ -28,19 +47,39 @@ const AdvertsPage = () => {
         }   
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        fetchDataByParams(title,type, location, minPrice, maxPrice);
+    }
+
     useEffect(() =>  {
         fetchData();
     }, [])
-
+    
     const indexOfLastAdvert = currentPage * advertsPerPage;
     const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
     const currentAdverts = searchedAdverts.slice(indexOfFirstAdvert, indexOfLastAdvert);
 
-    const paginate = pageNumber => setCurrentPage(pageNumber);
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     const style = {
         width : '200px',
         fontSize : '17px'
+    }
+
+    const paramsInputStyle = {
+        width : '90px',
+        fontSize : '17px',
+        marginRight : '20px',
+    }
+
+    const buttonDefaults = {
+        backgroundColor : '#F9F8F8',
+        color : 'black',
+    }
+
+    const button = {
+        textAlign :'center',
     }
 
     return (
@@ -59,15 +98,15 @@ const AdvertsPage = () => {
                         style={style}
                         type="text"
                         placeholder='напр. работа'
+                        onChange={e => setTitle(e.target.value)}
                     />
 
                     <div className={cl.titleSector}>
                         Категория
                     </div>
                     <div className={cl.itemField}>
-                    {/* TODO : implement it to useState value */}
-                        <Select style={style}>
-                            <option disabled defaultValue value='none'>Выберете категорию</option>
+                        <Select style={style} value={type} onChange={(e) => setType(e.target.value)}>
+                            <option disabled defaultValue value='none'>Категория</option>
                             <option value='job'>Работа</option>
                             <option value='auto'>Авто</option>
                             <option value='animal'>Животные</option>
@@ -81,33 +120,45 @@ const AdvertsPage = () => {
                         style={style}
                         type="text"
                         placeholder='напр. Брянск'
+                        onChange={e => setLocation(e.target.value)}
                     />
 
                     <div className={cl.titleSector}>
                         Цена
                     </div>
-                    <Input
-                        style={style}
-                        type='range'
-                        min='100'
-                        max='1000000'
-                    />
-                    <div className={cl.searchButton}>
-                        <Button>Поиск</Button>
+                    <div className={cl.paramsInputPrice}>
+                        <Input
+                            style={paramsInputStyle}
+                            type='text'
+                            placeholder='Мин'
+                            onChange={e => setMinPrice(e.target.value)}
+                        />
+                        <Input
+                            style={paramsInputStyle}
+                            type='text'
+                            placeholder='Макс'
+                            onChange={e => setMaxPrice(e.target.value)}
+                        />
+                    </div>
+
+                    <div className={cl.buttonArea}>
+                        <div className={cl.searchButton}>
+                            <Button style={button} onClick={handleSubmit}>Поиск</Button>
+                        </div>
                     </div>
                 </div>
 
                 <div className={cl.rightArea}>
-
+    
                     <div className={cl.precisionSearchArea}>
                         {/* TODO : implement some sort here */}
                         <div className={cl.item}>
                         {/* TODO : implement it with useState value */}
-                        <PrecisionSelect>
-                            <option value='new'>Новые объявления</option>
-                            <option value='more'>Более низкая цена первая</option>
-                            <option value='less'>Более высокая цена первая</option>
-                        </PrecisionSelect>
+                            <PrecisionSelect>
+                                <option value='new'>Новые объявления</option>
+                                <option value='more'>Более низкая цена первая</option>
+                                <option value='less'>Более высокая цена первая</option>
+                            </PrecisionSelect>
                         </div>
                     </div>
 

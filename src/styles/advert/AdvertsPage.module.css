@@ -14,14 +14,19 @@
     box-sizing: border-box;
     display: block;
     width: 250px;
-    height: 600px;
     padding: 20px;
+    margin-bottom: auto;
     margin-right: auto;
     margin-left: 20px;
     box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
 }
 
+.buttonArea{
+    
+}
+
 .searchButton {
+    word-spacing: 4px;
     text-align: center;
 }
 
@@ -45,4 +50,8 @@
 .item {
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.paramsInputPrice {
+    display: flex;
 }

@@ -5,9 +5,9 @@ import { CommentResponse } from "../response/CommentResponse";
 export default class CommentService {
     
     static async create(to: string, createdBy: string, 
-                                        advertName: string, title: string,
-                                        description: string, rating: string
-                                        ) : Promise<AxiosResponse<string>> {
+                        advertName: string, title: string,
+                        description: string, rating: string
+                        ) : Promise<AxiosResponse<string>> {
         return $api.post('/api/comment/save',
                         {to, createdBy, advertName, title, description, rating})
     };

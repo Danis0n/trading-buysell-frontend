@@ -3,6 +3,7 @@ import { AdvertResponse} from "../response/AdvertResponse";
 import $api, { API_URL } from "../components/http";
 import { Advert } from "../model/Advert";
 import { SearchRequest } from "../model/SearchRequest";
+import { stringify } from "querystring";
 
 export default class AdvertService {
 
@@ -14,9 +15,9 @@ export default class AdvertService {
         return axios.get(`${API_URL}/api/advert/get/${id}`);
     }
 
-    static async getParams(data: SearchRequest) : Promise<AxiosResponse<Advert[]>> {
-        console.log({data});
-        return axios.get(`${API_URL}/api/advert/get/params`, {data});
+    static async getParams(title: string, type: string, location: string,
+        minPrice: string, maxPrice: string) : Promise<AxiosResponse<Advert[]>> {
+        return axios.post(`${API_URL}/api/advert/get/params`, {title, type, location, minPrice, maxPrice});
     }
 
     static async create(formData: FormData) : Promise<void> {
