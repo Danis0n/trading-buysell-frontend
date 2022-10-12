@@ -9,6 +9,7 @@ import EditAdvert from '../pages/advert/EditAdvert';
 import RegisterUser from '../pages/user/registration/RegisterUser';
 import UserPage from '../pages/user/UserPage';
 import AboutPage from "../pages/AboutPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const AppRouter = () => {
     const {store} = useAuth()
@@ -28,6 +29,7 @@ const AppRouter = () => {
                 <Route path='register' element={<RegisterUser/>}/>
                 <Route path='user/:id' element={<UserPage/>}/>
                 <Route path='about' element={<AboutPage/>}/>
+                <Route path='*' element={<NotFoundPage/>}/>
             </Route>
         </Routes>
     );
