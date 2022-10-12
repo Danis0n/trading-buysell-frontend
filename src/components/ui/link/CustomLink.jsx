@@ -21,11 +21,14 @@ const CustomLink = ({children, to, ...props}) => {
 
     const LinkStyle = {
       color: match ? 'var(--color-active)' : 'black ',
-      background: 'var(--color-bg)'
+      textDecoration: isHover ? 'underline' : 'none',
+      background: 'var(--color-bg)',
     }
 
   return (
     <Link
+     onMouseEnter={handleMouseEnter}
+     onMouseLeave={handleMouseLeave}
      to={to} 
      style={LinkStyle}
      {...props}

@@ -2,8 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Footer from '../Footer'
 import { useAuth } from '../hook/useAuth'
-import AuthorizedNavbar from '../ui/navbar/AuthorizedNavbar'
-import NoAuthorizedNavbar from '../ui/navbar/NoAuthorizedNavbar'
+import Navbar from '../ui/navbar/Navbar'
 
 const Layout = ({isAuth}) => {
 
@@ -16,12 +15,8 @@ const Layout = ({isAuth}) => {
 
   return (
     <>
-    {isAuth
-     ? 
-     <AuthorizedNavbar/>
-     :
-     <NoAuthorizedNavbar/>
-    }
+
+    <Navbar isAuth={isAuth}/>
     
     <main>
         <Outlet/>
