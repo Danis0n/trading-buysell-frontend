@@ -6,7 +6,6 @@ import Navbar from '../ui/navbar/Navbar'
 
 const Layout = ({isAuth}) => {
 
-  // TODO : implement navbar of two types - auth&notauth
   const {store} = useAuth();
 
   if (store.isLoading) {
