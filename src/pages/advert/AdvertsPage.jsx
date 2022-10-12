@@ -73,15 +73,6 @@ const AdvertsPage = () => {
         setLocation('')
     }
 
-    const checkStates = () => {
-        if(title === ''){
-            setTitle('none')
-        }
-        if(location === ''){
-            setLocation('none')
-        }
-    }
-
     useEffect(() =>  {
         fetchData();
     }, [])
@@ -111,8 +102,6 @@ const AdvertsPage = () => {
     const button = {
         textAlign :'center',
     }
-
-    // checkStates();
 
     return (
         <div>
