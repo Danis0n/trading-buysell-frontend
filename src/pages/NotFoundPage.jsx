@@ -29,7 +29,12 @@ const NotFoundPage = () => {
     }
 
   return (
-    <div>
+    <div style={{
+        height: '575px',
+        display: 'table',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    }}>
         <div style={Error}>
             404
         </div>
@@ -41,6 +46,8 @@ const NotFoundPage = () => {
         </div>
         <div style={helperText}>
             <Button 
+             style={{
+             }}
              onClick={handleSubmit}>Назад</Button>
         </div>
     </div>

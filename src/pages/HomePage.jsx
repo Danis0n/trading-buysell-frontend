@@ -92,8 +92,8 @@ const HomePage = () => {
   }
 
   const DotStyle = {
-    height: '90px',
-    width: '90px',
+    height: '100px',
+    width: '100px',
   }
 
   const areaStyle = {
@@ -297,7 +297,9 @@ const HomePage = () => {
           <Button
            onClick={Navigate}
            style={{
+            fontSize: '25px',
             margin: '30px',
+            padding: '15px',
            }}
           >
             Все объявления

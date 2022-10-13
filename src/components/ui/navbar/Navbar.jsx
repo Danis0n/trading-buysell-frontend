@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 
 const Navbar = ({isAuth}) => {
 
-
     const {store} = useAuth();
     const [loginModal, setLoginModal] = useState(false)
     const [exitModal, setExitModal] = useState(false)

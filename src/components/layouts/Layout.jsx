@@ -18,7 +18,7 @@ const Layout = ({isAuth}) => {
     <Navbar isAuth={isAuth}/>
     
     <main style={{
-      marginBottom: '100px',
+      marginBottom: '30px',
     }}>
         <Outlet/>
     </main>

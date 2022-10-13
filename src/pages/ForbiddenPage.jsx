@@ -29,7 +29,12 @@ const ForbiddenPage = () => {
     }
 
   return (
-    <div>
+    <div style={{
+        height: '575px',
+        display: 'table',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    }}>
         <div style={Error}>
             403
         </div>
