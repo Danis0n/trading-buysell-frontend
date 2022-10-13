@@ -33,7 +33,11 @@ const UserPage = () => {
     }
 
     return (
-        <div>
+        <div style={{
+            display: 'table',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        }}>
         <div>{user?.id}</div>
         <div>{user?.info?.name}</div>
         <div>{user?.username}</div>

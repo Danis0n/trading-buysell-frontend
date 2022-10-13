@@ -18,7 +18,6 @@ const Navbar = ({isAuth}) => {
     }
 
     const handleLogin = (e) => {
-        e.preventDefault();
         setLoginModal(false);
     }
 
@@ -29,10 +28,12 @@ const Navbar = ({isAuth}) => {
     }
 
     const navbar = {
+        // overflow: 'hidden',
+        // overflowX: 'hidden',
         marginBottom: '25px',
         height: '70px',
         display: 'grid',
-        width: '99vw',
+        width: '100%',
         alignItems: 'center',
         padding:'0 15px',
         boxShadow: '0 0 15px 4px rgba(0,0,0,0.05)',

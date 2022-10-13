@@ -1,10 +1,10 @@
 import React from 'react'
 import cl from './Hr.module.css'
 
-const Hr = () => {
+const Hr = ({color}) => {
   return (
     <div className={cl.bottomLine}>
-        <hr/>
+        <hr style={{background: color}}/>
     </div>
   )
 }

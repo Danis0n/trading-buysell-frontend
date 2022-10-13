@@ -51,7 +51,7 @@ const LoginForm = ({handleLogin}) => {
       </Button>
 
       <div className={cl.registerForm}>
-        Нет аккаунта? <Link to='register' onClick={handleLogin}>Регистрация</Link> 
+        Нет аккаунта? <Link to='/register' onClick={handleLogin}>Регистрация</Link> 
       </div>
 
     </div>

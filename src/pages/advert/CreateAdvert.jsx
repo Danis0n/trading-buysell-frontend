@@ -66,8 +66,12 @@ const CreateAdvert = () => {
   }
 
   return (
+    <div style={{
+      display: 'table',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+  }}>
     <div>
-
       <div className={cl.titleWord}>
         Опубликовать объявление
         <Hr/>
@@ -166,6 +170,7 @@ const CreateAdvert = () => {
       </div>
 
       </div>
+    </div>
     </div>
   );
 }

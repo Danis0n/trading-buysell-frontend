@@ -58,6 +58,11 @@ const AdvertPage = () => {
     }, [])
 
     return (
+        <div style={{
+            display: 'table',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        }}>
         <div className={cl.advertWrapper}>
             <div className={cl.itemMainInfo}>
 
@@ -126,6 +131,7 @@ const AdvertPage = () => {
                 <></>}
 
             </div>
+        </div>
         </div>
     )
 }

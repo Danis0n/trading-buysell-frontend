@@ -1,11 +1,13 @@
 .advertWrapper{
     padding: 30px 60px;
-    width: 650px;
+    display: table;
     box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
 }
 
 .itemTitle{  
-    margin-bottom: 24px;
+    /* margin-bottom: 24px; */
+    text-align: start;
+    margin: 5px 5px 20px;
 }
 
 .itemField{

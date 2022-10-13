@@ -54,19 +54,19 @@ const HomePage = () => {
 
 
   const wrapper = {
-    minWidth: '100vw',
+    minWidth: '100%',
     minHeight: 'auto',
   }
-
+  
   const header = {
+
     marginTop: '-25px',
     minHeight: '600px',
     marginBottom: '60px',
-    width: '100vw',
+    width: 'auto',
     color: 'white',
     textAlign: 'center',
     backgroundImage : `url(${Bis})`,
-    backgroundRepeat: 'no-repeat',
   }
 
   const title = {
@@ -137,7 +137,7 @@ const HomePage = () => {
         }}>
           Разместите своё объявление
         </div>
-        <Hr/>
+        <Hr color={'black'}/>
         <div style={{
           textAlign: 'center',
           color: '#959494',
@@ -166,9 +166,21 @@ const HomePage = () => {
         
       </div>
 
+      <div style={{
+        // height: '400px',
+        backgroundImage : `url(${Laptop})`
+      }}>
 
-      <div>
+      <div style={{
+        marginTop: '40px',
+        fontSize: '30px',
+        color: 'white',
+        textAlign: 'center',
+      }}>
         Всё что Вам нужно в одном месте
+      </div>
+        <Hr color={'white'}/>
+
       </div>
 
       </div>

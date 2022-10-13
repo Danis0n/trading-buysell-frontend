@@ -32,7 +32,11 @@ const AboutPage = () => {
   }
 
   return (
-    <div>
+    <div style={{
+      display: 'table',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }}>
       <div style={About}>
         Связаться с нами
         <Hr/>

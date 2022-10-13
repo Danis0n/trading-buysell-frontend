@@ -50,7 +50,11 @@ const RegisterUser = () => {
     }
 
   return (
-    <div>
+    <div style={{
+      display: 'table',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }}>
 
       <div className={cl.registerWord}>
         Регистрация
