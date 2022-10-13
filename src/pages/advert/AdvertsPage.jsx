@@ -197,6 +197,10 @@ const AdvertsPage = () => {
                         advertsPerPage={advertsPerPage}
                         adverts={adverts}
                         paginate={paginate}
+                        style={{
+                            marginLeft: 'auto',
+                            maxWidth: '900px',
+                        }}
                         />
                     }
                 </div>
@@ -204,5 +208,4 @@ const AdvertsPage = () => {
         </div>
     )
 }
-
 export default AdvertsPage

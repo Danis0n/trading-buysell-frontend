@@ -15,7 +15,7 @@ const AdvertElement = ({advert}) => {
         <Image src={advert.images[0].url} width='250' height='200' alt='logo'/>
         
         <div className={cl.imageType}>
-          <CustomLink to={`${advert.id}`}>
+          <CustomLink to={`/adverts/${advert.id}`}>
             <Dot>
               <Image src={map.get(advert?.type?.name)} alt='typeLogo'/>
             </Dot>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Laptop from '../images/laptop.jpg'
 import Bis from '../images/business.jpg'
 import Image from '../components/ui/img/Image'
@@ -12,8 +12,46 @@ import chat from '../images/icons/chat.png'
 import auto from '../images/icons/auto.png'
 import animal from '../images/icons/animal.png'
 import TypeLink from '../components/ui/typeButton/TypeButton'
+import Hr from '../components/ui/hr/Hr'
+import AdvertService from '../service/AdvertService'
+import SearchedAdverts from './advert/SearchedAdverts'
+import Pagination from '../components/ui/pagination/Pagination'
 
 const HomePage = () => {
+
+  const [loading, setLoading] = useState(false);
+  const [latestAdverts, setLatestAdverts] = useState([]);
+  const [exampleAdverts, setExampleAdverts] = useState([])
+  const [currentPage, setCurrentPage] = useState(1);
+  const [advertsPerPage] = useState(3);
+  
+
+  const fetchLatest = async () => {
+    
+  }
+
+  const fetchExamples = async () => {
+    try {
+      const response = await AdvertService.getAll();
+      setExampleAdverts(response.data);
+    } catch (error) {
+        console.log(error.message);            
+    }
+  }
+
+  useEffect(() => {
+    setLoading(true);
+    fetchLatest();
+    fetchExamples();
+    setLoading(false);
+  }, [])
+  
+  const indexOfLastAdvert = currentPage * advertsPerPage;
+  const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
+  const currentAdverts = exampleAdverts.slice(indexOfFirstAdvert, indexOfLastAdvert);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
 
   const wrapper = {
     minWidth: '100vw',
@@ -23,6 +61,7 @@ const HomePage = () => {
   const header = {
     marginTop: '-25px',
     minHeight: '600px',
+    marginBottom: '60px',
     width: '100vw',
     color: 'white',
     textAlign: 'center',
@@ -79,9 +118,54 @@ const HomePage = () => {
           <TypeLink image={job}>
             Работа
           </TypeLink>
+          <TypeLink image={love}>
+            Знакомства
+          </TypeLink>
+          <TypeLink image={edu}>
+            Обучение
+          </TypeLink>
         </div>
         
       </div>
+
+      <div style={{
+        marginBottom: '60px',
+      }}>
+        <div style={{
+          fontSize: '35px',
+          textAlign: 'center',
+        }}>
+          Разместите своё объявление
+        </div>
+        <Hr/>
+        <div style={{
+          textAlign: 'center',
+          color: '#959494',
+          fontSize: '16px',
+        }}>
+          Ниже представлены примеры объявлений
+        </div>
+        
+        <div style={{
+          textAlign: 'center'
+        }}>
+        {loading
+        ?
+        <div></div>
+        :
+        <div>
+          <SearchedAdverts
+            currentAdverts={currentAdverts}
+            advertsPerPage={advertsPerPage}
+            adverts={exampleAdverts}
+            paginate={paginate}
+            />
+        </div>
+        }
+        </div>
+        
+      </div>
+
 
       <div>
         Всё что Вам нужно в одном месте
@@ -92,4 +176,4 @@ const HomePage = () => {
   );
 }
 
-export default HomePage
+export default HomePage;
