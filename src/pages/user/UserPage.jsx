@@ -38,13 +38,13 @@ const UserPage = () => {
             marginLeft: 'auto',
             marginRight: 'auto',
         }}>
-        <div>{user?.id}</div>
-        <div>{user?.info?.name}</div>
-        <div>{user?.username}</div>
-        <br/>
-        <CreateComment id={id} myId={store.user.id}/>
-        <br/>
-        <Comments id={id} userId={store.user.id} />
+            <div>{user?.id}</div>
+            <div>{user?.info?.name}</div>
+            <div>{user?.username}</div>
+            <br/>
+            <CreateComment id={id} myId={store.user.id}/>
+            <br/>
+            <Comments id={id} userId={store.user.id} />
         </div>
     )
 }

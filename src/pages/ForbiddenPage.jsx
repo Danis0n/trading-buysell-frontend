@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '../components/ui/button/Button';
 
-const NotFoundPage = () => {
+const ForbiddenPage = () => {
 
     const nav = useNavigate();
 
@@ -31,13 +31,13 @@ const NotFoundPage = () => {
   return (
     <div>
         <div style={Error}>
-            404
+            403
         </div>
         <div style={text}>
-            Упс... Не найдено :(
+            Упс... Запрещено :(
         </div>
         <div style={helperText}>
-            Вы оказались на несуществующей странице...
+            Вы оказались на странице, которую не можете посетить
         </div>
         <div style={helperText}>
             <Button 
@@ -47,4 +47,4 @@ const NotFoundPage = () => {
   )
 }
 
-export default NotFoundPage
+export default ForbiddenPage

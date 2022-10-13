@@ -1,8 +1,11 @@
 import cl from './Dot.module.css'
 
-const Dot = ({children}) => {
+const Dot = ({children, style}) => {
+
+
+
   return (
-    <div className={cl.dot}>{children}</div>
+    <div className={cl.dot} style={style}>{children}</div>
   )
 }
 

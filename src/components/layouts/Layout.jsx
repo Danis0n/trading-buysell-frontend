@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Footer from '../Footer'
+import Footer from '../ui/footer/Footer'
 import { useAuth } from '../hook/useAuth'
 import Navbar from '../ui/navbar/Navbar'
 
@@ -17,10 +17,12 @@ const Layout = ({isAuth}) => {
 
     <Navbar isAuth={isAuth}/>
     
-    <main>
+    <main style={{
+      marginBottom: '100px',
+    }}>
         <Outlet/>
     </main>
-    {/* <Footer/> */}
+    <Footer/>
     </>
   )
 }

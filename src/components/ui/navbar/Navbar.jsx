@@ -5,12 +5,15 @@ import { useAuth } from '../../hook/useAuth'
 import LoginForm from '../login/LoginForm'
 import Modal from '../modal/Modal'
 import Confirm from '../confirm/Confirm'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = ({isAuth}) => {
+
 
     const {store} = useAuth();
     const [loginModal, setLoginModal] = useState(false)
     const [exitModal, setExitModal] = useState(false)
+    const nav = useNavigate();
 
     const handleCancel = (e) => {
         e.preventDefault();
@@ -27,9 +30,11 @@ const Navbar = ({isAuth}) => {
         store.logout();
     }
 
+    const handleSubmit = (e) => {
+        nav('/adverts/create');
+    }
+
     const navbar = {
-        // overflow: 'hidden',
-        // overflowX: 'hidden',
         marginBottom: '25px',
         height: '70px',
         display: 'grid',
@@ -76,7 +81,7 @@ const Navbar = ({isAuth}) => {
              style={{
              marginRight : '20px',
             }}>
-                <Button>Добавить объявление</Button>
+                <Button onClick={handleSubmit}>Добавить объявление</Button>
             </div>
 
             {isAuth

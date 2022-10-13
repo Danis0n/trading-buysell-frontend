@@ -22,6 +22,7 @@ const AppRouter = () => {
         <Routes>
             <Route path='/' element={<Layout isAuth={store.isAuth}/>}>
                 <Route index element={<HomePage/>}/>
+                <Route path='*' element={<NotFoundPage/>}/>
                 <Route path='adverts' element={<AdvertsPage/>}/>
                 <Route path='adverts/:id' element={<AdvertPage/>}/>
                 <Route path='adverts/:id/edit' element={<EditAdvert/>}/>
@@ -29,7 +30,6 @@ const AppRouter = () => {
                 <Route path='register' element={<RegisterUser/>}/>
                 <Route path='user/:id' element={<UserPage/>}/>
                 <Route path='about' element={<AboutPage/>}/>
-                <Route path='*' element={<NotFoundPage/>}/>
             </Route>
         </Routes>
     );

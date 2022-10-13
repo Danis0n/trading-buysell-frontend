@@ -7,6 +7,7 @@ import Select from '../../components/ui/select/Select';
 import PrecisionSelect from '../../components/ui/select/PrecisionSelect';
 import Button from '../../components/ui/button/Button';
 import SearchedAdverts from './SearchedAdverts';
+import Coffe from '../../images/icons/coffe.jpg';
 
 const AdvertsPage = () => {
 
@@ -102,111 +103,127 @@ const AdvertsPage = () => {
     const button = {
         textAlign :'center',
     }
+    
+    const titleWord = {
+        marginTop: '-24px',
+        backgroundImage : `url(${Coffe})`,
+        height: '250px',
+        color: 'white',
+        padding: '40px 0 22px',
+        fontSize: '40px',
+    }
 
     return (
-        <div style={{
-            display: 'table',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        }}>
-            <div className={cl.titleWord}>
+        <div>
+            <div
+             style={titleWord}
+            >
                 Объявления
-                <Hr/>
+                <Hr
+                 color={'white'}
+                />
             </div>
 
-            <div className={cl.advertWrapper}>
-                <div className={cl.searchArea}>
-                    <div className={cl.titleSector}>
-                        Введите запрос
-                    </div>
-                    <Input
-                        style={style}
-                        type="text"
-                        placeholder='напр. работа'
-                        value={title}
-                        onChange={e => setTitle(e.target.value)}
-                    />
-
-                    <div className={cl.titleSector}>
-                        Категория
-                    </div>
-                    <div className={cl.itemField}>
-                        <Select style={style} value={type} onChange={(e) => setType(e.target.value)}>
-                            <option defaultValue value='none'>Категория</option>
-                            <option value='job'>Работа</option>
-                            <option value='auto'>Авто</option>
-                            <option value='animal'>Животные</option>
-                        </Select>
-                    </div>
-
-                    <div className={cl.titleSector}>
-                        Город
-                    </div>
-                    <Input
-                        style={style}
-                        type="text"
-                        placeholder='напр. Брянск'
-                        value={location}
-                        onChange={e => setLocation(e.target.value)}
-                    />
-
-                    <div className={cl.titleSector}>
-                        Цена
-                    </div>
-                    <div className={cl.paramsInputPrice}>
+            <div style={{
+                display: 'table',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+            }}>
+                <div className={cl.advertWrapper}>
+                    <div className={cl.searchArea}>
+                        <div className={cl.titleSector}>
+                            Введите запрос
+                        </div>
                         <Input
-                            style={paramsInputStyle}
-                            type='text'
-                            placeholder='Мин'
-                            onChange={e => setMinPrice(e.target.value)}
+                            style={style}
+                            type="text"
+                            placeholder='напр. работа'
+                            value={title}
+                            onChange={e => setTitle(e.target.value)}
                         />
+
+                        <div className={cl.titleSector}>
+                            Категория
+                        </div>
+                        <div className={cl.itemField}>
+                            <Select style={style} value={type} onChange={(e) => setType(e.target.value)}>
+                                <option defaultValue value='none'>Категория</option>
+                                <option value='job'>Работа</option>
+                                <option value='auto'>Авто</option>
+                                <option value='animal'>Животные</option>
+                            </Select>
+                        </div>
+
+                        <div className={cl.titleSector}>
+                            Город
+                        </div>
                         <Input
-                            style={paramsInputStyle}
-                            type='text'
-                            placeholder='Макс'
-                            onChange={e => setMaxPrice(e.target.value)}
+                            style={style}
+                            type="text"
+                            placeholder='напр. Брянск'
+                            value={location}
+                            onChange={e => setLocation(e.target.value)}
                         />
-                    </div>
 
-                    <div className={cl.buttonArea}>
-                        <div className={cl.searchButton}>
-                            <Button style={button} onClick={handleSubmit}>Поиск</Button>
+                        <div className={cl.titleSector}>
+                            Цена
+                        </div>
+                        <div className={cl.paramsInputPrice}>
+                            <Input
+                                style={paramsInputStyle}
+                                type='text'
+                                placeholder='Мин'
+                                onChange={e => setMinPrice(e.target.value)}
+                                />
+                            <Input
+                                style={paramsInputStyle}
+                                type='text'
+                                placeholder='Макс'
+                                onChange={e => setMaxPrice(e.target.value)}
+                                />
+                        </div>
+
+                        <div className={cl.buttonArea}>
+                            <div className={cl.searchButton}>
+                                <Button style={button} onClick={handleSubmit}>Поиск</Button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className={cl.rightArea}>
-    
-                    <div className={cl.precisionSearchArea}>
-                        <div className={cl.item}>
-                            <PrecisionSelect>
-                                <option value='new'>Новые объявления</option>
-                                <option value='more'>Более низкая цена первая</option>
-                                <option value='less'>Более высокая цена первая</option>
-                            </PrecisionSelect>
+                    <div className={cl.rightArea}>
+        
+                        <div className={cl.precisionSearchArea}>
+                            <div className={cl.item}>
+                                <PrecisionSelect>
+                                    <option value='new'>Новые объявления</option>
+                                    <option value='more'>Более низкая цена первая</option>
+                                    <option value='less'>Более высокая цена первая</option>
+                                </PrecisionSelect>
+                            </div>
+                            <div className={cl.Default}>
+                                <Button style={buttonDefaults} onClick={handleDefault}>Сбросить</Button>
+                            </div>
                         </div>
-                        <div className={cl.Default}>
-                            <Button style={buttonDefaults} onClick={handleDefault}>Сбросить</Button>
-                        </div>
-                    </div>
 
-                    {loading
-                    ?
+                        {loading
+                        ?
                         <div>
-                            {/* Spinner */}
-                        </div>
-                    :
+                                {/* Spinner */}
+                            </div>
+                        :
                         <SearchedAdverts
                         currentAdverts={currentAdverts}
                         advertsPerPage={advertsPerPage}
                         adverts={adverts}
                         paginate={paginate}
-                        style={{
-                            marginLeft: 'auto',
-                            maxWidth: '900px',
-                        }}
-                        />
-                    }
+                            style={{
+                                marginLeft: 'auto',
+                                maxWidth: '900px',
+                            }}
+                            isPagable
+                            />
+                        }
+                    </div>
                 </div>
             </div>
         </div>
