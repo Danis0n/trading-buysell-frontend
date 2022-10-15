@@ -95,7 +95,12 @@ const EditAdvert = () => {
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   return (
-    <div>
+    <div style={{
+      width: '700px',
+      display: 'table',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }}>
 
       <div className={cl.titleWord}>
         Редактировать объявление
@@ -107,22 +112,29 @@ const EditAdvert = () => {
         <div className={cl.itemTitle}>
          Название
         </div>
-        <Input
-         type="text"
-         onChange={e => setTitle(e.target.value)}
-         placeholder={title}
-        />
+        <div className={cl.itemField}>
+          <Input
+          style={{
+            textAlign: 'left'
+            }}
+          type="text"
+          onChange={e => setTitle(e.target.value)}
+          placeholder={title}
+          />
+        </div>
 
         <div className={cl.itemTitle}>
           Описание
         </div>
-        <Textarea
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-          rows={5}
-          cols={50}
-          name='text'
-        />
+        <div className={cl.itemField}>
+          <Textarea
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            rows={5}
+            cols={50}
+            name='text'
+            />
+        </div>
 
         <div className={cl.itemTitle}>
           Цена

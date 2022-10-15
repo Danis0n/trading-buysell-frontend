@@ -14,9 +14,7 @@ const Layout = ({isAuth}) => {
 
   return (
     <>
-
     <Navbar isAuth={isAuth}/>
-    
     <main style={{
       marginBottom: '30px',
     }}>

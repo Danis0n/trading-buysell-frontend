@@ -19,6 +19,18 @@ export default class AdvertService {
         return axios.post(`${API_URL}/api/advert/get/params`, data);
     }
 
+    static async getLatest() : Promise<AxiosResponse<Advert[]>> {
+        return axios.get(`${API_URL}/api/advert/get/latest`);
+    }
+
+    static async getExamples() : Promise<AxiosResponse<Advert[]>> {
+        return axios.get(`${API_URL}/api/advert/get/examples`);
+    }
+
+    static async getType(type: string) : Promise<AxiosResponse<Advert[]>> {
+        return axios.get(`${API_URL}/api/advert/get/type/${type}`)
+    }
+
     static async create(formData: FormData) : Promise<void> {
         return $api.post(`${API_URL}/api/advert/create`, formData);
     }

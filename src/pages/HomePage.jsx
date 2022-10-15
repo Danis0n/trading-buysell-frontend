@@ -37,16 +37,16 @@ const HomePage = () => {
 
   const fetchLatest = async () => {
     try {
-      const response = await AdvertService.getAll();
+      const response = await AdvertService.getLatest();
       setLatestAdverts(response.data);
     } catch (error) {
         console.log(error.message);            
     }
   }
-
+ 
   const fetchExamples = async () => {
     try {
-      const response = await AdvertService.getAll();
+      const response = await AdvertService.getExamples();
       setExampleAdverts(response.data);
     } catch (error) {
         console.log(error.message);            
@@ -85,10 +85,6 @@ const HomePage = () => {
   const title = {
     fontSize: '50px',
     paddingTop: '100px',
-  }
-
-  const category = {
-    background: 'rgba(255, 255, 255, 0.1)',
   }
 
   const DotStyle = {

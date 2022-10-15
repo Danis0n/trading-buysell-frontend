@@ -3,7 +3,6 @@
     display: flex;
     width: 1200px;
 }
-
 /* Advert info */
 
 .itemRightInfo{
@@ -92,7 +91,7 @@
     margin-right: auto;
     margin-left: 20px;
     width: 850px;
-    box-shadow: 0 0 15px 4px rgba(0,0,0,0.05);
+    /* box-shadow: 0 0 15px 4px rgba(0,0,0,0.05); */
 }
 
 .itemGallery {

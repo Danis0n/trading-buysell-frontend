@@ -14,13 +14,24 @@ import Hr from '../../components/ui/hr/Hr'
 import map from '../../utils/ImageUtil'
 import Dot from '../../components/ui/dot/Dot'
 import ImageSlider from '../../components/ui/slider/Slider'
+import SearchedAdverts from './SearchedAdverts'
 
 const AdvertPage = () => {
 
+    const [similar, setSimilar] = useState([])
     const {store} = useAuth();
     const [user,setUser] = useState();
     const [advert, setAdvert] = useState();
     const {id} = useParams();
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [advertsPerPage] = useState(3);
+
+    const indexOfLastAdvert = currentPage * advertsPerPage;
+    const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
+    const currentAdverts = similar.slice(indexOfFirstAdvert, indexOfLastAdvert);
+    
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     // TODO : on backend side implement 404 NOT FOUND after deleting advert
     async function handleDelete() {
@@ -36,12 +47,17 @@ const AdvertPage = () => {
         try {
             const response = await AdvertService.getId(id);
             setAdvert(response.data);
-            if(response?.data?.userId){
-                fetchUser(response?.data?.userId);
+            if(response?.data){
+                fetchSecondData(response?.data);
             }
         } catch (error) {
             console.log(error.message);            
         }
+    }
+
+    async function fetchSecondData(advert) {
+        fetchUser(advert?.userId);
+        fetchSimilar(advert?.type?.name);
     }
 
     async function fetchUser(id) {
@@ -50,6 +66,17 @@ const AdvertPage = () => {
             setUser(userResponse.data);
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    const fetchSimilar = async (type) => {
+        try {
+            const response = await AdvertService.getType(type);
+            setSimilar(response.data);
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        } finally{
         }
     }
 
@@ -131,6 +158,32 @@ const AdvertPage = () => {
                 <></>}
 
             </div>
+        </div>
+
+        <div>
+            <div style={{
+                marginBottom: '40px',
+            }}>
+                <div style={{
+                    fontSize: '36px',
+                }}>Похожие объявления</div>
+                <Hr/>
+                <div style={{
+                    color: '#959494',
+                }}>Посмотрите некоторые из лучших предложений</div>
+            </div>
+
+            <SearchedAdverts
+             currentAdverts={currentAdverts}
+             advertsPerPage={advertsPerPage}
+             adverts={similar}
+             paginate={paginate}
+                 style={{
+                     margin: 'auto',
+                     maxWidth: '1000px',
+                 }}
+                 isPagable
+            />
         </div>
         </div>
     )
