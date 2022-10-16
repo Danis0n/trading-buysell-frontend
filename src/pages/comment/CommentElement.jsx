@@ -6,13 +6,11 @@ const CommentElement = ({comment, id}) => {
     const deleteComment = async (id) => {
         try {
             const response = await CommentService.delete(id);
-            console.log(response);
         } catch (error) {
             console.log(error);
         }
     }
 
-    console.log(comment);
     const handleSubmitDelete = async (e) => {
         deleteComment(comment.id);
     }

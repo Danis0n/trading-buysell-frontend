@@ -10,6 +10,10 @@ export default class AdvertService {
     static async getAll() : Promise<AxiosResponse<Advert[]>> {
         return axios.get(`${API_URL}/api/advert/get/all`);
     }
+    
+    static async getAllByUserId(id: string) : Promise<AxiosResponse<Advert[]>> {
+        return axios.get(`${API_URL}/api/advert/get/user/${id}`);
+    }
 
     static async getId(id: string) : Promise<AxiosResponse<AdvertResponse>> {
         return axios.get(`${API_URL}/api/advert/get/${id}`);

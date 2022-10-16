@@ -37,13 +37,17 @@ const Footer = () => {
   return (
     <div
      style={{
+        // position: 'absolute',
+        // position: 'fixed',
+        bottom: '0',
         color: 'white',
-        display: 'table',
+        display: 'table-row',
         marginLeft: 'auto',
         marginRight: 'auto',
      }}
     >
         <div style={{
+            // height: '0',
             padding: '30px 120px 20px',
             textAlign: 'center',
             backgroundColor: '#313131',
