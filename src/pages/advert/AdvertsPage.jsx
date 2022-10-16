@@ -19,7 +19,7 @@ const AdvertsPage = () => {
     const [location, setLocation] = useState('');
     const [minPrice, setMinPrice] = useState(minValue);
     const [maxPrice, setMaxPrice] = useState(maxValue);
-    const [type, setType] = useState('');
+    const [type, setType] = useState('none');
 
     const [loading, setLoading] = useState(false);
 
