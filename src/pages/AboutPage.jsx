@@ -32,18 +32,19 @@ const AboutPage = () => {
   }
 
   return (
-    <div style={{
+    <div
+     style={{
       display: 'table',
       marginLeft: 'auto',
       marginRight: 'auto',
-    }}>
+     }}
+    >
       <div style={About}>
         Связаться с нами
         <Hr/>
       </div>
 
       <div className={cl.form}>
-
         <div style={titleWord}>
           Тема
         </div>

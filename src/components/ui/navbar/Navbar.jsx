@@ -30,7 +30,12 @@ const Navbar = ({isAuth}) => {
     }
 
     const handleSubmit = (e) => {
-        nav('/adverts/create');
+        if(store.isAuth){
+            nav('/adverts/create');
+        }
+        else {
+            setLoginModal(true);
+        }
     }
 
     const navbar = {
@@ -85,47 +90,46 @@ const Navbar = ({isAuth}) => {
 
             {isAuth
             ?
-            <div>
-            <Button
-             style={{
-                backgroundColor : 'white',
-                color: 'black',
-                }}
-             onClick={() => setExitModal(true)}>
-                Выйти
-            </Button>
-            <Modal
-             visible={exitModal}
-             setVisible={setExitModal}
-            >
-                <Confirm
-                 handleItem={handleLogout}
-                 handleCancel={handleCancel}
-                 message={'Вы точно хотите выйти?'}
-                />
-            </Modal>
-            </div>
-            :
-            <div>
+                <div>
                 <Button
-                 style={{
+                style={{
                     backgroundColor : 'white',
                     color: 'black',
                     }}
-                    onClick={() => setLoginModal(true)}
-                >
-                    Войти
+                onClick={() => setExitModal(true)}>
+                    Выйти
                 </Button>
                 <Modal
-                 visible={loginModal}
-                 setVisible={setLoginModal}
+                visible={exitModal}
+                setVisible={setExitModal}
                 >
-                    <LoginForm handleLogin={handleLogin}/>
+                    <Confirm
+                    handleItem={handleLogout}
+                    handleCancel={handleCancel}
+                    message={'Вы точно хотите выйти?'}
+                    />
                 </Modal>
-            </div>
+                </div>
+            :
+                <div>
+                    <Button
+                     style={{
+                       backgroundColor : 'white',
+                       color: 'black',
+                     }}
+                     onClick={() => setLoginModal(true)}
+                    >
+                     Войти
+                    </Button>
+                    <Modal
+                    visible={loginModal}
+                    setVisible={setLoginModal}
+                    >
+                        <LoginForm handleLogin={handleLogin}/>
+                    </Modal>
+                </div>
             }
         </div>
-
       </div>
     </div>
   )
