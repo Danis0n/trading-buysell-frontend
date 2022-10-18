@@ -10,7 +10,7 @@ const Comments = ({id, userId}) => {
     const fetchComments = async (id) => {
         setLoading(true);
         try {
-            const response = await CommentService.fetchAll(id);
+            const response = await CommentService.fetchAllById(id);
             setComments(response.data);
         } catch (error) {
             console.log(error);
@@ -18,7 +18,6 @@ const Comments = ({id, userId}) => {
             setLoading(false);
         }
     } 
-    
     useEffect(() => {
         fetchComments(id);
     }, [])
@@ -28,13 +27,13 @@ const Comments = ({id, userId}) => {
     }
 
     return (
-        <div>
-            Comments:
+        <div style={{
+            marginBottom: '50px',
+        }}>
             {comments?.map((comment) => {
                 return (
                     <div key={comment.id}>
-                        <CommentElement comment={comment} id={userId}/>
-                        <br/>
+                        <CommentElement comment={comment} userId={userId}/>
                     </div>
                 )
             })}

@@ -35,7 +35,6 @@ const UserPage = () => {
             const response = await UserService.fetchUser(id)
             setUser(response.data);
             if(response.data){
-                console.log(response.data);
                 fetchAdverts(response.data.id);
             }
         } catch (error) {
@@ -64,7 +63,6 @@ const UserPage = () => {
     if(loading){
         return <div>loading</div>
     }
-
     return (
         <div style={{
             height: '800px',
@@ -73,122 +71,119 @@ const UserPage = () => {
             marginLeft: 'auto',
             marginRight: 'auto',
         }}>
-                <div>
+            <div>
+                <div style={{
+                    marginBottom: '100px',
+                }}>
                     <div style={{
-                        marginBottom: '100px',
+                        display: 'table',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                        marginBottom: '50px',
                     }}>
                         <div style={{
-                            display: 'table',
-                            marginLeft: 'auto',
-                            marginRight: 'auto',
-                            marginBottom: '50px',
+                            display: 'table-cell',
+                            verticalAlign: 'top',
                         }}>
-                            <div style={{
-                                display: 'table-cell',
-                                verticalAlign: 'top',
-                            }}>
-                                <Image src={NoAvatar} width='130px' alt={'profile_pic'}/>
-                            </div>
-
-                            <div
-                             style={{
-                                textAlign: 'start',
-                                marginLeft: '40px',
-                             }}
-                            >
-                                <div style={{
-                                    margin: '10px 10px',
-                                    fontSize: "24px",
-                                    display: 'block',
-                                }}>
-                                    {user?.info.name}
-                                </div>
-
-                                <div style={{display: 'flex'}}>
-                                    <div style={{
-                                        fontSize: '20px',
-                                        color: '#7c7c7c',
-                                        verticalAlign: 'middle',
-                                        margin: '0 25px 10px 0',
-                                    }}>
-                                        <Image style={{
-                                            margin: '4px 7px -4px 0',
-                                        }}
-                                        src={Phone} 
-                                        alt='phone' 
-                                        width='18px'
-                                        />
-                                        {user?.info.phone}
-                                    </div>
-                                    <div
-                                     style={{
-                                        color: '#7c7c7c',
-                                        display: 'flex',
-                                     }}
-                                    >   
-                                        <Image
-                                         style={{
-                                            marginRight: '10px',
-                                            marginTop: '-10px',
-                                         }} 
-                                         src={Calendar} 
-                                         width='18px' 
-                                         alt={'calendar'}
-                                        />
-                                        <div style={{
-                                            marginRight: '10px',
-                                        }}>
-                                            Дата регистрации : 
-                                        </div>
-                                        <div>
-                                            {user?.info.dateOfCreation.substring(0,10)}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <Image src={NoAvatar} width='130px' alt={'profile_pic'}/>
                         </div>
 
-
-                        <div style={{
-                            fontSize: '30px',
-                        }}>
-                            Последние объявления
-                            <Hr/>
-                        </div>
-
-                        <SearchedAdverts
-                            currentAdverts={currentAdverts}
-                            advertsPerPage={advertsPerPage}
-                            adverts={adverts}
-                            paginate={paginate}
+                        <div
                             style={{
-                                margin: 'auto',
-                                maxWidth: '1000px',
+                            textAlign: 'start',
+                            marginLeft: '40px',
                             }}
-                            isPagable
-                        />
+                        >
+                            <div style={{
+                                margin: '10px 10px',
+                                fontSize: "24px",
+                                display: 'block',
+                            }}>
+                                {user?.info.name}
+                            </div>
+
+                            <div style={{display: 'flex'}}>
+                                <div style={{
+                                    fontSize: '20px',
+                                    color: '#7c7c7c',
+                                    verticalAlign: 'middle',
+                                    margin: '0 25px 10px 0',
+                                }}>
+                                    <Image style={{
+                                        margin: '4px 7px -4px 0',
+                                    }}
+                                    src={Phone} 
+                                    alt='phone' 
+                                    width='18px'
+                                    />
+                                    {user?.info.phone}
+                                </div>
+                                <div
+                                    style={{
+                                    color: '#7c7c7c',
+                                    display: 'flex',
+                                    }}
+                                >   
+                                    <Image
+                                        style={{
+                                        marginRight: '10px',
+                                        marginTop: '-10px',
+                                        }} 
+                                        src={Calendar} 
+                                        width='18px' 
+                                        alt={'calendar'}
+                                    />
+                                    <div style={{
+                                        marginRight: '10px',
+                                    }}>
+                                        Дата регистрации : 
+                                    </div>
+                                    <div>
+                                        {user?.info.dateOfCreation.substring(0,10)}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div style={{
+                        fontSize: '30px',
+                    }}>
+                        Последние объявления
+                        <Hr/>
+                    </div>
+
+                    <SearchedAdverts
+                        currentAdverts={currentAdverts}
+                        advertsPerPage={advertsPerPage}
+                        adverts={adverts}
+                        paginate={paginate}
+                        style={{
+                            margin: 'auto',
+                            maxWidth: '1000px',
+                        }}
+                        isPagable
+                    />
+                </div>
+
+                <div>
+
+                    <div style={{
+                        fontSize: '30px',
+                    }}>
+                        Комментарии
+                        <Hr/>
                     </div>
 
                     <div>
-
-                        <div style={{
-                            fontSize: '30px',
-                        }}>
-                            Комментарии
-                            <Hr/>
-                        </div>
-
-                        <div>
-                            <CreateComment id={id} myId={store.user.id}/>
-                        </div>
-                        <div>
-                            <Comments id={id} userId={store.user.id} />
-                        </div>
+                        <CreateComment id={id} myId={store?.user?.id}/>
+                    </div>
+                    <div>
+                        <Comments id={id} userId={store?.user?.id} />
                     </div>
                 </div>
-                <div>
-                </div>
-                        
+            </div>
         </div>
     )
 }

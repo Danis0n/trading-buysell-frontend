@@ -16,7 +16,7 @@ export default class CommentService {
         return $api.delete(`/api/comment/delete/${id}`);
     }
 
-    static async fetchAll(id: string) : Promise<AxiosResponse<CommentResponse>> {
+    static async fetchAllById(id: string) : Promise<AxiosResponse<CommentResponse>> {
         return axios.get(`${API_URL}/api/comment/get/user/${id}`);
     }
 

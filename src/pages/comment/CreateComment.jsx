@@ -4,17 +4,16 @@ import CommentService from '../../service/CommentService'
 import Input from '../../components/ui/input/Input'
 import Textarea from '../../components/ui/textarea/Textarea'
 import Button from '../../components/ui/button/Button'
+import Hr from '../../components/ui/hr/Hr'
 
 const CreateComment = ({id, myId}) => {
 
-  const {store} = useAuth();
-
-  const [userId, setUserId] = useState(id)
-  const [myUserId, setMyUserId] = useState(myId)
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [rating, setRating] = useState('')
-  const [advertName, setAdvertName] = useState('')
+  const [userId, setUserId] = useState(id);
+  const [myUserId, setMyUserId] = useState(myId);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [rating, setRating] = useState('');
+  const [advertName, setAdvertName] = useState('none');
 
   const create = async (id, myId, title, description, rating, advertName) => {
     try {
@@ -22,7 +21,6 @@ const CreateComment = ({id, myId}) => {
         id,myId,advertName,
         title, description, rating
       );
-
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -45,6 +43,7 @@ const CreateComment = ({id, myId}) => {
       boxShadow: '0 0 16px rgb(109 109 109 / 25%)',
       marginLeft: 'auto',
       marginRight: 'auto',
+      marginBottom: '50px',
       display: 'table',
     }}>
       
@@ -53,42 +52,30 @@ const CreateComment = ({id, myId}) => {
         display: 'flex',
        }}
       >
+        <div>
+            Ваша оценка
+            <Input
+              style={inputStyle}
+              type="text"
+              value={rating}
+              onChange={e => setRating(e.target.value)}
+            />
+        </div>
 
-      <div>
-          Title
-          <Input
-            style={inputStyle}
-            type="text"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-          />
+        <div>
+            Тема
+            <Input
+              style={inputStyle}
+              type="text"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+            />
+        </div>
       </div>
 
-      <div>
-          Rating
-          <Input
-            style={inputStyle}
-            type="text"
-            value={rating}
-            onChange={e => setRating(e.target.value)}
-          />
-      </div>
-
-      <div>
-          титл
-          <Input
-            style={inputStyle}
-            type="text"
-            value={advertName}
-            onChange={e => setAdvertName(e.target.value)}
-          />
-      </div>
-
-      </div>
-
-      Description
+      Описание
       <div style={{
-
+        marginTop: '20px',
       }}>
           <Textarea
             style={{
@@ -102,8 +89,6 @@ const CreateComment = ({id, myId}) => {
             onChange={e => setDescription(e.target.value)}
           />
       </div>
-      
-      
 
       <Button 
        onClick={handleSubmit}
