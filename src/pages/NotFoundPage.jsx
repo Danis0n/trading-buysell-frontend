@@ -6,6 +6,14 @@ const NotFoundPage = () => {
 
     const nav = useNavigate();
 
+    const wrapper = {
+        height: '575px',
+        display: 'table',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        position: 'relative'
+    }
+
     const Error = {
         marginTop: '30px',
         textAlign: 'center',
@@ -28,13 +36,11 @@ const NotFoundPage = () => {
         nav('/');
     }
 
+
   return (
-    <div style={{
-        height: '575px',
-        display: 'table',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-    }}>
+    <div
+     style={wrapper}
+    >
         <div style={Error}>
             404
         </div>

@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import Phone from '../../../images/icons/phone.png'
 import Mail from '../../../images/icons/mail.png'
+import {motion} from 'framer-motion';
+import { variants } from '../../../router/props'
 
 const Footer = () => {
 
@@ -35,10 +37,16 @@ const Footer = () => {
     }
 
   return (
+    <motion.div
+      initial="hidden"
+      animate="enter"
+      exit="exit"
+      variants={variants}
+      transition={{ duration: 0.4, type: 'easeInOut' }}
+      style={{ position: 'relative' }}
+    >
     <div
      style={{
-        // position: 'absolute',
-        // position: 'fixed',
         bottom: '0',
         color: 'white',
         display: 'table-row',
@@ -47,7 +55,6 @@ const Footer = () => {
      }}
     >
         <div style={{
-            // height: '0',
             padding: '30px 120px 20px',
             textAlign: 'center',
             backgroundColor: '#313131',
@@ -153,6 +160,7 @@ const Footer = () => {
         </div>
 
     </div>
+    </motion.div>
   )
 }
 

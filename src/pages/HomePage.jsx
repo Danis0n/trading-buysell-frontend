@@ -21,6 +21,8 @@ import Star from '../images/icons/star.png'
 import Dot from '../components/ui/dot/Dot'
 import Button from '../components/ui/button/Button'
 import { useNavigate } from 'react-router-dom'
+import {motion} from 'framer-motion';
+import { variants } from '../router/props'
 
 const HomePage = () => {
 
@@ -97,6 +99,8 @@ const HomePage = () => {
     marginLeft: 'auto',
     marginRight: 'auto',
   }
+
+
 
   return (
     <div>
