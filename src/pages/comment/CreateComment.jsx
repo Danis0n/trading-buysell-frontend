@@ -42,7 +42,7 @@ const CreateComment = ({id, myId}) => {
         return true;
       }
     }
-
+    
     setIsAllowed(false);
     return false;
   }
