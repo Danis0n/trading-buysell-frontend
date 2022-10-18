@@ -37,8 +37,10 @@ const CreateComment = ({id, myId}) => {
 
   const checkInputs = () => {
     if( title !== '' && description !== '' && ( !isNaN(rating))) {
-      setIsAllowed(true);
-      return true;
+      if(title.length < 100 && description.length < 5000){
+        setIsAllowed(true);
+        return true;
+      }
     }
 
     setIsAllowed(false);
@@ -77,6 +79,7 @@ const CreateComment = ({id, myId}) => {
     marginRight: 'auto',
     marginBottom: '50px',
     display: 'table',
+    maxWidth: '900px'
   }
 
   return (
@@ -89,6 +92,7 @@ const CreateComment = ({id, myId}) => {
         <div>
             Ваша оценка
             <Input
+              placeholder={'1-5'}
               style={inputStyle}
               type="text"
               value={rating}
@@ -99,6 +103,7 @@ const CreateComment = ({id, myId}) => {
         <div>
             Тема
             <Input
+              placeholder={'Не более 100 символов'}
               style={inputStyle}
               type="text"
               value={title}
@@ -112,9 +117,17 @@ const CreateComment = ({id, myId}) => {
             <div>
               {!isAllowed
               ?
-              <div>незя</div>
+                <div
+                 style={{
+                  marginTop: '40px',
+                  textAlign: 'justify',
+                  color: 'red',
+                 }}
+                >
+                  Пожалуйста, заполните все поля корректно!
+                </div>
               :
-              <></>
+                <></>
               }
 
               {!isAuth
@@ -150,6 +163,7 @@ const CreateComment = ({id, myId}) => {
               width: '900px',
               height: '100px',
             }}
+            placeholder={'Не более 5000 символов'}
             type="text"
             value={description}
             onChange={e => setDescription(e.target.value)}
