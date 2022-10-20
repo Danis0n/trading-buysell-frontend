@@ -11,6 +11,7 @@ import Hr from '../../components/ui/hr/Hr';
 import { useAuth } from '../../components/hook/useAuth';
 import LoginForm from '../../components/ui/login/LoginForm';
 import Modal from '../../components/ui/modal/Modal';
+import superImage from '../../utils/Image';
 
 
 const CreateAdvert = ({isAuth}) => {
@@ -29,8 +30,7 @@ const CreateAdvert = ({isAuth}) => {
   const {store} = useAuth();
 
   const deleteHandler = (image, index) =>  {
-    setSelectedImages(selectedImages.filter((_,index) => index !== 0));
-    setImagesToRender(imagesToRender.filter((e) => e !== image));
+    setSelectedImages(selectedImages.filter((e) => e !== image));
     URL.revokeObjectURL(image);
   }
 
@@ -53,7 +53,7 @@ const CreateAdvert = ({isAuth}) => {
         formData.append('price', price);
         
         selectedImages.map(file => {
-          return formData.append('files',file);
+          return formData.append('files',file.file);
         })
         formData.append('type',type);
         
@@ -67,13 +67,11 @@ const CreateAdvert = ({isAuth}) => {
 
   const onDrop = useCallback(acceptedFiles => {
     const Files = acceptedFiles;
-
-    setSelectedImages((previousImages) => previousImages.concat(Files));
-
-    const imagesArray = Files.map((file) => {
-      return URL.createObjectURL(file);
-    });
-    setImagesToRender((previousImages) => previousImages.concat(imagesArray));
+    Files.map((file) => {
+      setSelectedImages(
+        (previousImages) => previousImages.concat(new superImage(file,URL.createObjectURL(file)))
+      );
+    })
   }, [])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
@@ -83,7 +81,7 @@ const CreateAdvert = ({isAuth}) => {
     if( title !== '' && description !== '' && ( !isNaN(price)) && location !== '' && type !== 'none') {
       if(location.length < 100 && description.length < 5000 && title.length < 50 && 
          price >= 50 && price <= 10000000 &&
-         imagesToRender.length <= 10 && imagesToRender.length >= 1){
+         selectedImages.length <= 10 && selectedImages.length >= 1){
         setIsAllowed(true);
         return true;
       }
@@ -92,6 +90,7 @@ const CreateAdvert = ({isAuth}) => {
     setIsAllowed(false);
     return false;
   }
+
 
   const style = {
     width: '350px'
@@ -152,7 +151,7 @@ const CreateAdvert = ({isAuth}) => {
           Добавить изображения *
         </div>
 
-        {imagesToRender.length < 10
+        {selectedImages.length < 10
         ?
           <div className={cl.itemFileArea} {...getRootProps()}>
             <input {...getInputProps()}/>
@@ -170,11 +169,11 @@ const CreateAdvert = ({isAuth}) => {
 
 
         <div>
-          {imagesToRender && imagesToRender.map((image,index) => {
+          {selectedImages && selectedImages.map((image,index) => {
             return (
-              <div key={image} className={cl.imagePreviewArea}>
+              <div key={index} className={cl.imagePreviewArea}>
                 <button className={cl.previewButton} onClick={() => deleteHandler(image,index)}>Удалить</button>
-                <Image src={image} height='100' alt='img'/>
+                <Image src={image.url} height='100' alt='img'/>
               </div>
             )
           })}

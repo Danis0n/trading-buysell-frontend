@@ -1,3 +1,5 @@
+import { SmartImage } from "./Image";
+
 export interface Advert {
     id: string;
     title: string;
@@ -6,17 +8,11 @@ export interface Advert {
     userId: string;
     dateOfCreation: string;
     price: string;
-    images: Image[];    
+    images: SmartImage[];    
     type: Type;
 }
 
-export interface Image{
-    id: string;
-    name: string;
-    contentType: string;
-    size: string;
-    url: string;
-}
+
 
 export interface Type {
     name: string;
