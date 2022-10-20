@@ -33,7 +33,7 @@ const CreateComment = ({id, myId}) => {
 
   const handleLogin = (e) => {
     setLoginModal(false);
-}
+  }
 
   const checkInputs = () => {
     if( title !== '' && description !== '' && ( !isNaN(rating))) {

@@ -4,7 +4,7 @@ import Button from '../button/Button'
 const Confirm = ({handleCancel, handleItem, message}) => {
 
     const Message = {
-        fontSize : '30px',
+        fontSize : '20px',
         marginBottom : '20px',
     }
 
@@ -20,7 +20,7 @@ const Confirm = ({handleCancel, handleItem, message}) => {
                     style={{
                     padding : '5px 25px',
                     margin : 'auto 30px',
-                    fontSize : '25px',
+                    fontSize : '20px',
                     backgroundColor: 'white',
                     color: 'black',
                     }}
@@ -30,7 +30,7 @@ const Confirm = ({handleCancel, handleItem, message}) => {
                 <Button
                     style={{
                     padding : '5px 25px',
-                    fontSize : '25px',
+                    fontSize : '20px',
                     }}
                     onClick={handleCancel}
                 >

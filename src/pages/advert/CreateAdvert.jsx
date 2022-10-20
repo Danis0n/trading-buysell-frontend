@@ -9,13 +9,15 @@ import AdvertService from '../../service/AdvertService';
 import cl from '../../styles/advert/CreateAdvert.module.css'
 import Hr from '../../components/ui/hr/Hr';
 import { useAuth } from '../../components/hook/useAuth';
-import { useNavigate } from 'react-router-dom';
+import LoginForm from '../../components/ui/login/LoginForm';
+import Modal from '../../components/ui/modal/Modal';
 
 
 const CreateAdvert = ({isAuth}) => {
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [imagesToRender, setImagesToRender] = useState([]);
+  const [loginModal, setLoginModal] = useState(false)
 
   const [isAllowed, setIsAllowed] = useState(true);
   const [title, setTitle] = useState('')
@@ -32,8 +34,16 @@ const CreateAdvert = ({isAuth}) => {
     URL.revokeObjectURL(image);
   }
 
+  const handleLogin = (e) => {
+    setLoginModal(false);
+  }
+
   const handleSubmit = async (e) => {
       e.preventDefault();
+
+      if(!store.isAuth){
+          setLoginModal(true);
+      }
 
       if(inputCheck()){
         const formData = new FormData();
@@ -71,7 +81,6 @@ const CreateAdvert = ({isAuth}) => {
   const inputCheck = () => {
 
     if( title !== '' && description !== '' && ( !isNaN(price)) && location !== '' && type !== 'none') {
-
       if(location.length < 100 && description.length < 5000 && title.length < 50 && 
          price >= 50 && price <= 10000000 &&
          imagesToRender.length <= 10 && imagesToRender.length >= 1){
@@ -197,10 +206,32 @@ const CreateAdvert = ({isAuth}) => {
           placeholder='не более 100 символов'
           />
         </div>
+
+        {!isAllowed
+        ?
+        <div
+         style={{
+          marginBottom: '40px',
+          color: 'red',
+         }}
+        >
+          <Hr/>
+          Пожалуйста, заполните все поля корректно!
+        </div>
+        :
+        <div></div>
+        }
         
         <div className={cl.itemButton}>
           <Button onClick={handleSubmit}>Опубликовать</Button>
         </div>
+
+        <Modal
+          visible={loginModal}
+          setVisible={setLoginModal}
+        >
+          <LoginForm handleLogin={handleLogin}/>
+        </Modal>
 
         </div>
       </div>

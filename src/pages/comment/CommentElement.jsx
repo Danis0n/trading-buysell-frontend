@@ -1,9 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import CommentService from '../../service/CommentService'
 import Button from '../../components/ui/button/Button'
 import Hr from '../../components/ui/hr/Hr'
+import Modal from '../../components/ui/modal/Modal'
+import Confirm from '../../components/ui/confirm/Confirm'
 
 const CommentElement = ({comment, userId}) => {
+
+    const [confirmModal, setConfirmModal] = useState(false);
 
     const deleteComment = async (id) => {
         try {
@@ -13,8 +17,23 @@ const CommentElement = ({comment, userId}) => {
         }
     }
 
-    const handleSubmitDelete = async (e) => {
+    const handleSubmit = (e) => {
+        setConfirmModal(true);
+    }
+
+    const handleSubmitDelete = async () => {
         deleteComment(comment.id);
+    }
+
+    const handleCancel = (e) => {
+        e.preventDefault();
+        setConfirmModal(false);
+    }
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        setConfirmModal(false);
+        handleSubmitDelete();
     }
 
     const styleElement = {
@@ -72,10 +91,22 @@ const CommentElement = ({comment, userId}) => {
                 >
                     <Button
                      style={alternativeButton}
-                     onClick={handleSubmitDelete}
+                     onClick={handleSubmit}
                     >
                       Удалить
                     </Button>
+
+                    <Modal
+                      visible={confirmModal}
+                      setVisible={setConfirmModal}
+                    >
+                    <Confirm
+                      handleItem={handleLogout}
+                      handleCancel={handleCancel}
+                      message={'Вы точно хотите удалить комментарий?'}
+                    />
+                </Modal>
+
                 </div>
                 :
                 <></>

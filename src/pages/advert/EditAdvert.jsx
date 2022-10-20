@@ -9,19 +9,25 @@ import Button from '../../components/ui/button/Button';
 import Hr from '../../components/ui/hr/Hr';
 import Textarea from '../../components/ui/textarea/Textarea';
 import Input from '../../components/ui/input/Input';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../components/hook/useAuth';
 
 const EditAdvert = () => {
 
   const {id} = useParams();
+  const {store} = useAuth();
   
   const [selectedImages, setSelectedImages] = useState([]);
   const [imagesToRender, setImagesToRender] = useState([]);
     
-  const [title, setTitle] = useState('')
-  const [location, setLocation] = useState('')
-  const [description, setDescription] = useState('')
-  const [price, setPrice] = useState('')
-  const [type, setType] = useState('')
+  const [userId, setUserId] = useState('')
+  const [title, setTitle] = useState('');
+  const [location, setLocation] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [type, setType] = useState('');
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState();
 
   const sendResponse = async (id, formData) => {
     try {
@@ -48,12 +54,13 @@ const EditAdvert = () => {
     sendResponse(id, formData);
   }
 
-  async function setStates(advert){
+  const setStates = (advert) => {
     setTitle(advert?.title);
     setLocation(advert?.location);
     setDescription(advert?.description);
     setPrice(advert?.price);
     setType(advert?.type?.name);
+    setUserId(advert?.userId);
 
     advert?.images.map(async (image) => {
       const file = await getFile(image);
@@ -63,6 +70,8 @@ const EditAdvert = () => {
     advert?.images.map((image) => {
       return setImagesToRender((prevImage) => prevImage.concat(image.url));
     });
+
+    return advert?.userId;
   }
 
   const onDrop = useCallback(acceptedFiles => {
@@ -83,15 +92,37 @@ const EditAdvert = () => {
   }
 
   const fetchAdvert = async (id) => {
-    const response = await AdvertService.getId(id);
-    const data = response.data;
-    setStates(data);
+    setLoading(true)
+    let userId;
+    try {
+      const response = await AdvertService.getId(id);
+      userId = setStates(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false)
+    }
+    return userId;
   }
 
+  const handleCheck = async (userId) => {
+    const id = store.user.id;
+    const isAuth = store.isAuth;
+  
+    if(isAuth && id === userId) {
+      console.log('welcome');
+    } else {
+      navigate('/');
+    }
+  }
+  
   useEffect(() => {
-    fetchAdvert(id);
+    fetchAdvert(id).then(userId => {
+      const timer = setTimeout(() => handleCheck(userId), 500);
+      return () => clearTimeout(timer);
+    });
   }, [])
-
+  
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   return (

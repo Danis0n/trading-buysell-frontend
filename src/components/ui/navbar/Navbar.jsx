@@ -30,12 +30,7 @@ const Navbar = ({isAuth}) => {
     }
 
     const handleSubmit = (e) => {
-        if(store.isAuth){
-            nav('/adverts/create');
-        }
-        else {
-            setLoginModal(true);
-        }
+        nav('/adverts/create');
     }
 
     const navbar = {
@@ -90,7 +85,7 @@ const Navbar = ({isAuth}) => {
 
             {isAuth
             ?
-                <div>
+            <div>
                 <Button
                 style={{
                     backgroundColor : 'white',
@@ -109,7 +104,7 @@ const Navbar = ({isAuth}) => {
                     message={'Вы точно хотите выйти?'}
                     />
                 </Modal>
-                </div>
+            </div>
             :
                 <div>
                     <Button
