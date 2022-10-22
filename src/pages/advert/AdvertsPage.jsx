@@ -14,6 +14,8 @@ const AdvertsPage = () => {
     const minValue = 50;
     const maxValue = 10000000;
 
+    const [isSearched, setIsSearched] = useState(false);
+
     const [adverts, setAdverts] = useState([])
     const [title, setTitle] = useState('');
     const [location, setLocation] = useState('');
@@ -35,6 +37,7 @@ const AdvertsPage = () => {
         } catch (error) {
             console.log(error);
         } finally{
+            setIsSearched(true);
             setLoading(false);
         }
     }
@@ -59,19 +62,31 @@ const AdvertsPage = () => {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        fetchDataByParams(getRealValue(title),type, getRealValue(location), minPrice, maxPrice);
+        // e.preventDefault();
+        if(checkDefaults()) {
+            fetchDataByParams(getRealValue(title),type, getRealValue(location), minPrice, maxPrice);
+        }
     }
 
     const handleDefault = (e) => {
-        e.preventDefault();
-        if(title === '' && location === '' && type === 'none' ){
-            return;
+        if(isSearched){
+            fetchData();        
+            setType('none');
+            setMinPrice(minValue);
+            setMaxPrice(maxValue);
+            setTitle('')
+            setLocation('')
+            setIsSearched(false);
         }
-        fetchData();        
-        setType('none');
-        setTitle('')
-        setLocation('')
+        e.preventDefault();
+    }
+
+    const checkDefaults = () => {
+        return !(
+            type === 'none' && title === '' &&
+            location === '' && minPrice === minValue &&
+            maxPrice === maxValue
+        );
     }
 
     useEffect(() =>  {
@@ -82,7 +97,10 @@ const AdvertsPage = () => {
     const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
     const currentAdverts = adverts.slice(indexOfFirstAdvert, indexOfLastAdvert);
 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        return pageNumber;
+    }
 
     const style = {
         width : '200px',

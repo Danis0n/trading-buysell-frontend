@@ -1,8 +1,9 @@
-import React from 'react';
-import cl from './Pagination.module.css'
+import React, {useState} from 'react';
 import CustomLink from '../link/CustomLink';
 
 const Pagination = ({ advertsPerPage, totalAdverts, paginate }) => {
+  
+  const [currentPage, setCurrentPage] = useState(1);
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalAdverts / advertsPerPage); i++) {
@@ -11,20 +12,40 @@ const Pagination = ({ advertsPerPage, totalAdverts, paginate }) => {
 
   const handleLink = (e, number) => {
     e.preventDefault();
-    paginate(number);
+    setCurrentPage(paginate(number));
+  }
+
+  const page = {
+    textDecoration: 'none',
+    display: 'inline-block',
+    lineHeight: '1',
+  }
+
+  const pagination = {
+    textalign: 'center',
+    listStyleType: 'none',
   }
 
   return (
-    <div className={cl.pagination}>
-      <ul className={cl.ul}>
+    <div className={pagination}>
         {pageNumbers.map(number => (
-            <li className={cl.form} key={number}>
-                <CustomLink className={cl.page} onClick={(e) => handleLink(e,number)} to='!#'>
-                {number}
-                </CustomLink>
-          </li>
+          <CustomLink key={number} style={page} onClick={(e) => handleLink(e,number)} to='!#'>
+            <div
+             style={{
+              backgroundColor: currentPage === number ? 'red' : 'white',
+              borderRadius: '10px',
+              margin: '10px',
+              border: '1px solid #000',
+              padding: '10px 20px',
+             }}
+              key={number}
+            >
+                <div style={{color: currentPage === number ? 'white' : 'black' }}>
+                  {number}
+                </div>
+            </div>
+          </CustomLink>
         ))}
-      </ul>
     </div>
   );
 };

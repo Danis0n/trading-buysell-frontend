@@ -15,8 +15,11 @@ import map from '../../utils/ImageUtil'
 import Dot from '../../components/ui/dot/Dot'
 import ImageSlider from '../../components/ui/slider/Slider'
 import SearchedAdverts from './SearchedAdverts'
+import Confirm from '../../components/ui/confirm/Confirm'
+import Modal from '../../components/ui/modal/Modal'
 
 const AdvertPage = () => {
+
 
     const [similar, setSimilar] = useState([])
     const {store} = useAuth();
@@ -24,6 +27,7 @@ const AdvertPage = () => {
     const [advert, setAdvert] = useState();
     const {id} = useParams();
 
+    const [confirmModal, setConfirmModal] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
     const [advertsPerPage] = useState(3);
 
@@ -33,8 +37,8 @@ const AdvertPage = () => {
     
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    // TODO : on backend side implement 404 NOT FOUND after deleting advert
     async function handleDelete() {
+        setConfirmModal(false);
         try {
             const response = await AdvertService.delete(id);
             console.log(response);
@@ -73,7 +77,6 @@ const AdvertPage = () => {
         try {
             const response = await AdvertService.getType(type);
             setSimilar(response.data);
-            console.log(response.data);
         } catch (error) {
             console.log(error);
         } finally{
@@ -146,13 +149,23 @@ const AdvertPage = () => {
                 {advert?.userId === store.user.id
                 ?
                 <div className={cl.itemControl}>
-                    <div>
+                    <div style={{display: 'inline-block'}}>
                       <CustomLink to='edit'>Изменить</CustomLink>
                     </div>
                     
-                    <div>
-                      <Button onClick={handleDelete}>Удалить</Button>
+                    <div style={{display: 'inline-block'}}>
+                      <Button onClick={() => setConfirmModal(true)}>Удалить</Button>
                     </div>
+
+                    <Modal
+                      visible={confirmModal}
+                      setVisible={setConfirmModal}
+                    >
+                      <Confirm
+                        handleCancel={() => setConfirmModal(false)}
+                        handleItem={handleDelete}
+                        message='Вы точно хотите удалить объявление?'/>
+                    </Modal>
                 </div>
                 :
                 <></>}
