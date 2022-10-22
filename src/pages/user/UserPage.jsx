@@ -29,8 +29,10 @@ const UserPage = () => {
     const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
     const currentAdverts = adverts.slice(indexOfFirstAdvert, indexOfLastAdvert);
     
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        return pageNumber;
+    }
     const fetchData = async (id) => {
         setLoading(true)
         try {
@@ -44,6 +46,10 @@ const UserPage = () => {
             }
         } catch (error) {
             console.log(error);
+            if(error.request.status === 400) {
+                nav('/');
+            }
+            
         } finally{
             setLoading(false);
         }

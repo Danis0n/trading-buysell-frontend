@@ -17,10 +17,11 @@ import ImageSlider from '../../components/ui/slider/Slider'
 import SearchedAdverts from './SearchedAdverts'
 import Confirm from '../../components/ui/confirm/Confirm'
 import Modal from '../../components/ui/modal/Modal'
+import { useNavigate } from 'react-router-dom'
 
 const AdvertPage = () => {
 
-
+    const nav = useNavigate();
     const [similar, setSimilar] = useState([])
     const {store} = useAuth();
     const [user,setUser] = useState();
@@ -46,19 +47,25 @@ const AdvertPage = () => {
             const response = await AdvertService.delete(id);
             console.log(response);
         } catch (error) {
-            console.log(error);            
+            console.log(error);  
         }
     }
 
     async function fetchData() {
         try {
             const response = await AdvertService.getId(id);
+            if(response.data === '') {
+                nav('/');
+            }
             setAdvert(response.data);
             if(response?.data){
                 fetchSecondData(response?.data);
             }
         } catch (error) {
-            console.log(error.message);            
+            console.log(error);  
+            if(error.request.status === 400) {
+                nav('/');
+            }               
         }
     }
 
