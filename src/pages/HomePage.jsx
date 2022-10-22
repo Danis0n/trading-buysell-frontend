@@ -66,8 +66,10 @@ const HomePage = () => {
   const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
   const currentAdverts = exampleAdverts.slice(indexOfFirstAdvert, indexOfLastAdvert);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    return pageNumber;
+  } 
 
   const wrapper = {
     minWidth: '100%',
@@ -99,8 +101,6 @@ const HomePage = () => {
     marginLeft: 'auto',
     marginRight: 'auto',
   }
-
-
 
   return (
     <div>

@@ -35,7 +35,10 @@ const AdvertPage = () => {
     const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
     const currentAdverts = similar.slice(indexOfFirstAdvert, indexOfLastAdvert);
     
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        return pageNumber;
+    }
 
     async function handleDelete() {
         setConfirmModal(false);

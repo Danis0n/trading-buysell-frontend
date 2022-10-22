@@ -54,17 +54,22 @@ const AdvertsPage = () => {
         }
     }
 
-    const getRealValue = (value) => {
+    const getRealValue = (value, realValue) => {
         if(value === ''){
-            return 'none';
+            return realValue;
         }
         return value
     }
 
     const handleSubmit = (e) => {
-        // e.preventDefault();
         if(checkDefaults()) {
-            fetchDataByParams(getRealValue(title),type, getRealValue(location), minPrice, maxPrice);
+            fetchDataByParams(
+                getRealValue(title,'none'),
+                getRealValue(type, 'none'),
+                getRealValue(location, 'none'),
+                getRealValue(minPrice, 50),
+                getRealValue(maxPrice, 10000000)
+            );
         }
     }
 

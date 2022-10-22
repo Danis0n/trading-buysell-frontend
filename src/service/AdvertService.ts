@@ -3,7 +3,6 @@ import { AdvertResponse} from "../response/AdvertResponse";
 import $api, { API_URL } from "../components/http";
 import { Advert } from "../model/Advert";
 import { SearchRequest } from "../model/SearchRequest";
-import { stringify } from "querystring";
 
 export default class AdvertService {
 
