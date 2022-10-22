@@ -11,9 +11,11 @@ import Calendar from '../../images/icons/calendar.svg'
 import Image from '../../components/ui/img/Image';
 import SearchedAdverts from '../advert/SearchedAdverts';
 import Hr from '../../components/ui/hr/Hr';
+import { useNavigate } from 'react-router-dom';
 
 const UserPage = () => {
 
+    const nav = useNavigate();
     const {id} = useParams();
     const {store} = useAuth();
     const [user, setUser] = useState();
@@ -32,7 +34,10 @@ const UserPage = () => {
     const fetchData = async (id) => {
         setLoading(true)
         try {
-            const response = await UserService.fetchUser(id)
+            const response = await UserService.fetchUser(id);
+            if(response.data === '') {
+                nav('/');
+            }
             setUser(response.data);
             if(response.data){
                 fetchAdverts(response.data.id);
