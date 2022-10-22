@@ -41,6 +41,10 @@ const AdvertPage = () => {
         return pageNumber;
     }
 
+    const deleteAdvert = async () => {
+        handleDelete();
+    }
+
     async function handleDelete() {
         setConfirmModal(false);
         try {
@@ -173,8 +177,10 @@ const AdvertPage = () => {
                     >
                       <Confirm
                         handleCancel={() => setConfirmModal(false)}
-                        handleItem={handleDelete}
-                        message='Вы точно хотите удалить объявление?'/>
+                        handleItem={deleteAdvert}
+                        message='Вы точно хотите удалить объявление?'
+                        link={'/'}
+                        />
                     </Modal>
                 </div>
                 :

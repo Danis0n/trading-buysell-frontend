@@ -8,6 +8,7 @@ import CustomLink from '../../components/ui/link/CustomLink'
 const AdvertElement = ({advert}) => {
 
   const [isHover, setIsHover] = useState(false);
+  const linkToAdvert = `/adverts/${advert.id}`
 
   const element = {
     width: '254px',
@@ -15,7 +16,6 @@ const AdvertElement = ({advert}) => {
     position: 'relative',
     display: 'inline-block',
     paddingTop: '10px',
-    // paddingBottom: '30px',
     boxShadow: '0 0 16px rgb(109 109 109 / 25%)',
     margin: '20px',
   }
@@ -39,12 +39,12 @@ const AdvertElement = ({advert}) => {
      style={element}
      key={advert.id}
     >
-      <CustomLink to={`/adverts/${advert.id}`}>
+      <CustomLink to={linkToAdvert}>
         <Image src={advert.images[0].url} width='250' height='200' alt='logo'/>
       </CustomLink>
         
       <div className={cl.imageType}>
-        <CustomLink to={`/adverts/${advert.id}`}>
+        <CustomLink to={linkToAdvert}>
           <Dot>
             <Image src={map.get(advert?.type?.name)} alt='typeLogo'/>
           </Dot>
@@ -57,9 +57,11 @@ const AdvertElement = ({advert}) => {
         <div className={cl.itemDate}>
           {advert.dateOfCreation.substring(0,10)}
         </div>
+        <CustomLink to={linkToAdvert}>
         <div className={cl.itemTitle}>
           {advert.title}
         </div>
+        </CustomLink>
         <div className={cl.itemDescription}>
           {advert.description}
         </div>

@@ -107,10 +107,14 @@ const UserPage = () => {
                         >
                             <div style={{
                                 margin: '10px 10px',
-                                fontSize: "24px",
-                                display: 'block',
+                                display: 'flex',
                             }}>
-                                {user?.info.name}
+                                <div style={{fontSize: "24px", marginRight: '30px'}}>
+                                    {user?.info.name}
+                                </div>
+                                 <div style={{fontSize: '24px'}}>
+                                   Рейтинг: {user?.info?.rating}
+                                </div>
                             </div>
 
                             <div style={{display: 'flex'}}>

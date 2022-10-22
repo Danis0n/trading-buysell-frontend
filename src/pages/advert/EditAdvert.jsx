@@ -38,13 +38,12 @@ const EditAdvert = () => {
   const sendResponse = async (id, formData) => {
     try {
       const response = await AdvertService.update(id,formData);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
   }
 
-  const fillDataRequest = () => {
+  const sendDataRequest = () => {
     const formData = new FormData();
     formData.append('title',title);
     formData.append('location',location);
@@ -62,7 +61,7 @@ const EditAdvert = () => {
     setConfirmModal(false);
 
     if(inputCheck()){
-      fillDataRequest()
+      sendDataRequest()
       navigate(`/adverts/${id}`);
     }
   }

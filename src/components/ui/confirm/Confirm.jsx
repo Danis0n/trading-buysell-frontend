@@ -29,8 +29,8 @@ const Confirm = ({handleCancel, handleItem, message, link}) => {
                 ?
                 <a onClick={() => {window.location.href=link}}>
                     <Button
-                    style={button}
-                    onClick={handleItem}
+                     style={button}
+                     onClick={handleItem}
                     >
                         Да
                     </Button>
