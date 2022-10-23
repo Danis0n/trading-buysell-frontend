@@ -22,6 +22,7 @@ const Pagination = ({ advertsPerPage, totalAdverts, paginate }) => {
   }
 
   const pagination = {
+    boxShadow: '0 0 15px 4px rgba(0,0,0,0.05)',
     textalign: 'center',
     listStyleType: 'none',
   }
@@ -35,14 +36,15 @@ const Pagination = ({ advertsPerPage, totalAdverts, paginate }) => {
               backgroundColor: currentPage === number ? 'red' : 'white',
               borderRadius: '10px',
               margin: '10px',
-              border: '1px solid #000',
+              border: 'none',
               padding: '10px 20px',
+              boxShadow: '0 0 15px 4px rgba(0,0,0,0.15)',
              }}
-              key={number}
+             key={number}
             >
-                <div style={{color: currentPage === number ? 'white' : 'black' }}>
-                  {number}
-                </div>
+              <div style={{color: currentPage === number ? 'white' : 'black' }}>
+                {number}
+              </div>
             </div>
           </CustomLink>
         ))}

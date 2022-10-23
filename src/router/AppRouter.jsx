@@ -12,6 +12,7 @@ import AboutPage from "../pages/AboutPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import {AnimatePresence} from 'framer-motion'
 import UserSettings from "../pages/user/UserSettings";
+import ForbiddenPage from "../pages/ForbiddenPage";
 
 const AppRouter = () => {
     const {store} = useAuth()
@@ -27,6 +28,7 @@ const AppRouter = () => {
             <Route path='/' element={<Layout isAuth={store.isAuth}/>}>
                 <Route index element={<HomePage/>}/>
                 <Route path='*' element={<NotFoundPage/>}/>
+                <Route path='forbidden' element={<ForbiddenPage/>}/>
                 <Route path='adverts' element={<AdvertsPage/>}/>
                 <Route path='adverts/:id' element={<AdvertPage/>}/>
                 <Route path='adverts/:id/edit' element={<EditAdvert/>}/>

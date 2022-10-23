@@ -6,6 +6,8 @@ import LoginForm from '../login/LoginForm'
 import Modal from '../modal/Modal'
 import Confirm from '../confirm/Confirm'
 import { useNavigate } from 'react-router-dom'
+import Image from '../img/Image'
+import NoAvatar from '../../../images/no-avatar.png'
 
 const Navbar = ({isAuth}) => {
 
@@ -85,7 +87,26 @@ const Navbar = ({isAuth}) => {
 
             {isAuth
             ?
-            <div>
+            <div style={{display: 'flex'}}>
+
+                <div
+                 style={{
+                    // padding: '5px',
+                    border: '1px solid blue', 
+                    backgroundColor: 'white',
+                    borderRadius: '20px',
+                 }}
+                 
+                 >
+                    <Image
+                     style={{marginTop: '5px'}}
+                     src={NoAvatar} 
+                     alt='user' 
+                     width='30px'/>
+                </div>
+
+                <div style={{marginLeft: '20px'}}>
+
                 <Button
                 style={{
                     backgroundColor : 'white',
@@ -94,6 +115,7 @@ const Navbar = ({isAuth}) => {
                 onClick={() => setExitModal(true)}>
                     Выйти
                 </Button>
+                </div>
                 <Modal
                 visible={exitModal}
                 setVisible={setExitModal}

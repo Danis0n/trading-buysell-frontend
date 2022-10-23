@@ -208,8 +208,8 @@ const AdvertPage = () => {
              adverts={similar}
              paginate={paginate}
                  style={{
-                     margin: 'auto',
-                     maxWidth: '1000px',
+                    margin: 'auto',
+                    maxWidth: '1000px',
                  }}
                  isPagable
             />
