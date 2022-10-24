@@ -6,12 +6,16 @@ import LoginForm from '../login/LoginForm'
 import Modal from '../modal/Modal'
 import Confirm from '../confirm/Confirm'
 import { useNavigate } from 'react-router-dom'
+import Dropdown from 'react-bootstrap/esm/Dropdown'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import menu from '../../../images/icons/menu.png'
 import Image from '../img/Image'
-import NoAvatar from '../../../images/no-avatar.png'
+import user from '../../../images/icons/user.png'
 
 const Navbar = ({isAuth}) => {
 
     const {store} = useAuth();
+    const [userId, setUserId] = useState(store?.user?.id)
     const [loginModal, setLoginModal] = useState(false)
     const [exitModal, setExitModal] = useState(false)
     const nav = useNavigate();
@@ -36,29 +40,30 @@ const Navbar = ({isAuth}) => {
     }
 
     const navbar = {
-        marginBottom: '25px',
-        height: '70px',
-        display: 'grid',
         width: '100%',
+        marginBottom: '25px',
+        height: 'auto',
         alignItems: 'center',
         padding:'0 15px',
         boxShadow: '0 0 15px 4px rgba(0,0,0,0.05)',
     }
 
     const linksArea = {
-        margin: '0 400px',
+        width: '65%',
+        margin: '0 auto',
         textAlign : 'center',
         display : 'flex',
         justifyContent : 'space-between',
     }
 
     const catalog = {
-        marginTop: '5px',
+        textTransform: 'uppercase',
+        margin: '30px 10px',
     }
 
     const buttons = {
         display: 'flex',
-        margin: '0 20px',
+        margin: '25px 10px',
     }
 
   return (
@@ -66,7 +71,7 @@ const Navbar = ({isAuth}) => {
       <div style={linksArea}>
         
         <div style={catalog}>
-          Лого
+          <Image style={{marginTop: '-10px'}} src={user} alt='logo' width='50px'/>
         </div>
 
         <div style={catalog}>
@@ -76,6 +81,9 @@ const Navbar = ({isAuth}) => {
         <div style={catalog}>
           <CustomLink to='/about'>Контакты</CustomLink>
         </div>
+        <div style={catalog}>
+          <CustomLink to='/register'>Регистрация</CustomLink>
+        </div>
 
         <div style={buttons}>
             <div
@@ -84,41 +92,15 @@ const Navbar = ({isAuth}) => {
             }}>
                 <Button onClick={handleSubmit}>Добавить объявление</Button>
             </div>
+            
+            <div style={{display: 'inline-block'}}>
 
             {isAuth
             ?
-            <div style={{display: 'flex'}}>
-
-                <div
-                 style={{
-                    // padding: '5px',
-                    border: '1px solid blue', 
-                    backgroundColor: 'white',
-                    borderRadius: '20px',
-                 }}
-                 
-                 >
-                    <Image
-                     style={{marginTop: '5px'}}
-                     src={NoAvatar} 
-                     alt='user' 
-                     width='30px'/>
-                </div>
-
-                <div style={{marginLeft: '20px'}}>
-
-                <Button
-                style={{
-                    backgroundColor : 'white',
-                    color: 'black',
-                    }}
-                onClick={() => setExitModal(true)}>
-                    Выйти
-                </Button>
-                </div>
+            <div >
                 <Modal
-                visible={exitModal}
-                setVisible={setExitModal}
+                  visible={exitModal}
+                  setVisible={setExitModal}
                 >
                     <Confirm
                     handleItem={handleLogout}
@@ -126,6 +108,30 @@ const Navbar = ({isAuth}) => {
                     message={'Вы точно хотите выйти?'}
                     />
                 </Modal>
+
+                <div style={{margin: '-5px'}}>
+                <Dropdown>
+                    <Dropdown.Toggle variant="white" id="dropdown-basic">
+                        <Image src={menu}/>
+                    </Dropdown.Toggle>
+                
+                    <Dropdown.Menu>
+                        <Dropdown.Item href={`/user/${userId}`}>
+                            Профиль
+                        </Dropdown.Item>
+                        <Dropdown.Item href={`/user/${userId}`}>
+                            Мои объявления
+                        </Dropdown.Item>
+                        <Dropdown.Item href={`/user/${userId}/settings`}>
+                            Настройки
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => setExitModal(true)}>
+                            Выход
+                        </Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+                </div>
+
             </div>
             :
                 <div>
@@ -143,9 +149,11 @@ const Navbar = ({isAuth}) => {
                     setVisible={setLoginModal}
                     >
                         <LoginForm handleLogin={handleLogin}/>
-                    </Modal>
+                    </Modal>  
                 </div>
             }
+            </div>
+
         </div>
       </div>
     </div>
