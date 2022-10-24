@@ -12,9 +12,12 @@ import { useAuth } from '../../components/hook/useAuth';
 import LoginForm from '../../components/ui/login/LoginForm';
 import Modal from '../../components/ui/modal/Modal';
 import superImage from '../../utils/Image';
+import { useNavigate } from 'react-router-dom';
 
 
 const CreateAdvert = ({isAuth}) => {
+
+  const nav = useNavigate();
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [imagesToRender, setImagesToRender] = useState([]);
@@ -57,10 +60,16 @@ const CreateAdvert = ({isAuth}) => {
         })
         formData.append('type',type);
         
+        let response
         try {
-          const response = await AdvertService.create(formData);
+          response = await AdvertService.create(formData);
+          console.log(response);
         } catch (error) {
           console.log(error);
+        } finally {
+          if(response.status === 200 ) {
+            nav(`/user/${store.user.id}/adverts`)
+          }
         }
       }
   }

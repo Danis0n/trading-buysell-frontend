@@ -1,29 +1,33 @@
-import React from 'react'
+import React, {useState} from 'react'
 import cl from '../../styles/advert/AdvertsPage.module.css'
 import Pagination from '../../components/ui/pagination/Pagination'
 import AdvertElement from './AdvertElement'
 
-const SearchedAdverts = ({currentAdverts, advertsPerPage, adverts, paginate, style, isPagable}) => {
+const SearchedAdverts = ({currentAdverts, advertsPerPage, 
+  adverts, paginate, style, isPageable, isAdmin}) => {
+
   return (
     <div style={style}>
+
+      <div>
         {
         currentAdverts.map((advert) => (
-            <AdvertElement key={advert.id} advert={advert}/> 
-            ))
+          <AdvertElement key={advert.id} advert={advert} isAdmin={isAdmin}/> 
+        ))
         }
+      </div>
+      
 
-        {isPagable
+        {isPageable
         ?
         <Pagination
-            advertsPerPage={advertsPerPage}
-            totalAdverts={adverts.length}
-            paginate={paginate}
+          advertsPerPage={advertsPerPage}
+          totalAdverts={adverts.length}
+          paginate={paginate}
         />
         :
         <></>
         }
-
-
 
     </div>
   )

@@ -203,15 +203,15 @@ const AdvertPage = () => {
             </div>
 
             <SearchedAdverts
-             currentAdverts={currentAdverts}
-             advertsPerPage={advertsPerPage}
-             adverts={similar}
-             paginate={paginate}
-                 style={{
-                    margin: 'auto',
-                    maxWidth: '1000px',
-                 }}
-                 isPagable
+                currentAdverts={currentAdverts}
+                advertsPerPage={advertsPerPage}
+                adverts={similar}
+                paginate={paginate}
+                style={{
+                margin: 'auto',
+                maxWidth: '1000px',
+                }}
+                isPageable
             />
         </div>
         </div>

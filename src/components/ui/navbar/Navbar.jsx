@@ -119,8 +119,8 @@ const Navbar = ({isAuth}) => {
                         <Dropdown.Item href={`/user/${userId}`}>
                             Профиль
                         </Dropdown.Item>
-                        <Dropdown.Item href={`/user/${userId}`}>
-                            Мои объявления
+                        <Dropdown.Item href={`/user/${userId}/adverts`}>
+                            Ваши объявления
                         </Dropdown.Item>
                         <Dropdown.Item href={`/user/${userId}/settings`}>
                             Настройки

@@ -4,11 +4,29 @@ import cl from '../../styles/advert/AdvertElement.module.css'
 import map from '../../utils/ImageUtil'
 import Dot from '../../components/ui/dot/Dot'
 import CustomLink from '../../components/ui/link/CustomLink'
+import AdvertService from '../../service/AdvertService'
+import Confirm from '../../components/ui/confirm/Confirm'
+import Modal from '../../components/ui/modal/Modal'
+import Button from '../../components/ui/button/Button'
 
-const AdvertElement = ({advert}) => {
+
+const AdvertElement = ({advert, isAdmin}) => {
 
   const [isHover, setIsHover] = useState(false);
   const linkToAdvert = `/adverts/${advert.id}`
+
+  const [confirmModal, setConfirmModal] = useState(false)
+
+
+  async function handleDelete() {
+    setConfirmModal(false);
+    try {
+        const response = await AdvertService.delete(advert.id);
+        console.log(response);
+    } catch (error) {
+        console.log(error);  
+    }
+  }
 
   const element = {
     width: '254px',
@@ -68,6 +86,38 @@ const AdvertElement = ({advert}) => {
         <div className={cl.itemPrice}>
           {advert.price} 
         </div>
+      </div>
+
+      <div>
+        {isAdmin
+        ?
+        <div style={{margin: '20px'}}>
+          <Button
+           onClick={() => setConfirmModal(true)}
+           style={{
+            backgroundColor: 'white',
+            color: 'black'
+           }}
+          >
+            Удалить
+          </Button>
+
+          <Modal
+            visible={confirmModal}
+            setVisible={setConfirmModal}
+          >
+            <Confirm
+              handleCancel={() => setConfirmModal(false)}
+              handleItem={handleDelete}
+              message='Вы точно хотите удалить объявление?'
+              link={`/user/${advert?.userId}/adverts`}
+              />
+          </Modal>
+
+        </div>
+        :
+        <></>
+        }
       </div>
 
     </div>

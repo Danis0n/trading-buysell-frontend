@@ -183,7 +183,7 @@ const HomePage = () => {
             advertsPerPage={advertsPerPage}
             adverts={exampleAdverts}
             paginate={paginate}
-            isPagable
+            isPageable
             />
         </div>
         }

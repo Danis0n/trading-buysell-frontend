@@ -67,7 +67,7 @@ const UserPage = () => {
         }
     }
 
-    useEffect( () => {
+    useEffect(() => {
         fetchData(id);
     }, [])
 
@@ -178,7 +178,7 @@ const UserPage = () => {
                             margin: 'auto',
                             maxWidth: '1000px',
                         }}
-                        isPagable
+                        isPageable
                     />
                 </div>
 

@@ -231,19 +231,19 @@ const AdvertsPage = () => {
                         {loading
                         ?
                         <div>
-                                {/* Spinner */}
-                            </div>
+                            {/* Spinner */}
+                        </div>
                         :
                         <SearchedAdverts
-                        currentAdverts={currentAdverts}
-                        advertsPerPage={advertsPerPage}
-                        adverts={adverts}
-                        paginate={paginate}
+                            currentAdverts={currentAdverts}
+                            advertsPerPage={advertsPerPage}
+                            adverts={adverts}
+                            paginate={paginate}
                             style={{
                                 marginLeft: 'auto',
                                 maxWidth: '900px',
                             }}
-                            isPagable
+                            isPageable
                             />
                         }
                     </div>
