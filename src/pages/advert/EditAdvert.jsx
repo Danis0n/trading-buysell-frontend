@@ -262,6 +262,16 @@ const EditAdvert = () => {
         <div className={cl.itemButton}>
           <Button onClick={() => setConfirmModal(true)}>Изменить</Button>
         </div>
+        <div className={cl.itemButton}>
+          <Button
+           style={{
+            color: 'black', backgroundColor: 'white'
+           }} 
+           onClick={() => navigate(`/adverts/${id}`)}
+          >
+            Отмена
+          </Button>
+        </div>
 
         <Modal
           visible={confirmModal}

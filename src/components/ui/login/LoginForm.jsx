@@ -12,7 +12,26 @@ const LoginForm = ({handleLogin}) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [isAllowed, setIsAllowed] = useState(true)
   const {store} = useAuth();
+
+  const login = () => {
+
+    if(username == '' || password == ''){
+      setIsAllowed(false);
+    }
+    else{
+      store.login(username,password);
+    }
+
+  }
+
+  const errorMsg = {
+    width: '250px',
+    color: 'red',
+    fontSize: '20px', 
+    position: 'absolute'
+  }
 
   const style = {
     width: '250px'
@@ -43,9 +62,7 @@ const LoginForm = ({handleLogin}) => {
       />
 
       <Button
-       onClick={() => {
-        store.login(username,password);
-      }}
+       onClick={login}
       >
         Войти
       </Button>
@@ -53,6 +70,15 @@ const LoginForm = ({handleLogin}) => {
       <div className={cl.registerForm}>
         Нет аккаунта? <Link to='/register' onClick={handleLogin}>Регистрация</Link> 
       </div>
+
+      {!isAllowed
+      ?
+      <div style={errorMsg}>
+        Пожалуйста, введите данные корректно!
+      </div>
+      :
+      <></>
+      }
 
     </div>
   )
