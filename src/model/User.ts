@@ -8,7 +8,7 @@ export interface User{
 
 export interface Info {
     name: string;
-    phoneNumber: string;
+    phone: string;
     email : string;
     rating: string;
     dateOfCreation: string;
