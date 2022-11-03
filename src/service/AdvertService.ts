@@ -45,4 +45,16 @@ export default class AdvertService {
     static async delete(id: string) : Promise<void> {
         return $api.delete(`${API_URL}/api/advert/delete/${id}`);
     }
+
+    static async getBrandTypeByTitleType(id: string) : Promise<void> {
+        return axios.get(`${API_URL}/api/advert/get/type/brand/title/${id}`);
+    }
+
+    static async getMainTypeByTitleType(id: string) : Promise<void> {
+        return axios.get(`${API_URL}/api/advert/get/type/main/title/${id}`);
+    }
+
+    static async getSubTypeByTitleType(id: string) : Promise<void> {
+        return axios.get(`${API_URL}/api/advert/get/type/sub/title/${id}`);
+    }
 }

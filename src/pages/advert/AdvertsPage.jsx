@@ -2,12 +2,11 @@ import React, {useState, useEffect} from 'react'
 import AdvertService from '../../service/AdvertService';
 import cl from '../../styles/advert/AdvertsPage.module.css'
 import Hr from '../../components/ui/hr/Hr';
-import Input from '../../components/ui/input/Input';
-import Select from '../../components/ui/select/Select';
-import PrecisionSelect from '../../components/ui/select/PrecisionSelect';
-import Button from '../../components/ui/button/Button';
 import SearchedAdverts from './SearchedAdverts';
 import Coffe from '../../images/icons/coffe.jpg';
+import Dropdown from 'react-bootstrap/esm/Dropdown'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import SearchElement from './SearchElement';
 
 const AdvertsPage = () => {
 
@@ -21,27 +20,32 @@ const AdvertsPage = () => {
     const [location, setLocation] = useState('');
     const [minPrice, setMinPrice] = useState(minValue);
     const [maxPrice, setMaxPrice] = useState(maxValue);
-    const [type, setType] = useState('none');
+    
+    const [titleType, setTitleType] = useState('');
+    const [mainType, setMainType] = useState([])
+    const [subType, setSubType] = useState([])
+    const [brandType, setBrandType] = useState([])
 
     const [loading, setLoading] = useState(false);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [advertsPerPage] = useState(9);
     
-    const fetchDataByParams = async (title, type, location, minPrice, maxPrice) => {
-        setLoading(true);
-        try {
-            const response = await AdvertService.getParams(
-            { title, type, location, minPrice, maxPrice });
-            setAdverts(response.data);
-        } catch (error) {
-            console.log(error);
-        } finally{
-            setIsSearched(true);
-            setLoading(false);
-        }
+    const toggleBrand = value => {
+        if(brandType.includes(value)) setBrandType(brandType.filter((e) => e !== value));
+        else setBrandType(val => val.concat(value))
     }
 
+    const toggleMain = value => {
+        if(mainType.includes(value)) setMainType(mainType.filter((e) => e !== value));
+        else setMainType(val => val.concat(value))
+    }
+
+    const toggleSub = value => {
+        if(subType.includes(value)) setSubType(subType.filter((e) => e !== value));
+        else setSubType(val => val.concat(value))
+    }
+    
     const fetchData = async () => {
         setLoading(true);
         try {
@@ -54,50 +58,51 @@ const AdvertsPage = () => {
         }
     }
 
-    const getRealValue = (value, realValue) => {
-        if(value === ''){
-            return realValue;
-        }
-        return value
-    }
-
-    const handleSubmit = (e) => {
-        if(checkDefaults()) {
-            fetchDataByParams(
-                getRealValue(title,'none'),
-                getRealValue(type, 'none'),
-                getRealValue(location, 'none'),
-                getRealValue(minPrice, 50),
-                getRealValue(maxPrice, 10000000)
-            );
+    const fetchDataByParams = async (data) => {
+        try {
+            const response = await AdvertService.getParams(data);
+            setAdverts(response.data);
+        } catch (error) {
+            console.log(error);
         }
     }
 
-    const handleDefault = (e) => {
-        if(isSearched){
-            fetchData();        
-            setType('none');
-            setMinPrice(minValue);
-            setMaxPrice(maxValue);
-            setTitle('')
-            setLocation('')
-            setIsSearched(false);
-        }
-        e.preventDefault();
+    const getJson = () => {
+        return JSON.stringify({
+            title: title,
+            type: {
+                titleType: titleType,
+                mainType: mainType,
+                subType: subType,
+                brandType: brandType
+            },
+            minPrice: minPrice,
+            maxPrice: maxPrice,
+            location: location
+        });
     }
 
-    const checkDefaults = () => {
-        return !(
-            type === 'none' && title === '' &&
-            location === '' && minPrice === minValue &&
-            maxPrice === maxValue
-        );
+    const handleUpdate = async () => {
+        if(titleType === '') {
+            fetchData();
+            return;
+        }
+        else {
+            const json = getJson();
+            fetchDataByParams(json);
+        }
     }
+
+    useEffect(() => {
+        setBrandType([])
+        setMainType([])
+        setSubType([])
+    }, [titleType])
 
     useEffect(() =>  {
-        fetchData();
-    }, [])
-    
+        handleUpdate();
+    }, [titleType,mainType,brandType,subType,title, location, minPrice, maxPrice])
+
     const indexOfLastAdvert = currentPage * advertsPerPage;
     const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
     const currentAdverts = adverts.slice(indexOfFirstAdvert, indexOfLastAdvert);
@@ -105,26 +110,6 @@ const AdvertsPage = () => {
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
         return pageNumber;
-    }
-
-    const style = {
-        width : '200px',
-        fontSize : '17px'
-    }
-
-    const paramsInputStyle = {
-        width : '90px',
-        fontSize : '17px',
-        marginRight : '20px',
-    }
-
-    const buttonDefaults = {
-        backgroundColor : '#F9F8F8',
-        color : 'black',
-    }
-
-    const button = {
-        textAlign :'center',
     }
     
     const titleWord = {
@@ -154,78 +139,40 @@ const AdvertsPage = () => {
             }}>
                 <div className={cl.advertWrapper}>
                     <div className={cl.searchArea}>
-                        <div className={cl.titleSector}>
-                            Введите запрос
-                        </div>
-                        <Input
-                            style={style}
-                            type="text"
-                            placeholder='напр. работа'
-                            value={title}
-                            onChange={e => setTitle(e.target.value)}
+                        <SearchElement
+                         title={titleType} 
+                         mainHandler={toggleMain}
+                         subHandler={toggleSub}
+                         brandHandler={toggleBrand}
                         />
-
-                        <div className={cl.titleSector}>
-                            Категория
-                        </div>
-                        <div className={cl.itemField}>
-                            <Select style={style} value={type} onChange={(e) => setType(e.target.value)}>
-                                <option defaultValue value='none'>Категория</option>
-                                <option value='job'>Работа</option>
-                                <option value='auto'>Авто</option>
-                                <option value='animal'>Животные</option>
-                            </Select>
-                        </div>
-
-                        <div className={cl.titleSector}>
-                            Город
-                        </div>
-                        <Input
-                            style={style}
-                            type="text"
-                            placeholder='напр. Брянск'
-                            value={location}
-                            onChange={e => setLocation(e.target.value)}
-                        />
-
-                        <div className={cl.titleSector}>
-                            Цена
-                        </div>
-                        <div className={cl.paramsInputPrice}>
-                            <Input
-                                style={paramsInputStyle}
-                                type='text'
-                                placeholder='Мин'
-                                onChange={e => setMinPrice(e.target.value)}
-                                />
-                            <Input
-                                style={paramsInputStyle}
-                                type='text'
-                                placeholder='Макс'
-                                onChange={e => setMaxPrice(e.target.value)}
-                                />
-                        </div>
-
-                        <div className={cl.buttonArea}>
-                            <div className={cl.searchButton}>
-                                <Button style={button} onClick={handleSubmit}>Поиск</Button>
-                            </div>
-                        </div>
                     </div>
 
                     <div className={cl.rightArea}>
         
                         <div className={cl.precisionSearchArea}>
-                            <div className={cl.item}>
-                                <PrecisionSelect>
-                                    <option value='new'>Новые объявления</option>
-                                    <option value='more'>Более низкая цена первая</option>
-                                    <option value='less'>Более высокая цена первая</option>
-                                </PrecisionSelect>
-                            </div>
-                            <div className={cl.Default}>
-                                <Button style={buttonDefaults} onClick={handleDefault}>Сбросить</Button>
-                            </div>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="white" id="dropdown-basic">
+                                Каталог 
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item onClick={(e) => setTitleType('auto')}>
+                                    Авто
+                                </Dropdown.Item>
+                                <Dropdown.Item onClick={(e) => setTitleType('property')}>
+                                    Недвижимость
+                                </Dropdown.Item>
+                                <Dropdown.Item onClick={(e) => setTitleType('tech')}>
+                                    Техника
+                                </Dropdown.Item>
+                                <Dropdown.Item onClick={(e) => setTitleType('sport')}>
+                                    Спорт и отдых
+                                </Dropdown.Item>
+                                <Dropdown.Item onClick={(e) => setTitleType('study')}>
+                                    Учёба
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+
                         </div>
 
                         {loading

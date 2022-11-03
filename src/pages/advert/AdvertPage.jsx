@@ -101,6 +101,7 @@ const AdvertPage = () => {
         fetchData();
     }, [])
 
+
     return (
         <div style={{
             display: 'table',
@@ -137,11 +138,9 @@ const AdvertPage = () => {
             <div className={cl.itemRightInfo}>
                 <div className={cl.itemAdvertInfo}>
                     <div className={cl.itemType}>
-                        <CustomLink to={`/adverts/type/${advert?.type?.name}`}>
-                            <Dot>
-                              <Image src={map.get(advert?.type?.name)} alt='typeLogo'/>
-                            </Dot>
-                        </CustomLink>
+                        <Dot>
+                            <Image src={map.get(advert?.type?.titleType?.name)} alt='typeLogo'/>
+                        </Dot>
                     </div>
                     <div className={cl.itemTitle}>{advert?.title}</div>
                     <div className={cl.itemDate}>{advert?.dateOfCreation.substring(0,10)}</div>

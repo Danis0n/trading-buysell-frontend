@@ -82,7 +82,7 @@ const Navbar = ({isAuth}) => {
           <CustomLink to='/about'>Контакты</CustomLink>
         </div>
         <div style={catalog}>
-          <CustomLink to='/register'>Регистрация</CustomLink>
+          <CustomLink to='/adverts'>Объявления</CustomLink>
         </div>
 
         <div style={buttons}>

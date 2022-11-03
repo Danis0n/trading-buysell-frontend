@@ -21,8 +21,6 @@ import Star from '../images/icons/star.png'
 import Dot from '../components/ui/dot/Dot'
 import Button from '../components/ui/button/Button'
 import { useNavigate } from 'react-router-dom'
-import {motion} from 'framer-motion';
-import { variants } from '../router/props'
 
 const HomePage = () => {
 
@@ -42,7 +40,7 @@ const HomePage = () => {
       const response = await AdvertService.getLatest();
       setLatestAdverts(response.data);
     } catch (error) {
-        console.log(error.message);            
+      console.log(error.message);            
     }
   }
  
@@ -51,7 +49,7 @@ const HomePage = () => {
       const response = await AdvertService.getExamples();
       setExampleAdverts(response.data);
     } catch (error) {
-        console.log(error.message);            
+      console.log(error.message);            
     }
   }
 
@@ -116,40 +114,6 @@ const HomePage = () => {
         }}>
         Легко купить, легко продать
         </div>
-
-        <div style={{
-          textAlign: 'center',
-          margin : '58px 0 0',
-        }}>
-          <TypeLink image={work}>
-            Услуги
-          </TypeLink>
-          <TypeLink image={auto}>
-            Авто-мото
-          </TypeLink>
-          <TypeLink image={animal}>
-            Животные
-          </TypeLink>
-          <TypeLink image={chat}>
-            Общение
-          </TypeLink>
-          <TypeLink image={property}>
-            Недвижимость
-          </TypeLink>
-          <TypeLink image={store}>
-            Продажа
-          </TypeLink>
-          <TypeLink image={job}>
-            Работа
-          </TypeLink>
-          <TypeLink image={love}>
-            Знакомства
-          </TypeLink>
-          <TypeLink image={edu}>
-            Обучение
-          </TypeLink>
-        </div>
-        
       </div>
 
       <div style={{

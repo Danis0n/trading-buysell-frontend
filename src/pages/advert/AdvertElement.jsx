@@ -64,7 +64,7 @@ const AdvertElement = ({advert, isAdmin}) => {
       <div className={cl.imageType}>
         <CustomLink to={linkToAdvert}>
           <Dot>
-            <Image src={map.get(advert?.type?.name)} alt='typeLogo'/>
+            <Image src={map.get(advert?.type?.titleType?.name)} alt='typeLogo'/>
           </Dot>
         </CustomLink>
       </div>
