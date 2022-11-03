@@ -13,8 +13,6 @@ const AdvertsPage = () => {
     const minValue = 50;
     const maxValue = 10000000;
 
-    const [isSearched, setIsSearched] = useState(false);
-
     const [adverts, setAdverts] = useState([])
     const [title, setTitle] = useState('');
     const [location, setLocation] = useState('');
@@ -25,6 +23,8 @@ const AdvertsPage = () => {
     const [mainType, setMainType] = useState([])
     const [subType, setSubType] = useState([])
     const [brandType, setBrandType] = useState([])
+
+    const [availables, setAvailables] = useState([])
 
     const [loading, setLoading] = useState(false);
 
@@ -45,16 +45,14 @@ const AdvertsPage = () => {
         if(subType.includes(value)) setSubType(subType.filter((e) => e !== value));
         else setSubType(val => val.concat(value))
     }
-    
-    const fetchData = async () => {
-        setLoading(true);
+
+    const fetchAvailable = async (data) => {
         try {
-            const response = await AdvertService.getAll();
-            setAdverts(response.data);
+          const response = await AdvertService.getAvailables(data);
+          setAvailables(response.data)
+          console.log(response.data);
         } catch (error) {
-            console.log(error.message);            
-        } finally{
-            setLoading(false);
+          console.log(error);
         }
     }
 
@@ -82,15 +80,18 @@ const AdvertsPage = () => {
         });
     }
 
+    const getJsonAvailables = () => {
+        return JSON.stringify({
+            titleType: titleType,
+            mainType: mainType,
+            subType: subType,
+            brandType: brandType
+        });
+    }
+
     const handleUpdate = async () => {
-        if(titleType === '') {
-            fetchData();
-            return;
-        }
-        else {
-            const json = getJson();
-            fetchDataByParams(json);
-        }
+        fetchDataByParams(getJson());
+        fetchAvailable(getJsonAvailables());
     }
 
     useEffect(() => {
@@ -144,6 +145,7 @@ const AdvertsPage = () => {
                          mainHandler={toggleMain}
                          subHandler={toggleSub}
                          brandHandler={toggleBrand}
+                         availables={availables}
                         />
                     </div>
 

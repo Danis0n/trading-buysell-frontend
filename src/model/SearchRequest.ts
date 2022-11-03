@@ -7,7 +7,8 @@ export interface SearchRequest {
 }
 
 export interface Type {
-    titleType: string[];
+    titleType: string;
+    mainType: string[];
     subType: string[];
     brandType: string[];
 }

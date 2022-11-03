@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { AdvertResponse} from "../response/AdvertResponse";
 import $api, { API_URL } from "../components/http";
 import { Advert } from "../model/Advert";
-import { SearchRequest } from "../model/SearchRequest";
+import { SearchRequest, Type } from "../model/SearchRequest";
 
 export default class AdvertService {
 
@@ -20,6 +20,10 @@ export default class AdvertService {
 
     static async getParams(data : SearchRequest) : Promise<AxiosResponse<Advert[]>> {
         return axios.post(`${API_URL}/api/advert/get/params`, data);
+    }
+
+    static async getAvailables(data: Type) : Promise<void> {
+        return axios.post(`${API_URL}/api/advert/get/available`, data);
     }
 
     static async getLatest() : Promise<AxiosResponse<Advert[]>> {

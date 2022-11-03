@@ -2,12 +2,15 @@ import React, {useState, useEffect} from 'react'
 import Hr from '../../components/ui/hr/Hr';
 import AdvertService from '../../service/AdvertService';
 
-const SearchElement = ({title, brandHandler, subHandler, mainHandler}) => {
+const SearchElement = ({title, brandHandler, subHandler, mainHandler, availables}) => {
   
   const [mainType, setMainType] = useState([])
   const [subType, setSubType] = useState([])
   const [brandType, setBrandType] = useState([])
-  
+
+  const [brandName, setBrandName] = useState([])
+  const [brandQuantity, setBrandQuantity] = useState([])
+
   const fetchCheckBoxBrand = async (titleType) => {
     try {
       const response = await AdvertService.getBrandTypeByTitleType(titleType);
@@ -42,10 +45,33 @@ const SearchElement = ({title, brandHandler, subHandler, mainHandler}) => {
   }
 
   useEffect(() => {
+    setBrandName([])
+    setBrandQuantity([])
+    brandNameArry(availables);
+    brandQuantityArry(availables);
+  }, [availables])
+  
+
+  useEffect(() => {
     if(title === '') return;
     fetchData(title);
+    
+
   }, [title])
-  
+
+  const brandNameArry = (origin) => {
+    origin.map(element => {
+      setBrandName((prev) => prev.concat(element.brand));
+    })
+  }
+
+  const brandQuantityArry = (origin) => {
+    origin.map(element => {
+      setBrandQuantity(element.quantity);
+    })
+  }
+
+
   return (
     <div>
       {mainType.map((element) => (
@@ -64,7 +90,7 @@ const SearchElement = ({title, brandHandler, subHandler, mainHandler}) => {
       <Hr/>
       {brandType.map((element) => (
         <div key={element.name}>
-          <input type='checkbox' onChange={()=> brandHandler(element.name)}/>
+          <input type='checkbox' disabled={!brandName.includes(element.name)} onChange={()=> brandHandler(element.name)}/>
           {element.description}
         </div>
       ))}      
