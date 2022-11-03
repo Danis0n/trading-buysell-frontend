@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react'
 import Hr from '../../components/ui/hr/Hr';
 import AdvertService from '../../service/AdvertService';
 
-const SearchElement = ({title, brandHandler, subHandler, mainHandler, availables}) => {
+const SearchElement = ({title, brandHandler, subHandler,
+   mainHandler, brandAvailables, subAvailables, mainAvailables}) => {
   
   const [mainType, setMainType] = useState([])
   const [subType, setSubType] = useState([])
@@ -10,6 +11,12 @@ const SearchElement = ({title, brandHandler, subHandler, mainHandler, availables
 
   const [brandName, setBrandName] = useState([])
   const [brandQuantity, setBrandQuantity] = useState([])
+
+  const [subName, setSubName] = useState([])
+  const [subQuantity, setSubQuantity] = useState([])
+
+  const [mainName, setMainName] = useState([])
+  const [mainQuantity, setMainQuantity] = useState([])
 
   const fetchCheckBoxBrand = async (titleType) => {
     try {
@@ -47,43 +54,53 @@ const SearchElement = ({title, brandHandler, subHandler, mainHandler, availables
   useEffect(() => {
     setBrandName([])
     setBrandQuantity([])
-    brandNameArry(availables);
-    brandQuantityArry(availables);
-  }, [availables])
+    NameArray(brandAvailables,setBrandName)
+    QuantityArray(brandAvailables,setBrandQuantity)
+  }, [brandAvailables])
   
+  useEffect(() => {
+    setSubName([])
+    setSubQuantity([])
+    NameArray(subAvailables,setSubName)
+    QuantityArray(subAvailables,setSubQuantity)
+  }, [subAvailables])
+  
+  useEffect(() => {
+    setMainName([])
+    setMainQuantity([])
+    NameArray(mainAvailables,setMainName)
+    QuantityArray(mainAvailables,setMainQuantity)
+  }, [mainAvailables])
 
   useEffect(() => {
     if(title === '') return;
     fetchData(title);
-    
-
   }, [title])
 
-  const brandNameArry = (origin) => {
+  const NameArray = (origin,set) => {
     origin.map(element => {
-      setBrandName((prev) => prev.concat(element.brand));
+      set((prev) => prev.concat(element.name));
     })
   }
 
-  const brandQuantityArry = (origin) => {
+  const QuantityArray = (origin,set) => {
     origin.map(element => {
-      setBrandQuantity(element.quantity);
+      set(element.quantity);
     })
   }
-
 
   return (
     <div>
       {mainType.map((element) => (
         <div key={element.name}>
-          <input type='checkbox' onChange={()=> mainHandler(element.name)}/>
+          <input type='checkbox' disabled={!mainName.includes(element.name)} onChange={()=> mainHandler(element.name)}/>
           {element.description}
         </div>
       ))}
       <Hr/>
       {subType.map((element) => (
         <div key={element.name}>
-          <input type='checkbox' onChange={()=> subHandler(element.name)}/>
+          <input type='checkbox' disabled={!subName.includes(element.name)} onChange={()=> subHandler(element.name)}/>
           {element.description}
         </div>
       ))}
@@ -91,7 +108,7 @@ const SearchElement = ({title, brandHandler, subHandler, mainHandler, availables
       {brandType.map((element) => (
         <div key={element.name}>
           <input type='checkbox' disabled={!brandName.includes(element.name)} onChange={()=> brandHandler(element.name)}/>
-          {element.description}
+          {element.description} 
         </div>
       ))}      
 

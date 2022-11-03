@@ -24,7 +24,9 @@ const AdvertsPage = () => {
     const [subType, setSubType] = useState([])
     const [brandType, setBrandType] = useState([])
 
-    const [availables, setAvailables] = useState([])
+    const [brandAvailables, setBrandAvailables] = useState([])
+    const [subAvailables, setSubAvailables] = useState([])
+    const [mainAvailables, setMainAvailables] = useState([])
 
     const [loading, setLoading] = useState(false);
 
@@ -46,13 +48,30 @@ const AdvertsPage = () => {
         else setSubType(val => val.concat(value))
     }
 
-    const fetchAvailable = async (data) => {
+    const fetchAvailableBrand = async (data) => {
         try {
           const response = await AdvertService.getAvailables(data);
-          setAvailables(response.data)
-          console.log(response.data);
+          setBrandAvailables(response.data)
         } catch (error) {
           console.log(error);
+        }
+    }
+
+    const fetchAvailableSub = async (data) => {
+        try {
+          const response = await AdvertService.getAvailablesSub(data);
+          setSubAvailables(response.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const fetchAvailableMain = async (data) => {
+        try {
+          const response = await AdvertService.getAvailablesMain(data);
+          setMainAvailables(response.data)
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -85,13 +104,30 @@ const AdvertsPage = () => {
             titleType: titleType,
             mainType: mainType,
             subType: subType,
+        });
+    }
+
+    const getJsonAvailablesSub = () => {
+        return JSON.stringify({
+            titleType: titleType,
+            mainType: mainType,
+            brandType: brandType
+        });
+    }
+
+    const getJsonAvailablesMain = () => {
+        return JSON.stringify({
+            titleType: titleType,
+            subType: subType,
             brandType: brandType
         });
     }
 
     const handleUpdate = async () => {
+        fetchAvailableSub(getJsonAvailablesSub());
+        fetchAvailableMain(getJsonAvailablesMain());
+        fetchAvailableBrand(getJsonAvailables());
         fetchDataByParams(getJson());
-        fetchAvailable(getJsonAvailables());
     }
 
     useEffect(() => {
@@ -145,7 +181,9 @@ const AdvertsPage = () => {
                          mainHandler={toggleMain}
                          subHandler={toggleSub}
                          brandHandler={toggleBrand}
-                         availables={availables}
+                         brandAvailables={brandAvailables}
+                         subAvailables={subAvailables}
+                         mainAvailables={mainAvailables}
                         />
                     </div>
 
