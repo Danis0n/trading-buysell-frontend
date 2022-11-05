@@ -7,6 +7,8 @@ import Coffe from '../../images/icons/coffe.jpg';
 import Dropdown from 'react-bootstrap/esm/Dropdown'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchElement from './SearchElement';
+import Input from '../../components/ui/input/Input';
+import Button from '../../components/ui/button/Button';
 
 const AdvertsPage = () => {
 
@@ -15,7 +17,7 @@ const AdvertsPage = () => {
 
     const [adverts, setAdverts] = useState([])
     const [title, setTitle] = useState('');
-    const [location, setLocation] = useState('');
+    const [location, setLocation] = useState([]);
     const [minPrice, setMinPrice] = useState(minValue);
     const [maxPrice, setMaxPrice] = useState(maxValue);
     
@@ -27,6 +29,7 @@ const AdvertsPage = () => {
     const [brandAvailables, setBrandAvailables] = useState([])
     const [subAvailables, setSubAvailables] = useState([])
     const [mainAvailables, setMainAvailables] = useState([])
+    const [locationAvailables, setLocationAvailables] = useState([])
 
     const [loading, setLoading] = useState(false);
 
@@ -46,6 +49,11 @@ const AdvertsPage = () => {
     const toggleSub = value => {
         if(subType.includes(value)) setSubType(subType.filter((e) => e !== value));
         else setSubType(val => val.concat(value))
+    }
+
+    const toggleLocation = value => {
+        if(location.includes(value)) setLocation(location.filter((e) => e !== value));
+        else setLocation(val => val.concat(value))
     }
 
     const fetchAvailableBrand = async (data) => {
@@ -75,6 +83,16 @@ const AdvertsPage = () => {
         }
     }
 
+    const fetchAvailableLocation = async (data) => {
+        console.log(data);
+        try {
+          const response = await AdvertService.getAvailablesLocation(data);
+          setLocationAvailables(response.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const fetchDataByParams = async (data) => {
         try {
             const response = await AdvertService.getParams(data);
@@ -84,26 +102,36 @@ const AdvertsPage = () => {
         }
     }
 
-    const getJson = () => {
+    const getJson = (title) => {
         return JSON.stringify({
             title: title,
             type: {
                 titleType: titleType,
                 mainType: mainType,
                 subType: subType,
-                brandType: brandType
+                brandType: brandType,
+                locations: location
             },
             minPrice: minPrice,
             maxPrice: maxPrice,
-            location: location
         });
     }
 
-    const getJsonAvailables = () => {
+    const getJsonAvailablesLocation = () => {
         return JSON.stringify({
             titleType: titleType,
             mainType: mainType,
             subType: subType,
+            brandType: brandType
+        })
+    }
+
+    const getJsonAvailablesBrand = () => {
+        return JSON.stringify({
+            titleType: titleType,
+            mainType: mainType,
+            subType: subType,
+            locations: location
         });
     }
 
@@ -111,7 +139,8 @@ const AdvertsPage = () => {
         return JSON.stringify({
             titleType: titleType,
             mainType: mainType,
-            brandType: brandType
+            brandType: brandType,
+            locations: location
         });
     }
 
@@ -119,26 +148,34 @@ const AdvertsPage = () => {
         return JSON.stringify({
             titleType: titleType,
             subType: subType,
-            brandType: brandType
+            brandType: brandType,
+            locations: location
         });
     }
 
-    const handleUpdate = async () => {
+    const handleUpdate = async (title) => {
         fetchAvailableSub(getJsonAvailablesSub());
         fetchAvailableMain(getJsonAvailablesMain());
-        fetchAvailableBrand(getJsonAvailables());
-        fetchDataByParams(getJson());
+        fetchAvailableBrand(getJsonAvailablesBrand());
+        fetchAvailableLocation(getJsonAvailablesLocation())
+        fetchDataByParams(getJson(title));
+    }
+
+    const handleDefault = () => {
+        setTitle('')
+        handleUpdate('')
     }
 
     useEffect(() => {
         setBrandType([])
         setMainType([])
         setSubType([])
+        setLocation([])
     }, [titleType])
 
     useEffect(() =>  {
-        handleUpdate();
-    }, [titleType,mainType,brandType,subType,title, location, minPrice, maxPrice])
+        handleUpdate(title);
+    }, [titleType, mainType, brandType, subType, location, minPrice, maxPrice])
 
     const indexOfLastAdvert = currentPage * advertsPerPage;
     const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
@@ -181,37 +218,69 @@ const AdvertsPage = () => {
                          mainHandler={toggleMain}
                          subHandler={toggleSub}
                          brandHandler={toggleBrand}
+                         locationHandler={toggleLocation}
                          brandAvailables={brandAvailables}
                          subAvailables={subAvailables}
                          mainAvailables={mainAvailables}
+                         locationAvailables={locationAvailables}
                         />
                     </div>
 
                     <div className={cl.rightArea}>
-        
                         <div className={cl.precisionSearchArea}>
-                        <Dropdown>
-                            <Dropdown.Toggle variant="white" id="dropdown-basic">
-                                Каталог 
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                                <Dropdown.Item onClick={(e) => setTitleType('auto')}>
-                                    Авто
-                                </Dropdown.Item>
-                                <Dropdown.Item onClick={(e) => setTitleType('property')}>
-                                    Недвижимость
-                                </Dropdown.Item>
-                                <Dropdown.Item onClick={(e) => setTitleType('tech')}>
-                                    Техника
-                                </Dropdown.Item>
-                                <Dropdown.Item onClick={(e) => setTitleType('sport')}>
-                                    Спорт и отдых
-                                </Dropdown.Item>
-                                <Dropdown.Item onClick={(e) => setTitleType('study')}>
-                                    Учёба
-                                </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
+                            <div>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="white" id="dropdown-basic">
+                                    Каталог 
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={(e) => setTitleType('auto')}>
+                                        Авто
+                                    </Dropdown.Item>
+                                    <Dropdown.Item onClick={(e) => setTitleType('property')}>
+                                        Недвижимость
+                                    </Dropdown.Item>
+                                    <Dropdown.Item onClick={(e) => setTitleType('tech')}>
+                                        Техника
+                                    </Dropdown.Item>
+                                    <Dropdown.Item onClick={(e) => setTitleType('sport')}>
+                                        Спорт и отдых
+                                    </Dropdown.Item>
+                                    <Dropdown.Item onClick={(e) => setTitleType('study')}>
+                                        Учёба
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            </div>
+
+                            <div style={{
+                                paddingLeft: '20px',
+                                paddingRight: '20px'
+                            }}>
+                            <Input
+                             style={{
+                                width: '500px',
+                                paddingLeft: '20px'
+                            }}
+                             value={title}
+                             placeholder='поиск..'
+                             onChange={(e) => setTitle(e.target.value)}
+                            />
+                            </div>
+                            <div>
+                            <Button
+                             onClick={handleDefault}
+                             style={{
+                                color: 'black',
+                                backgroundColor: 'white'
+                             }}
+                            >Очистить
+                             </Button>
+                            </div>
+                            <div>
+                            <Button onClick={(e) => handleUpdate(title)}>Поиск</Button>
+                            </div>
+
 
                         </div>
 

@@ -75,7 +75,7 @@ const AdvertPage = () => {
 
     async function fetchSecondData(advert) {
         fetchUser(advert?.userId);
-        fetchSimilar(advert?.type?.name);
+        // fetchSimilar(advert?.type?.name);
     }
 
     async function fetchUser(id) {
@@ -126,12 +126,6 @@ const AdvertPage = () => {
                     <Paragraph>
                       {advert?.description}
                     </Paragraph>
-
-                    <div className={cl.itemTitle}>Адрес</div>
-                    <Hr/>
-                    <Paragraph>
-                        <div>{advert?.location}</div>
-                    </Paragraph>
                 </div>
             </div>
 
@@ -145,6 +139,8 @@ const AdvertPage = () => {
                     <div className={cl.itemTitle}>{advert?.title}</div>
                     <div className={cl.itemDate}>{advert?.dateOfCreation.substring(0,10)}</div>
                     <div className={cl.itemPrice}>{advert?.price} рублей</div>
+                    <Hr/>
+                    <div>{advert?.location.description}</div>
                 </div>
                 <div className={cl.itemUserInfo}>
                     <Image width='100' height='100' src={NoAvatar} alt="no-avatar" />

@@ -34,8 +34,16 @@ export default class AdvertService {
         return axios.post(`${API_URL}/api/advert/get/available/main`, data);
     }
 
+    static async getAvailablesLocation(data: Type) : Promise<void> {
+        return axios.post(`${API_URL}/api/advert/get/available/location`, data)
+    }
+
     static async getLatest() : Promise<AxiosResponse<Advert[]>> {
         return axios.get(`${API_URL}/api/advert/get/latest`);
+    }
+
+    static async getLocations() : Promise<void> {
+        return axios.get(`${API_URL}/api/advert/get/location`)
     }
 
     static async getExamples() : Promise<AxiosResponse<Advert[]>> {

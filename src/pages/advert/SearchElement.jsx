@@ -2,12 +2,13 @@ import React, {useState, useEffect} from 'react'
 import Hr from '../../components/ui/hr/Hr';
 import AdvertService from '../../service/AdvertService';
 
-const SearchElement = ({title, brandHandler, subHandler,
-   mainHandler, brandAvailables, subAvailables, mainAvailables}) => {
+const SearchElement = ({title, brandHandler, subHandler, locationHandler,
+   mainHandler, brandAvailables, subAvailables, mainAvailables, locationAvailables}) => {
   
   const [mainType, setMainType] = useState([])
   const [subType, setSubType] = useState([])
   const [brandType, setBrandType] = useState([])
+  const [location, setLocation] = useState([])
 
   const [brandName, setBrandName] = useState([])
   const [brandQuantity, setBrandQuantity] = useState([])
@@ -17,6 +18,9 @@ const SearchElement = ({title, brandHandler, subHandler,
 
   const [mainName, setMainName] = useState([])
   const [mainQuantity, setMainQuantity] = useState([])
+
+  const [locationName, setLocationName] = useState([])
+  const [locationQuantity, setLocationQuantity] = useState([])
 
   const fetchCheckBoxBrand = async (titleType) => {
     try {
@@ -37,18 +41,28 @@ const SearchElement = ({title, brandHandler, subHandler,
   }
 
   const fetchCheckBoxSub = async (titleType) => {
-      try {
-        const response = await AdvertService.getSubTypeByTitleType(titleType);
-        setSubType(response.data)
-      } catch (error) {
-        console.log(error);
-      }
+    try {
+      const response = await AdvertService.getSubTypeByTitleType(titleType);
+      setSubType(response.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const fetchCheckBoxLocation = async () => {
+    try {
+      const response = await AdvertService.getLocations();
+      setLocation(response.data)
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const fetchData = async title => {
     fetchCheckBoxMain(title);
     fetchCheckBoxSub(title);        
     fetchCheckBoxBrand(title);
+    fetchCheckBoxLocation();
   }
 
   useEffect(() => {
@@ -71,6 +85,14 @@ const SearchElement = ({title, brandHandler, subHandler,
     NameArray(mainAvailables,setMainName)
     QuantityArray(mainAvailables,setMainQuantity)
   }, [mainAvailables])
+
+  useEffect(() => {
+    setLocationName([])
+    setLocationQuantity([])
+    NameArray(locationAvailables,setLocationName)
+    QuantityArray(locationAvailables,setLocationQuantity)
+  }, [locationAvailables])
+  
 
   useEffect(() => {
     if(title === '') return;
@@ -111,6 +133,13 @@ const SearchElement = ({title, brandHandler, subHandler,
           {element.description} 
         </div>
       ))}      
+      <Hr/>
+      {location.map((element) => (
+        <div key={element.name}>
+          <input type='checkbox' disabled={!locationName.includes(element.name)} onChange={()=> locationHandler(element.name)}/>
+          {element.description} 
+        </div>
+      ))} 
 
     </div>
   )
