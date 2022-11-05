@@ -84,7 +84,6 @@ const AdvertsPage = () => {
     }
 
     const fetchAvailableLocation = async (data) => {
-        console.log(data);
         try {
           const response = await AdvertService.getAvailablesLocation(data);
           setLocationAvailables(response.data)

@@ -62,6 +62,7 @@ const AdvertPage = () => {
                 nav('/');
             }
             setAdvert(response.data);
+            console.log(response.data);
             if(response?.data){
                 fetchSecondData(response?.data);
             }
@@ -74,11 +75,11 @@ const AdvertPage = () => {
     }
 
     async function fetchSecondData(advert) {
-        fetchUser(advert?.userId);
-        // fetchSimilar(advert?.type?.name);
+        getUser(advert?.userId);
+        getSimilar(getJson(advert));
     }
 
-    async function fetchUser(id) {
+    async function getUser(id) {
         try {
             const userResponse = await UserService.fetchUser(id);
             setUser(userResponse.data);
@@ -87,14 +88,30 @@ const AdvertPage = () => {
         }
     }
 
-    const fetchSimilar = async (type) => {
+    const getSimilar = async (data) => {
+        console.log(data);
         try {
-            const response = await AdvertService.getType(type);
+            const response = await AdvertService.getParams(data);
             setSimilar(response.data);
         } catch (error) {
             console.log(error);
         } finally{
         }
+    }
+
+    const getJson = (advert) => {
+        return JSON.stringify({
+            title: '',
+            type: {
+                titleType : advert?.type?.titleType?.name,
+                mainType : [advert?.type?.mainType?.name],
+                subType : [],
+                brandType : [],
+                locations : [advert?.location?.name]
+            },
+            minPrice: '50',
+            maxPrice: '10000000'
+        })
     }
 
     useEffect(() =>  {

@@ -1,7 +1,6 @@
 export interface SearchRequest {
     title: string;
     type: Type;
-    location: string;
     minPrice: string;
     maxPrice: string;
 }
@@ -11,4 +10,5 @@ export interface Type {
     mainType: string[];
     subType: string[];
     brandType: string[];
+    location: string[];
 }
