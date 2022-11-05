@@ -33,7 +33,7 @@ const Pagination = ({ advertsPerPage, totalAdverts, paginate }) => {
           <CustomLink key={number} style={page} onClick={(e) => handleLink(e,number)} to='!#'>
             <div
              style={{
-              backgroundColor: currentPage === number ? 'red' : 'white',
+              backgroundColor: currentPage === number ? '#AE2519' : 'white',
               borderRadius: '10px',
               margin: '10px',
               border: 'none',

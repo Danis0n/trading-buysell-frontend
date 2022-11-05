@@ -213,24 +213,30 @@ const AdvertsPage = () => {
             }}>
                 <div className={cl.advertWrapper}>
                     <div className={cl.searchArea}>
-                        <SearchElement
-                         title={titleType} 
-                         mainHandler={toggleMain}
-                         subHandler={toggleSub}
-                         brandHandler={toggleBrand}
-                         locationHandler={toggleLocation}
-                         brandAvailables={brandAvailables}
-                         subAvailables={subAvailables}
-                         mainAvailables={mainAvailables}
-                         locationAvailables={locationAvailables}
-                        />
+                        <div>
+                            {titleType == '' ?
+                            <></>
+                            :
+                            <SearchElement
+                            title={titleType} 
+                            mainHandler={toggleMain}
+                            subHandler={toggleSub}
+                            brandHandler={toggleBrand}
+                            locationHandler={toggleLocation}
+                            brandAvailables={brandAvailables}
+                            subAvailables={subAvailables}
+                            mainAvailables={mainAvailables}
+                            locationAvailables={locationAvailables}
+                            />
+                            }
+                        </div>
                     </div>
 
                     <div className={cl.rightArea}>
                         <div className={cl.precisionSearchArea}>
-                            <div>
+                            <div style={{marginTop : '5px'}}> 
                             <Dropdown>
-                                <Dropdown.Toggle variant="white" id="dropdown-basic">
+                                <Dropdown.Toggle as={Button} variant="white" id="dropdown-basic">
                                     Каталог 
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
@@ -259,7 +265,7 @@ const AdvertsPage = () => {
                             }}>
                             <Input
                              style={{
-                                width: '500px',
+                                width: '450px',
                                 paddingLeft: '20px'
                             }}
                              value={title}
@@ -267,18 +273,21 @@ const AdvertsPage = () => {
                              onChange={(e) => setTitle(e.target.value)}
                             />
                             </div>
-                            <div>
-                            <Button
-                             onClick={handleDefault}
-                             style={{
-                                color: 'black',
-                                backgroundColor: 'white'
-                             }}
-                            >Очистить
-                             </Button>
-                            </div>
-                            <div>
-                            <Button onClick={(e) => handleUpdate(title)}>Поиск</Button>
+                            
+                            <div style={{display: 'flex', gap: '1rem', marginTop: '5px'}}>
+                                <div>
+                                    <Button
+                                    onClick={handleDefault}
+                                    style={{
+                                        color: 'black',
+                                        backgroundColor: 'white',
+                                    }}
+                                    >Очистить
+                                    </Button>
+                                </div>
+                                <div>
+                                    <Button onClick={(e) => handleUpdate(title)}>Поиск</Button>
+                                </div>
                             </div>
 
 
@@ -300,7 +309,7 @@ const AdvertsPage = () => {
                                 maxWidth: '900px',
                             }}
                             isPageable
-                            />
+                        />
                         }
                     </div>
                 </div>

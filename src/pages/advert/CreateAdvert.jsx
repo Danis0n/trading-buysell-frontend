@@ -20,7 +20,6 @@ const CreateAdvert = ({isAuth}) => {
   const nav = useNavigate();
 
   const [selectedImages, setSelectedImages] = useState([]);
-  const [imagesToRender, setImagesToRender] = useState([]);
   const [loginModal, setLoginModal] = useState(false)
 
   const [isAllowed, setIsAllowed] = useState(true);

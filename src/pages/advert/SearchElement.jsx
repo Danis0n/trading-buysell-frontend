@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Hr from '../../components/ui/hr/Hr';
 import AdvertService from '../../service/AdvertService';
+import CheckboxFilter from './CheckboxFilter';
 
 const SearchElement = ({title, brandHandler, subHandler, locationHandler,
    mainHandler, brandAvailables, subAvailables, mainAvailables, locationAvailables}) => {
@@ -107,40 +108,29 @@ const SearchElement = ({title, brandHandler, subHandler, locationHandler,
 
   const QuantityArray = (origin,set) => {
     origin.map(element => {
-      set(element.quantity);
+      set((prev) => prev.concat(element.quantity));
     })
   }
 
   return (
-    <div>
-      {mainType.map((element) => (
-        <div key={element.name}>
-          <input type='checkbox' disabled={!mainName.includes(element.name)} onChange={()=> mainHandler(element.name)}/>
-          {element.description}
-        </div>
-      ))}
+    <div style={{
+      boxShadow: '0 0 16px rgb(109 109 109 / 25%)',
+    }}>
+      <div style={{
+        fontSize: '25px',
+        padding: '5px',
+        paddingBottom: '-5px'
+      }}>
+        Категории
+        <Hr/>
+      </div>
+      <CheckboxFilter array={mainType} nameArray={mainName} handler={mainHandler}/>
       <Hr/>
-      {subType.map((element) => (
-        <div key={element.name}>
-          <input type='checkbox' disabled={!subName.includes(element.name)} onChange={()=> subHandler(element.name)}/>
-          {element.description}
-        </div>
-      ))}
+      <CheckboxFilter array={subType} nameArray={subName} handler={subHandler}/>
       <Hr/>
-      {brandType.map((element) => (
-        <div key={element.name}>
-          <input type='checkbox' disabled={!brandName.includes(element.name)} onChange={()=> brandHandler(element.name)}/>
-          {element.description} 
-        </div>
-      ))}      
+      <CheckboxFilter array={brandType} nameArray={brandName} handler={brandHandler}/>
       <Hr/>
-      {location.map((element) => (
-        <div key={element.name}>
-          <input type='checkbox' disabled={!locationName.includes(element.name)} onChange={()=> locationHandler(element.name)}/>
-          {element.description} 
-        </div>
-      ))} 
-
+      <CheckboxFilter array={location} nameArray={locationName} handler={locationHandler}/>
     </div>
   )
 }
