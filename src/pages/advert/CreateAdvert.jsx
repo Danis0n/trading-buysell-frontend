@@ -42,7 +42,7 @@ const CreateAdvert = ({isAuth}) => {
 
   const {store} = useAuth();
 
-  const deleteHandler = (image, index) =>  {
+  const imageDeleteHandler = (image, index) =>  {
     setSelectedImages(selectedImages.filter((e) => e !== image));
     URL.revokeObjectURL(image);
   }
@@ -101,7 +101,7 @@ const CreateAdvert = ({isAuth}) => {
 
   const inputCheck = () => {
 
-    if(title !== '' && description !== '' && ( !isNaN(price)) && location !== '' && titleType !== 'none') {
+    if(title !== '' && description !== '' && ( !isNaN(price)) && location !== '' && titleType !== '') {
       if(location.length < 100 && description.length < 5000 && title.length < 50 && 
          price >= 50 && price <= 10000000 &&
          selectedImages.length <= 10 && selectedImages.length >= 1){
@@ -174,7 +174,7 @@ const CreateAdvert = ({isAuth}) => {
       marginRight: 'auto',
      }}
     >
-    <div style={{maxWidth: '1000px'}}>
+    <div style={{maxWidth: '1000px', height: "1000px"}}>
       <div className={cl.titleWord}>
         Опубликовать объявление
         <Hr/>
@@ -185,7 +185,6 @@ const CreateAdvert = ({isAuth}) => {
         display: 'table',
         boxShadow: '0 0 15px 4px rgba(0,0,0,0.05)'
       }}>
-
         <div style={{display: 'flex', gap: "3rem"}}>
           <SmartInput
             styleInput={style}
@@ -313,7 +312,7 @@ const CreateAdvert = ({isAuth}) => {
           {selectedImages && selectedImages.map((image,index) => {
             return (
               <div key={index} className={cl.imagePreviewArea}>
-                <button className={cl.previewButton} onClick={() => deleteHandler(image,index)}>Удалить</button>
+                <button className={cl.previewButton} onClick={() => imageDeleteHandler(image,index)}>Удалить</button>
                 <Image src={image.url} height='100' alt='img'/>
               </div>
             )

@@ -8,12 +8,13 @@ import Image from '../../components/ui/img/Image';
 import Button from '../../components/ui/button/Button';
 import Hr from '../../components/ui/hr/Hr';
 import Textarea from '../../components/ui/textarea/Textarea';
-import Input from '../../components/ui/input/Input';
+import SmartInput from './SmartInput';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../components/hook/useAuth';
 import Confirm from '../../components/ui/confirm/Confirm';
 import Modal from '../../components/ui/modal/Modal';
 import superImage from '../../utils/Image';
+import SmartSelect from './SmartSelect';
 
 
 const EditAdvert = () => {
@@ -27,11 +28,12 @@ const EditAdvert = () => {
   const [isAllowed, setIsAllowed] = useState(true);
   const [loading, setLoading] = useState();
 
+  const [DBLocations, setDBLocations] = useState([])
+
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
-  const [type, setType] = useState('');
 
   const navigate = useNavigate();
 
@@ -52,7 +54,7 @@ const EditAdvert = () => {
     selectedImages.map(file => {
       return formData.append('files',file.file);
     })
-    formData.append('type',type); 
+
     sendResponse(id, formData);
   }
 
@@ -68,10 +70,9 @@ const EditAdvert = () => {
 
   const setStates = (advert) => {
     setTitle(advert?.title);
-    setLocation(advert?.location);
+    setLocation(advert?.location?.name);
     setDescription(advert?.description);
     setPrice(advert?.price);
-    setType(advert?.type?.name);
 
     advert?.images.map(async (image) => {
       const file = await getFile(image);
@@ -90,7 +91,7 @@ const EditAdvert = () => {
     })
   }, [])
 
-  const deleteHandler = (image, index) =>  {
+  const imageDeleteHandler = (image, index) =>  {
     setSelectedImages(selectedImages.filter((e) => e !== image));
     URL.revokeObjectURL(image);
   }
@@ -112,15 +113,22 @@ const EditAdvert = () => {
   const handleCheck = async (userId) => {
     const id = store.user.id;
     const isAuth = store.isAuth;
-  
     if(isAuth && id === userId) {
-
-    } else {
+    } else 
       navigate('/');
-    }
   }
   
+  const getLocations = async () => {
+    try {
+      const response = await AdvertService.getLocations();
+      setDBLocations(response.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
+    getLocations();
     fetchAdvert(id).then(userId => {
       const timer = setTimeout(() => handleCheck(userId), 500);
       return () => clearTimeout(timer);
@@ -129,7 +137,7 @@ const EditAdvert = () => {
   
   const inputCheck = () => {
 
-    if( title !== '' && description !== '' && ( !isNaN(price)) && location !== '' && type !== 'none') {
+    if( title !== '' && description !== '' && ( !isNaN(price)) && location !== '') {
       if(location.length < 100 && description.length < 5000 && title.length < 50 && 
          price >= 50 && price <= 10000000 &&
          selectedImages.length <= 10 && selectedImages.length >= 1){
@@ -144,8 +152,13 @@ const EditAdvert = () => {
   
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
+  const style = {
+    width: '260px'
+  }
+
   return (
     <div style={{
+      minHeight: "1300px",
       width: '700px',
       display: 'table',
       marginLeft: 'auto',
@@ -157,64 +170,59 @@ const EditAdvert = () => {
         <Hr/>
       </div>
 
-      <div className={cl.advertWrapper}>
-
-        <div className={cl.itemTitle}>
-          <div style={{display: 'flex'}}>
-            Название <div style={{color: 'gray', marginLeft: '10px'}}>(не более 50 символов)</div>
-          </div>
-        </div>
-        <div className={cl.itemField}>
-          <Input
-          style={{
-            textAlign: 'left'
-            }}
-          type="text"
-          onChange={e => setTitle(e.target.value)}
-          placeholder={title}
+      <div style={{
+        marginBottom: '200px',
+        padding: '30px 60px',
+        display: 'table',
+        boxShadow: '0 0 15px 4px rgba(0,0,0,0.05)'
+      }}>
+        <div style={{display: 'flex', gap: "3rem"}}>
+          <SmartInput
+            styleInput={style}
+            title={'Название *'}
+            inputType={'text'}
+            set={setTitle}
+            value={title}
+            placeholder={'не более 50 символов'}
           />
-        </div>
+      </div>
 
-        <div className={cl.itemTitle}>
-          <div style={{display: 'flex'}}>
-              Описание <div style={{color: 'gray', marginLeft: '10px'}}>(не более 5000 символов)</div>
+      <div style={{display: 'flex', gap: '5rem'}}>
+        <SmartInput
+          styleInput={style}
+          title={'Цена *'}
+          inputType={'number'}
+          set={setPrice}
+          value={price}
+          placeholder={'50 - 10.000.000'}
+        />
+        <div style={{display : 'flex', gap: '2rem'}}>
+          <div className={cl.itemTitle}>
+            Адрес *
           </div>
-        </div>
-        <div className={cl.itemField}>
-          <Textarea
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-            rows={5}
-            cols={50}
-            name='text'
+          <div className={cl.itemField}>
+            <SmartSelect
+              style={style}
+              value={location}
+              set={setLocation}
+              defaultValue={''}
+              array={DBLocations}
             />
-        </div>
-
-        <div className={cl.itemTitle}>
-          <div style={{display: 'flex'}}>
-                Цена <div style={{color: 'gray', marginLeft: '10px'}}>(50 - 10.000.000 руб.)</div>
           </div>
         </div>
-        <div className={cl.itemField}>
-          <Input 
-          type="text"
-          onChange={e => setPrice(e.target.value)}
-          placeholder={price}
-          />
-        </div>
+      </div>
 
-        <div className={cl.itemTitle}>
-          <div style={{display: 'flex'}}>
-              Адрес <div style={{color: 'gray', marginLeft: '10px'}}>(не более 100 символов)</div>
-          </div>
-        </div>
-        <div className={cl.itemField}>
-          <Input 
-          type="text"
-          onChange={e => setLocation(e.target.value)}
-          placeholder={location}
-          />
-        </div>
+      <div className={cl.itemTitle}>
+        Описание *
+      </div>
+      <Textarea
+        value={description}
+        onChange={e => setDescription(e.target.value)}
+        rows={10}
+        cols={80}
+        name='text'
+        placeholder='не более 5000 символов'
+      />
 
         {selectedImages.length < 10
         ?
@@ -223,10 +231,10 @@ const EditAdvert = () => {
             {
               isDragActive ?
                 <p>Перетащите файлы сюда ...</p> :
-                <p style={{textAlign: 'justify'}}>
+                <div style={{textAlign: 'justify'}}>
                   Нажмите или перетащите для загрузки изображений.
                   <div style={{color: 'gray'}}>(Не более 10 изображений.)</div>
-                </p>
+                </div>
             }
           </div>
         :
@@ -237,7 +245,7 @@ const EditAdvert = () => {
           {selectedImages && selectedImages.map((image,index) => {
             return (
               <div key={index} className={cl.imagePreviewArea}>
-                <button className={cl.previewButton} onClick={() => deleteHandler(image,index)}>Удалить</button>
+                <button className={cl.previewButton} onClick={() => imageDeleteHandler(image,index)}>Удалить</button>
                 <Image src={image.url} height='100' alt='img'/>
               </div>
             )
