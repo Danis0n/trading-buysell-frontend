@@ -28,6 +28,15 @@ const AdvertPage = () => {
     const [advert, setAdvert] = useState();
     const {id} = useParams();
 
+    const [brandTypes, setBrandTypes] = useState([])
+    const [subTypes, setSubTypes] = useState([])
+    const [mainTypes, setMainTypes] = useState([])
+    const [titleTypes, setTitleTypes] = useState([])
+
+    const [brand, setBrand] = useState('')
+    const [sub, setSub] = useState('')
+    const [main, setMain] = useState('')
+
     const [confirmModal, setConfirmModal] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
     const [advertsPerPage] = useState(3);
@@ -62,7 +71,6 @@ const AdvertPage = () => {
                 nav('/');
             }
             setAdvert(response.data);
-            console.log(response.data);
             if(response?.data){
                 fetchSecondData(response?.data);
             }
@@ -156,6 +164,8 @@ const AdvertPage = () => {
                     <div className={cl.itemPrice}>{advert?.price} рублей</div>
                     <Hr/>
                     <div>{advert?.location.description}</div>
+                </div>
+                <div className={cl.itemAdvertInfo}>
                 </div>
                 <div className={cl.itemUserInfo}>
                     <Image width='100' height='100' src={NoAvatar} alt="no-avatar" />

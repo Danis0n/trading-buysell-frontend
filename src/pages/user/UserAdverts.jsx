@@ -79,6 +79,7 @@ const UserAdverts = () => {
                     paginate={paginate}
                     style={{
                         marginLeft: 'auto',
+                        width: '1500px'
                     }}
                     isPageable
                     isAdmin
