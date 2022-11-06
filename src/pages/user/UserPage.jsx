@@ -58,8 +58,8 @@ const UserPage = () => {
     const fetchAdverts = async (id) => {
         setLoading(true);
         try {
-            const response = await AdvertService.getAllByUserId(id);
-            setAdverts(response.data);
+            const response = await AdvertService.getAllByUserIdUnPower(id);
+            setAdverts(response.data);  
         } catch (error) {
             console.log(error.message);            
         } finally{

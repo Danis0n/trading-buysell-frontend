@@ -22,20 +22,27 @@ const AdvertElement = ({advert, isAdmin}) => {
     setConfirmModal(false);
     try {
         const response = await AdvertService.delete(advert.id);
-        console.log(response);
     } catch (error) {
         console.log(error);  
     }
   }
 
-  const element = {
-    width: '254px',
-    textAlign: 'center',
-    position: 'relative',
-    display: 'inline-block',
-    paddingTop: '10px',
-    boxShadow: '0 0 16px rgb(109 109 109 / 25%)',
-    margin: '20px',
+  const handleHideById = async (id, userId) => {
+    setConfirmModal(false);
+    try {
+      const response = await AdvertService.hideById(id,userId);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleUnHideById = async (id,userId) => {
+    setConfirmModal(false);
+    try {
+      const response = await AdvertService.unHideById(id,userId);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleMouseEnter = () => {
@@ -48,6 +55,16 @@ const AdvertElement = ({advert, isAdmin}) => {
 
   const elementStyle = {
     backgroundColor: isHover? '#FFF1C9' : 'white',
+  }
+
+  const element = {
+    width: '270px',
+    textAlign: 'center',
+    position: 'relative',
+    display: 'inline-block',
+    paddingTop: '10px',
+    boxShadow: '0 0 16px rgb(109 109 109 / 25%)',
+    margin: '20px',
   }
 
   return (
@@ -87,33 +104,77 @@ const AdvertElement = ({advert, isAdmin}) => {
           {advert.price} 
         </div>
       </div>
-
+      
       <div>
         {isAdmin
         ?
-        <div style={{margin: '20px'}}>
-          <Button
-           onClick={() => setConfirmModal(true)}
-           style={{
-            backgroundColor: 'white',
-            color: 'black'
-           }}
-          >
-            Удалить
-          </Button>
+        <div>
+          {advert?.isHiddenByAdmin 
+          ?
+          <div style={{
+            marginTop: "25px",
+            marginBottom: "25px",
+            color: 'gray',
+          }}>
+            Скрыто Администрацией
+          </div>
+          :
+          <div style={{margin: '20px', display: 'flex', gap: "0.5rem"}}>
+            <Button
+            onClick={() => setConfirmModal(true)}
+            style={{
+              backgroundColor: 'white',
+              color: 'black'
+            }}
+            >
+              Удалить
+            </Button>
+            <Modal
+              visible={confirmModal}
+              setVisible={setConfirmModal}
+            >
+              <Confirm
+                handleCancel={() => setConfirmModal(false)}
+                handleItem={handleDelete}
+                message='Вы точно хотите удалить объявление?'
+                link={`/user/${advert?.userId}/adverts`}
+                />
+            </Modal>
 
-          <Modal
-            visible={confirmModal}
-            setVisible={setConfirmModal}
-          >
-            <Confirm
-              handleCancel={() => setConfirmModal(false)}
-              handleItem={handleDelete}
-              message='Вы точно хотите удалить объявление?'
-              link={`/user/${advert?.userId}/adverts`}
-              />
-          </Modal>
-
+            <Button
+            onClick={() => setConfirmModal(true)}
+            style={{
+              backgroundColor: 'white',
+              color: 'black'
+            }}
+            >
+              {advert?.isHidden ?
+              <div>Раскрыть</div>
+              :
+              <div>Скрыть</div>
+              }
+            </Button>
+            <Modal
+              visible={confirmModal}
+              setVisible={setConfirmModal}
+            >
+              <Confirm
+                handleCancel={() => setConfirmModal(false)}
+                handleItem={
+                  advert?.isHidden ?
+                  () => handleUnHideById(advert?.id, advert?.userId) 
+                  :
+                  () => handleHideById(advert?.id, advert?.userId)
+                }
+                message={
+                  advert?.isHidden ? 
+                  'Вы точно хотите раскрыть объявление?' : 'Вы точно хотите скрыть объявление?'
+                }
+                link={`/user/${advert?.userId}/adverts`}
+                />
+            </Modal>
+          </div>
+          }
         </div>
         :
         <></>

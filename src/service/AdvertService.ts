@@ -13,6 +13,10 @@ export default class AdvertService {
     static async getAllByUserId(id: string) : Promise<AxiosResponse<Advert[]>> {
         return axios.get(`${API_URL}/api/advert/get/user/${id}`);
     }
+    
+    static async getAllByUserIdUnPower(id: string) : Promise<AxiosResponse<Advert[]>> {
+        return axios.get(`${API_URL}/api/advert/get/user/${id}/unpower`);
+    }
 
     static async getId(id: string) : Promise<AxiosResponse<AdvertResponse>> {
         return axios.get(`${API_URL}/api/advert/get/${id}`);
@@ -73,5 +77,25 @@ export default class AdvertService {
     static async getSubTypeByTitleType(id: string) : Promise<void> {
         return axios.get(`${API_URL}/api/advert/get/type/sub/title/${id}`);
     }
+
+    static async hideById(id: string, userId: string) : Promise<void> {
+        return $api.post(`${API_URL}/api/advert/hide/advert/${id}/user/${userId}`)
+    }
+
+    static async unHideById(id: string, userId: string) : Promise<void> {
+        return $api.post(`${API_URL}/api/advert/unhide/advert/${id}/user/${userId}`)
+    }
+
+    static async hideAll(userId: string) : Promise<void> {
+        return $api.post(`${API_URL}/api/advert/hide/advert/user/${userId}`)
+    }
+
+    static async unHideAll(userId: string) : Promise<void> {
+        return $api.post(`${API_URL}/api/advert/unhide/advert/user/${userId}`)
+    }
+
+
+
+
 
 }

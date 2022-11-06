@@ -174,7 +174,7 @@ const CreateAdvert = ({isAuth}) => {
       marginRight: 'auto',
      }}
     >
-    <div style={{maxWidth: '1000px', height: "1000px"}}>
+    <div style={{maxWidth: '1000px', minHeight: "1000px"}}>
       <div className={cl.titleWord}>
         Опубликовать объявление
         <Hr/>

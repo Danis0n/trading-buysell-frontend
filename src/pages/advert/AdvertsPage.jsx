@@ -235,7 +235,7 @@ const AdvertsPage = () => {
                         <div className={cl.precisionSearchArea}>
                             <div style={{marginTop : '5px'}}> 
                             <Dropdown>
-                                <Dropdown.Toggle as={Button} variant="white" id="dropdown-basic">
+                                <Dropdown.Toggle variant="white" id="dropdown-basic">
                                     Каталог 
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
@@ -264,7 +264,7 @@ const AdvertsPage = () => {
                             }}>
                             <Input
                              style={{
-                                width: '450px',
+                                width: '500px',
                                 paddingLeft: '20px'
                             }}
                              value={title}
@@ -273,7 +273,7 @@ const AdvertsPage = () => {
                             />
                             </div>
                             
-                            <div style={{display: 'flex', gap: '1rem', marginTop: '5px'}}>
+                            <div style={{display: 'flex', gap: '2rem', marginTop: '5px'}}>
                                 <div>
                                     <Button
                                     onClick={handleDefault}
@@ -305,7 +305,7 @@ const AdvertsPage = () => {
                             paginate={paginate}
                             style={{
                                 marginLeft: 'auto',
-                                maxWidth: '900px',
+                                maxWidth: '1000px',
                             }}
                             isPageable
                         />

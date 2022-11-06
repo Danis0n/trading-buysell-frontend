@@ -18,7 +18,7 @@ const UserAdverts = () => {
     const [loading, setLoading] = useState(false);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [advertsPerPage] = useState(10);
+    const [advertsPerPage] = useState(12);
 
     const indexOfLastAdvert = currentPage * advertsPerPage;
     const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
