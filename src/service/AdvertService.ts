@@ -18,11 +18,11 @@ export default class AdvertService {
         return axios.get(`${API_URL}/api/advert/get/${id}`);
     }
 
-    static async getParams(data : SearchRequest) : Promise<AxiosResponse<Advert[]>> {
+    static async getByParams(data : SearchRequest) : Promise<AxiosResponse<Advert[]>> {
         return axios.post(`${API_URL}/api/advert/get/params`, data);
     }
 
-    static async getAvailables(data: Type) : Promise<void> {
+    static async getAvailablesBrand(data: Type) : Promise<void> {
         return axios.post(`${API_URL}/api/advert/get/available/brand`, data);
     }
 
@@ -50,10 +50,6 @@ export default class AdvertService {
         return axios.get(`${API_URL}/api/advert/get/examples`);
     }
 
-    static async getType(type: string) : Promise<AxiosResponse<Advert[]>> {
-        return axios.get(`${API_URL}/api/advert/get/type/${type}`)
-    }
-
     static async create(data: FormData) : Promise<void> {
         return $api.post(`${API_URL}/api/advert/create`, data);
     }
@@ -77,4 +73,5 @@ export default class AdvertService {
     static async getSubTypeByTitleType(id: string) : Promise<void> {
         return axios.get(`${API_URL}/api/advert/get/type/sub/title/${id}`);
     }
+
 }

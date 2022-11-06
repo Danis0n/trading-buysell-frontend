@@ -30,7 +30,7 @@ const CheckboxFilter = ({array, nameArray, handler}) => {
            onMouseLeave={handleLeave}
            style={{
             marginRight: '10px',
-            cursor: isEnter ? 'pointer' : 'none',
+            cursor: isEnter ? 'pointer' : '',
             borderRadius: '20px',
            }}
            type='checkbox' 

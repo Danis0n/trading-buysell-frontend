@@ -58,7 +58,7 @@ const AdvertsPage = () => {
 
     const fetchAvailableBrand = async (data) => {
         try {
-          const response = await AdvertService.getAvailables(data);
+          const response = await AdvertService.getAvailablesBrand(data);
           setBrandAvailables(response.data)
         } catch (error) {
           console.log(error);
@@ -94,7 +94,7 @@ const AdvertsPage = () => {
 
     const fetchDataByParams = async (data) => {
         try {
-            const response = await AdvertService.getParams(data);
+            const response = await AdvertService.getByParams(data);
             setAdverts(response.data);
         } catch (error) {
             console.log(error);

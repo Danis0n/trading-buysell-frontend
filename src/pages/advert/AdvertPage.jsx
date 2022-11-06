@@ -89,9 +89,8 @@ const AdvertPage = () => {
     }
 
     const getSimilar = async (data) => {
-        console.log(data);
         try {
-            const response = await AdvertService.getParams(data);
+            const response = await AdvertService.getByParams(data);
             setSimilar(response.data);
         } catch (error) {
             console.log(error);
@@ -117,7 +116,6 @@ const AdvertPage = () => {
     useEffect(() =>  {
         fetchData();
     }, [])
-
 
     return (
         <div style={{
