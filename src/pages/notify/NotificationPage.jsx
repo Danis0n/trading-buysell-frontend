@@ -13,7 +13,12 @@ const NotificationPage = () => {
     const [notifications, setNotifications] = useState([])
 
     const fetchNotifications = async (id) => {
-        console.log(id);
+        try {
+            const response = await NotifyService.getAllByUserId(id);
+            setNotifications(response.data)
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const handleCheck = () => {
@@ -22,9 +27,9 @@ const NotificationPage = () => {
     }
     
     useEffect(() =>{
-        const timer = setTimeout(() => handleCheck(), 50);
+        const timer = setTimeout(() => handleCheck(), 30);
         return () => clearTimeout(timer);
-    })
+    },[])
     
     return (
         <div style={{
@@ -40,7 +45,9 @@ const NotificationPage = () => {
             <Hr/>
 
             <div>
-
+                {notifications.map((element) => {
+                    return <NotificationElement key={element.id} element={element}/>
+                })}
             </div>
         </div>
     )

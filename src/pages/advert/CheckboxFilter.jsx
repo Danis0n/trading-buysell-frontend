@@ -17,10 +17,6 @@ const CheckboxFilter = ({array, nameArray, handler}) => {
     <div style={{
         padding: '10px 20px',
         margin: '20px 10px',
-        // marginLeft: '10px',
-        // marginRight: '10px',
-        // marginTop: '20px',
-        // marginBottom: '20px',
         boxShadow: '0 0 15px 4px rgba(0,0,0,0.05)',
         borderRadius: '10px'
     }}>

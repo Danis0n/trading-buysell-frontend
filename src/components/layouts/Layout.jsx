@@ -25,7 +25,7 @@ const Layout = ({isAuth}) => {
   
   const getNotifications = async (id) => {
     try {
-      const response = await NotifyService.getUnviewed(id);
+      const response = await NotifyService.getAllUnviewed(id);
       setUnViewed(response.data);
     } catch (error) {
       console.log(error);
