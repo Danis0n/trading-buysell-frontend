@@ -12,7 +12,8 @@ import menu from '../../../images/icons/menu.png'
 import Image from '../img/Image'
 import user from '../../../images/icons/user.png'
 
-const Navbar = ({isAuth}) => {
+
+const Navbar = ({isAuth, isAdmin}) => {
 
     const {store} = useAuth();
     const [userId, setUserId] = useState(store?.user?.id)
@@ -122,6 +123,13 @@ const Navbar = ({isAuth}) => {
                         <Dropdown.Item href={`/user/${userId}/adverts`}>
                             Ваши объявления
                         </Dropdown.Item>
+                        {isAdmin ?
+                        <Dropdown.Item href={`/admin`}>
+                        Админ панель
+                        </Dropdown.Item>
+                        :
+                        <></>
+                        }
                         <Dropdown.Item href={`/user/${userId}/settings`}>
                             Настройки
                         </Dropdown.Item>

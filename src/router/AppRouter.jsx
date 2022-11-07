@@ -1,4 +1,4 @@
-import {Routes, Route, Router , useLocation} from "react-router-dom";
+import {Routes, Route , useLocation} from "react-router-dom";
 import { useAuth } from '../components/hook/useAuth';
 import Layout from '../components/layouts/Layout';
 import HomePage from '../pages/HomePage';
@@ -14,6 +14,22 @@ import {AnimatePresence} from 'framer-motion'
 import UserSettings from "../pages/user/UserSettings";
 import ForbiddenPage from "../pages/ForbiddenPage";
 import UserAdverts from "../pages/user/UserAdverts";
+import AdminPanel from "../pages/admin/AdminPanel";
+import { Navigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { toJS } from "mobx";
+
+const ProtectedRoute = ({
+    isAllowed,
+    redirectPath = '/*',
+    children
+}) => {
+    console.log(isAllowed);
+    if (!isAllowed)
+      return <Navigate to={redirectPath} replace />;
+    return children ? children : <Outlet />;
+};
 
 const AppRouter = () => {
     const {store} = useAuth()
@@ -23,10 +39,11 @@ const AppRouter = () => {
         return <div>Loading</div>
     }
 
+
     return (
         <AnimatePresence>
         <Routes location={location} key={location.pathname}>
-            <Route path='/' element={<Layout isAuth={store.isAuth}/>}>
+            <Route path='/' element={<Layout isAuth={store.isAuth} />}>
                 <Route index element={<HomePage/>}/>
                 <Route path='*' element={<NotFoundPage/>}/>
                 <Route path='forbidden' element={<ForbiddenPage/>}/>
@@ -39,6 +56,7 @@ const AppRouter = () => {
                 <Route path='user/:id/adverts' element={<UserAdverts/>}/>
                 <Route path='user/:id/settings' element={<UserSettings/>}/>
                 <Route path='about' element={<AboutPage/>}/>
+                <Route path='admin' element={<AdminPanel/>}/>
             </Route>
         </Routes>
     </AnimatePresence>

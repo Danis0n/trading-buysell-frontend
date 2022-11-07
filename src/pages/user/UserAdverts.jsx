@@ -35,8 +35,6 @@ const UserAdverts = () => {
             setAdverts(response.data);
         } catch (error) {
             console.log(error.message);            
-        } finally{
-
         }
     }
 
@@ -48,10 +46,9 @@ const UserAdverts = () => {
       }
 
     useEffect(() => {
-        const timer = setTimeout(() => handleCheck(), 500);
+        const timer = setTimeout(() => handleCheck(), 100);
         fetchAdverts(id)
         return () => clearTimeout(timer);
-
     }, [])
 
   return (

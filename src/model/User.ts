@@ -4,6 +4,11 @@ export interface User{
     enabled: boolean;
     locked: boolean;
     info : Info;
+    roles: Role[];
+}
+
+export interface Role {
+    name: string;
 }
 
 export interface Info {

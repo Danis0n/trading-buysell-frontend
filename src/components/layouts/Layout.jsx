@@ -5,6 +5,8 @@ import { useAuth } from '../hook/useAuth'
 import Navbar from '../ui/navbar/Navbar'
 import {motion} from 'framer-motion';
 import { variants } from '../../router/props'
+import { toJS } from 'mobx'
+import { isAdmin } from '../../utils/AdminUtil'
 
 const Layout = ({isAuth}) => {
 
@@ -12,7 +14,13 @@ const Layout = ({isAuth}) => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+
+
   }, []);
+
+  const isUserAdmin = () => {
+    return store.isAuth && isAdmin(toJS(store?.user?.roles));
+  }
   
   if (store.isLoading) {
     return <div>Loading</div>
@@ -20,7 +28,7 @@ const Layout = ({isAuth}) => {
 
   return (
     <>
-    <Navbar isAuth={isAuth}/>
+    <Navbar isAuth={isAuth} isAdmin={isUserAdmin()}/>
       <motion.div
         initial="hidden"
         animate="enter"

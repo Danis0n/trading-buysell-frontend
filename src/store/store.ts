@@ -28,7 +28,6 @@ export default class Store {
         return this.isAuth
     }
 
-    // todo : fix it bug
     async login(username: string, password: string){
         this.setLoading(true);
         try {
