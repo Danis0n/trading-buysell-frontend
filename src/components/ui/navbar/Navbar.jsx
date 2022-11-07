@@ -120,24 +120,24 @@ const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
                             Профиль
                         </Dropdown.Item>
                         <Dropdown.Item href={`/user/${userId}/adverts`}>
-                            Ваши объявления
+                            Объявления
                         </Dropdown.Item>
                         {isAdmin ?
                         <Dropdown.Item href={`/admin`}>
-                        Админ панель
+                            Админ панель
                         </Dropdown.Item>
                         :
                         <></>
                         }
                         <Dropdown.Item href={`/notifications`}>
-                        {hasNewNotifications > 0 ?
-                        <div style={{display: "flex", gap: '0.5rem'}}>
-                        <div>Уведомления: </div> 
-                        <div style={{color: 'red'}}>Новые: {hasNewNotifications}</div>
-                        </div>
-                        :
-                        <div>Уведомления</div>
-                        }   
+                            {hasNewNotifications > 0 ?
+                            <div style={{display: "flex", gap: '0.5rem'}}>
+                            <div>Уведомления: </div> 
+                            <div style={{color: 'red'}}>Новые: {hasNewNotifications}</div>
+                            </div>
+                            :
+                            <div>Уведомления</div>
+                            }   
                         </Dropdown.Item>
                         <Dropdown.Item href={`/user/${userId}/settings`}>
                             Настройки

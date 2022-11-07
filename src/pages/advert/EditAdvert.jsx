@@ -207,6 +207,7 @@ const EditAdvert = () => {
               set={setLocation}
               defaultValue={''}
               array={DBLocations}
+              defaultName={'Выберете адрес'}
             />
           </div>
         </div>

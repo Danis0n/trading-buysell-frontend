@@ -203,6 +203,7 @@ const CreateAdvert = ({isAuth}) => {
             value={titleType}
             set={setTitleType}
             defaultValue={''}
+            defaultName={'Выберете категорию'}
             array={[
               {name: 'auto', description : 'Авто'},
               {name: 'tech', description : 'Электроника'},
@@ -228,6 +229,7 @@ const CreateAdvert = ({isAuth}) => {
             set={setMain}
             defaultValue={''}
             array={mainTypes}
+            defaultName={'Выберете категорию'}
             />
           <SmartSelect
             style={style}
@@ -235,6 +237,7 @@ const CreateAdvert = ({isAuth}) => {
             set={setSub}
             defaultValue={''}
             array={subTypes}
+            defaultName={'Выберете категорию'}
           />
           <SmartSelect
             style={style}
@@ -242,6 +245,7 @@ const CreateAdvert = ({isAuth}) => {
             set={setBrand}
             defaultValue={''}
             array={brandTypes}
+            defaultName={'Выберете категорию'}
           />
         </div>
         <Hr/>
@@ -271,6 +275,7 @@ const CreateAdvert = ({isAuth}) => {
               set={setLocation}
               defaultValue={''}
               array={DBLocations}
+              defaultName={'Выберете адрес'}
             />
           </div>
         </div>

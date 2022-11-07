@@ -39,15 +39,22 @@ const NotificationPage = () => {
             marginLeft: 'auto',
             marginRight: 'auto',
         }}>
-            <div style={{fontSize: '30px'}}>
+            <div style={{fontSize: '40px'}}>
                 Уведомления
             </div>
             <Hr/>
 
             <div>
-                {notifications.map((element) => {
-                    return <NotificationElement key={element.id} element={element}/>
-                })}
+                {notifications.length > 0 ?
+                    notifications.map((element) => {
+                        return <NotificationElement key={element.id} element={element}/>
+                    })
+                :
+                    <div style={{
+                        marginTop: '100px',
+                        fontSize: '40px',
+                    }}>Упс... Тут ничего нет.</div>
+                }
             </div>
         </div>
     )
