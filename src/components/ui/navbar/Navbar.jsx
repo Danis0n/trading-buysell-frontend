@@ -11,9 +11,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import menu from '../../../images/icons/menu.png'
 import Image from '../img/Image'
 import user from '../../../images/icons/user.png'
+import NotifyService from '../../../service/NotifyService'
 
 
-const Navbar = ({isAuth, isAdmin}) => {
+const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
 
     const {store} = useAuth();
     const [userId, setUserId] = useState(store?.user?.id)
@@ -130,6 +131,16 @@ const Navbar = ({isAuth, isAdmin}) => {
                         :
                         <></>
                         }
+                        <Dropdown.Item href={`/notifications`}>
+                        {hasNewNotifications > 0 ?
+                        <div style={{display: "flex", gap: '0.5rem'}}>
+                        <div>Уведомления: </div> 
+                        <div style={{color: 'red'}}>Новые: {hasNewNotifications}</div>
+                        </div>
+                        :
+                        <div>Уведомления</div>
+                        }   
+                        </Dropdown.Item>
                         <Dropdown.Item href={`/user/${userId}/settings`}>
                             Настройки
                         </Dropdown.Item>

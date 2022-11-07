@@ -56,7 +56,7 @@ const UserAdverts = () => {
 
         <div style={pageTitleText}>
             Ваши объявления
-            </div>
+        </div>
         <Hr/>
 
         <div>

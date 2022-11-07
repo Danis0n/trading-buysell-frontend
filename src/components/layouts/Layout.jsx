@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Outlet } from 'react-router-dom'
 import Footer from '../ui/footer/Footer'
 import { useAuth } from '../hook/useAuth'
@@ -7,16 +7,30 @@ import {motion} from 'framer-motion';
 import { variants } from '../../router/props'
 import { toJS } from 'mobx'
 import { isAdmin } from '../../utils/AdminUtil'
+import NotifyService from '../../service/NotifyService'
 
 const Layout = ({isAuth}) => {
 
   const {store} = useAuth();
+  const [unViewed, setUnViewed] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0)
-
-
   }, []);
+
+  useEffect(() => {
+    if(store?.user?.id)
+      getNotifications(store?.user?.id);
+  }, [])
+  
+  const getNotifications = async (id) => {
+    try {
+      const response = await NotifyService.getUnviewed(id);
+      setUnViewed(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const isUserAdmin = () => {
     return store.isAuth && isAdmin(toJS(store?.user?.roles));
@@ -28,7 +42,7 @@ const Layout = ({isAuth}) => {
 
   return (
     <>
-    <Navbar isAuth={isAuth} isAdmin={isUserAdmin()}/>
+    <Navbar isAuth={isAuth} isAdmin={isUserAdmin()} hasNewNotifications={unViewed}/>
       <motion.div
         initial="hidden"
         animate="enter"

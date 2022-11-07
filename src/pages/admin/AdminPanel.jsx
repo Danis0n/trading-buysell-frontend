@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../components/hook/useAuth';
 import { toJS } from 'mobx';
 import { isAdmin } from '../../utils/AdminUtil';
+import Hr from '../../components/ui/hr/Hr';
 
 const AdminPanel = () => {
 
   const nav = useNavigate();
   const {store} = useAuth();
+
+  const [users, setUsers] = useState([]);
 
   const isUserAdmin = () => {
     return store.isAuth && isAdmin(toJS(store?.user?.roles));
@@ -22,16 +25,28 @@ const AdminPanel = () => {
     return () => clearTimeout(timer);
   })
 
+  
+
   return (
     <div style={{
-      height: '800px',
+      minHeight: '600px',
       marginTop: '20px',
       display: 'table',
       marginLeft: 'auto',
       marginRight: 'auto',
-  }}>
-    AdminPanel
-  </div>
+    }}>
+
+
+      <div style={{fontSize: '30px'}}>
+        Панель администрирования
+      </div>
+      <Hr/>
+
+      <div>
+
+      </div>
+
+    </div>
   )
 }
 

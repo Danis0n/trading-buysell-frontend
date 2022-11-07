@@ -19,6 +19,7 @@ import { Navigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toJS } from "mobx";
+import NotificationPage from "../pages/notify/NotificationPage";
 
 const ProtectedRoute = ({
     isAllowed,
@@ -57,6 +58,7 @@ const AppRouter = () => {
                 <Route path='user/:id/settings' element={<UserSettings/>}/>
                 <Route path='about' element={<AboutPage/>}/>
                 <Route path='admin' element={<AdminPanel/>}/>
+                <Route path='notifications' element={<NotificationPage/>}/>
             </Route>
         </Routes>
     </AnimatePresence>
