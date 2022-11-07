@@ -11,8 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import menu from '../../../images/icons/menu.png'
 import Image from '../img/Image'
 import user from '../../../images/icons/user.png'
-import NotifyService from '../../../service/NotifyService'
-
 
 const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
 

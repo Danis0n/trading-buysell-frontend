@@ -114,7 +114,9 @@ const SearchElement = ({title, brandHandler, subHandler, locationHandler,
 
   return (
     <div style={{
-      boxShadow: '0 0 16px rgb(109 109 109 / 25%)',
+      marginTop: '25px',
+      // boxShadow: '0 0 16px rgb(109 109 109 / 25%)',
+      paddingBottom: '30px',  
     }}>
       <div style={{
         fontSize: '25px',
@@ -125,11 +127,11 @@ const SearchElement = ({title, brandHandler, subHandler, locationHandler,
         <Hr/>
       </div>
       <CheckboxFilter array={mainType} nameArray={mainName} handler={mainHandler}/>
-      <Hr/>
+      {/* <Hr/> */}
       <CheckboxFilter array={subType} nameArray={subName} handler={subHandler}/>
-      <Hr/>
+      {/* <Hr/> */}
       <CheckboxFilter array={brandType} nameArray={brandName} handler={brandHandler}/>
-      <Hr/>
+      {/* <Hr/> */}
       <CheckboxFilter array={location} nameArray={locationName} handler={locationHandler}/>
     </div>
   )
