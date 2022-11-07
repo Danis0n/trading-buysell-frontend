@@ -34,7 +34,8 @@ const LoginForm = ({handleLogin}) => {
   }
 
   const style = {
-    width: '250px'
+    width: '250px',
+    margin: '20px',
   }
 
   return (

@@ -14,7 +14,8 @@ const AboutPage = () => {
   }
 
   const style = {
-    width: '95%'
+    width: '80%',
+    margin : '20px'
   }
 
   const titleWord = {
@@ -27,8 +28,10 @@ const AboutPage = () => {
 
   const feedBackInputs = {
     width : '200px',
-    marginLeft: '10px',
-    marginRight: '10px',
+    // marginLeft: '10px',
+    // marginRight: '10px',
+    margin: '30px',
+    marginBottom: '20px'
   }
 
   return (

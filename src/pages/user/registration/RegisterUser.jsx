@@ -41,12 +41,10 @@ const RegisterUser = () => {
     if(store.isLoading){
       return <div>Loading</div>
     }
-    // check on backend mobile phone (only digits/check if already exists)
-    // TODO : implement all checks (double password(~), mobile phone
-    //  (only digits) in special util class)
 
     const style = {
-      width: '350px'
+      width: '350px',
+      margin: '20px'
     }
 
   return (

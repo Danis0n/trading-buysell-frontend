@@ -192,15 +192,10 @@ const UserPage = () => {
                     </div>
 
                     <div>
-                        {store?.isAuth ?
+                        {store?.isAuth && store?.user?.id != id ?
                             <CreateComment id={id} myId={store?.user?.id}/>
                         :
-                            <div style={{
-                                margin: '40px',
-                                fontSize: '25px'
-                            }}>
-                                Авторизируйтесь, чтобы оставить комментарий
-                            </div>
+                        <></>
                         }
                     </div>
                     <div>
