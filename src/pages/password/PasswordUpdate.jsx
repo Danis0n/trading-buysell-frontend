@@ -13,6 +13,7 @@ const PasswordUpdate = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [token, setToken] = useState(searchParams.get('token'))
 
+    const [passwordEquals, setPasswordEquals] = useState()
     const [isSuccess, setIsSuccess] = useState('');
 
     const [password, setPassword] = useState('');
@@ -28,7 +29,8 @@ const PasswordUpdate = () => {
     }
 
     const handlePasswords = (password, passwordRepeat) => {
-        return password.length >= 8 && password == passwordRepeat;
+        setPasswordEquals(password === passwordRepeat)
+        return password.length >= 8 && password === passwordRepeat;
     } 
 
     const handleSubmit = (password, passwordRepeat) => {
@@ -77,6 +79,16 @@ const PasswordUpdate = () => {
                         marginBottom: '20px'
                     }}
                 />
+
+                {passwordEquals ?
+                <></>
+                :
+                <div style={{
+                    color: 'red',
+                    marginBottom: '20px' 
+                }}>Пароли не совпадают!</div>
+                }
+
                 <Button onClick={() => handleSubmit(password, passwordRepeat)} >Подтвердить</Button> 
             </div>
         </div>

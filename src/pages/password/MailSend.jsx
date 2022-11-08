@@ -6,21 +6,21 @@ const MailSend = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-  return (
-    <div style={{
-        height: '575px',
-        display: 'table',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-    }}>
+    return (
         <div style={{
-            paddingTop: '200px',
-            fontSize: '30px'
+            height: '575px',
+            display: 'table',
+            marginLeft: 'auto',
+            marginRight: 'auto',
         }}>
-        Письмо было отправлено на почтовый ящик {searchParams.get('email')}
+            <div style={{
+                paddingTop: '200px',
+                fontSize: '30px'
+            }}>
+            Письмо было отправлено на почтовый ящик {searchParams.get('email')}
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default MailSend

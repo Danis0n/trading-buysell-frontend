@@ -21,7 +21,6 @@ const PasswordRestore = () => {
         try {
             const response = await PasswordService.isEmailValid(email);
             setIsEmailValid(response.data);
-            console.log(response.data);
         } catch (error) {
             console.log(error);
         }
@@ -31,7 +30,6 @@ const PasswordRestore = () => {
         try {
             const response = await PasswordService.restorePassword(email,username);
             setIsRestored(response.data)
-            console.log(response.data);
         } catch (error) {
             console.log(error);
         }
