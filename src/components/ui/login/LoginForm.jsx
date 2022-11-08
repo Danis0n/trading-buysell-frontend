@@ -71,7 +71,9 @@ const LoginForm = ({handleLogin}) => {
       <div className={cl.registerForm}>
         Нет аккаунта? <Link to='/register' onClick={handleLogin}>Регистрация</Link> 
       </div>
-
+      <div className={cl.registerForm}>
+        <Link to='/restore'>Забыли пароль?</Link>
+      </div>
       {!isAllowed
       ?
       <div style={errorMsg}>

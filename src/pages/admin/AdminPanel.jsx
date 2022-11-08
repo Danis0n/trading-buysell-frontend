@@ -25,8 +25,6 @@ const AdminPanel = () => {
     return () => clearTimeout(timer);
   })
 
-  
-
   return (
     <div style={{
       minHeight: '600px',

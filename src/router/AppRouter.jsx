@@ -20,6 +20,11 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toJS } from "mobx";
 import NotificationPage from "../pages/notify/NotificationPage";
+import PasswordRestore from "../pages/password/PasswordRestore";
+import PasswordUpdate from "../pages/password/PasswordUpdate";
+import BadToken from "../pages/password/BadToken";
+import MailSend from "../pages/password/MailSend";
+import PasswordUpdateSuccess from "../pages/password/PasswordUpdateSuccess";
 
 const ProtectedRoute = ({
     isAllowed,
@@ -59,6 +64,11 @@ const AppRouter = () => {
                 <Route path='about' element={<AboutPage/>}/>
                 <Route path='admin' element={<AdminPanel/>}/>
                 <Route path='notifications' element={<NotificationPage/>}/>
+                <Route path='restore' element={<PasswordRestore/>}/>
+                <Route path='restore/success' element={<MailSend/>}/>
+                <Route path='password/update' element={<PasswordUpdate/>}/>
+                <Route path='password/update/success' element={<PasswordUpdateSuccess/>}/>
+                <Route path='password/restore/badtoken' element={<BadToken/>}/>
             </Route>
         </Routes>
     </AnimatePresence>
