@@ -4,10 +4,8 @@ export const API_URL = `http://localhost:8080`
 export const API_EMAIL_NOT_VALID = `email is not valid`
 export const API_USERNAME_NOT_VALID = `username is not valid`
 
-// TODO : на бэке глянуть, если фрештокен умер
-
 const $api = axios.create({
-    withCredentials: true, // С каждым запросом идут куки
+    withCredentials: true,
     baseURL: API_URL
 })
 

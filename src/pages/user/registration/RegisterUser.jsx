@@ -33,9 +33,20 @@ const RegisterUser = () => {
         }
     }
 
+    const checkParams = () => {
+      if(name.length >= 5 &&
+          username.length >= 8 &&
+          password.length >= 8 &&
+          password === confirmPassword &&
+          email.length >= 11
+        ) return true;
+      return false;
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        register(name, username, password, email, phone);
+        if(checkParams())
+          register(name, username, password, email, phone);
     }
 
     if(store.isLoading){
@@ -103,7 +114,7 @@ const RegisterUser = () => {
 
         <Input
           style={style}
-          type='text'
+          type='number'
           value={phone}
           placeholder='Мобильный телефон'
           onChange={e => setPhone(e.target.value)}

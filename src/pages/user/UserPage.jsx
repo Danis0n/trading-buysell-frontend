@@ -194,7 +194,7 @@ const UserPage = () => {
                     <div>
                         {store?.isAuth && store?.user?.id != id ?
                             <CreateComment id={id} myId={store?.user?.id}/>
-                        :
+                        :   
                         <></>
                         }
                     </div>
