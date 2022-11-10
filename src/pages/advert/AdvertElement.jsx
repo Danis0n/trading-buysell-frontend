@@ -10,7 +10,7 @@ import Modal from '../../components/ui/modal/Modal'
 import Button from '../../components/ui/button/Button'
 
 
-const AdvertElement = ({advert, isAdmin}) => {
+const AdvertElement = ({advert, isCreator}) => {
 
   const [isHover, setIsHover] = useState(false);
   const linkToAdvert = `/adverts/${advert.id}`
@@ -106,7 +106,7 @@ const AdvertElement = ({advert, isAdmin}) => {
       </div>
       
       <div>
-        {isAdmin
+        {isCreator
         ?
         <div>
           {advert?.isHiddenByAdmin 

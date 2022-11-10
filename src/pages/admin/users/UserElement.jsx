@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
-import AdminService from '../../service/AdminService'
-import Button from '../../components/ui/button/Button'
-import Modal from '../../components/ui/modal/Modal'
+import AdminService from '../../../service/AdminService'
+import Button from '../../../components/ui/button/Button'
+import Modal from '../../../components/ui/modal/Modal'
 import NotifyUser from './NotifyUser'
+import CustomLink from '../../../components/ui/link/CustomLink'
 
 const UserElement = ({user, meId}) => {
 
@@ -60,7 +61,9 @@ const UserElement = ({user, meId}) => {
         gap: '1.5rem',
       }}>
         <div style={{marginLeft: 'auto'}}>
+          <CustomLink to={`/user/${user.id}`}>
           | Логин: {user.username} |
+          </CustomLink>
         </div>
         <div style={{display: 'flex', gap: '0.5rem', marginLeft: 'auto'}}>
           | Состояние: {user.locked ? <p> Заблокирован </p> : <p> Не заблокирован </p>} |
@@ -103,6 +106,9 @@ const UserElement = ({user, meId}) => {
           }
         </div>
       </div>
+      <CustomLink to={`/admin/user/adverts?user=${user.id}`}>
+        Открыть объявления пользователя
+      </CustomLink>
     </div>
   )
 }

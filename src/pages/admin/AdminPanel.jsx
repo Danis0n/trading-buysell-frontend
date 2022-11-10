@@ -5,8 +5,8 @@ import { toJS } from 'mobx';
 import { isAdmin } from '../../utils/AdminUtil';
 import Hr from '../../components/ui/hr/Hr';
 import UserService from '../../service/UserService';
-import UserElement from './UserElement';
-import AdminPanelUsers from './AdminPanelUsers';
+import UserElement from './users/UserElement';
+import AdminPanelUsers from './users/AdminPanelUsers';
 
 const AdminPanel = () => {
 

@@ -79,7 +79,7 @@ const UserAdverts = () => {
                         width: '1500px'
                     }}
                     isPageable
-                    isAdmin
+                    isCreator
                 />              
                 :
                 <div style={pageTitleText}>

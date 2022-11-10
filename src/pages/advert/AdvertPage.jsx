@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom'
 import { isAdmin } from '../../utils/AdminUtil'
 import { toJS } from 'mobx'
 import AdminService from '../../service/AdminService'
-import NotifyUser from '../admin/NotifyUser'
+import NotifyUser from '../admin/users/NotifyUser'
 import { act } from '@testing-library/react'
 
 const AdvertPage = () => {

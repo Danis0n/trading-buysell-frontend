@@ -25,6 +25,7 @@ import PasswordUpdate from "../pages/password/PasswordUpdate";
 import BadToken from "../pages/password/BadToken";
 import MailSend from "../pages/password/MailSend";
 import PasswordUpdateSuccess from "../pages/password/PasswordUpdateSuccess";
+import UserAdvetsAdmin from "../pages/admin/users/UserAdvetsAdmin";
 
 const ProtectedRoute = ({
     isAllowed,
@@ -63,6 +64,7 @@ const AppRouter = () => {
                 <Route path='user/:id/settings' element={<UserSettings/>}/>
                 <Route path='about' element={<AboutPage/>}/>
                 <Route path='admin' element={<AdminPanel/>}/>
+                <Route path='admin/user/adverts' element={<UserAdvetsAdmin/>}/>
                 <Route path='notifications' element={<NotificationPage/>}/>
                 <Route path='restore' element={<PasswordRestore/>}/>
                 <Route path='restore/success' element={<MailSend/>}/>

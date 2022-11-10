@@ -1,6 +1,6 @@
 import React from 'react'
-import Button from '../../components/ui/button/Button'
-import Textarea from '../../components/ui/textarea/Textarea'
+import Button from '../../../components/ui/button/Button'
+import Textarea from '../../../components/ui/textarea/Textarea'
 
 const NotifyUser = ({message, setMessage, handleSubmit, handleCancel, text}) => {
   return (
