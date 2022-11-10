@@ -18,6 +18,11 @@ import SearchedAdverts from './SearchedAdverts'
 import Confirm from '../../components/ui/confirm/Confirm'
 import Modal from '../../components/ui/modal/Modal'
 import { useNavigate } from 'react-router-dom'
+import { isAdmin } from '../../utils/AdminUtil'
+import { toJS } from 'mobx'
+import AdminService from '../../service/AdminService'
+import NotifyUser from '../admin/NotifyUser'
+import { act } from '@testing-library/react'
 
 const AdvertPage = () => {
 
@@ -27,19 +32,20 @@ const AdvertPage = () => {
     const [user,setUser] = useState();
     const [advert, setAdvert] = useState();
     const {id} = useParams();
+    
+    const isUserAdmin = () => {
+        return store.isAuth && isAdmin(toJS(store?.user?.roles));
+    }
 
-    const [brandTypes, setBrandTypes] = useState([])
-    const [subTypes, setSubTypes] = useState([])
-    const [mainTypes, setMainTypes] = useState([])
-    const [titleTypes, setTitleTypes] = useState([])
-
-    const [brand, setBrand] = useState('')
-    const [sub, setSub] = useState('')
-    const [main, setMain] = useState('')
+    const [admin, setAdmin] = useState(isUserAdmin());
+    const [modalAdmin, setModalAdmin] = useState(false);
+    const [modalHideAdmin, setModalHideAdmin] = useState(false);
+    const [message, setMessage] = useState('');
 
     const [confirmModal, setConfirmModal] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
     const [advertsPerPage] = useState(3);
+
 
     const indexOfLastAdvert = currentPage * advertsPerPage;
     const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
@@ -53,7 +59,7 @@ const AdvertPage = () => {
     const deleteAdvert = async () => {
         handleDelete();
     }
-
+    
     async function handleDelete() {
         setConfirmModal(false);
         try {
@@ -121,6 +127,56 @@ const AdvertPage = () => {
         })
     }
 
+    const getMessageJson = () => {
+        return JSON.stringify({
+            message: message
+        })
+    }
+
+    const powerDelete = async (id, message) => {
+        try {
+            const response = await AdminService.powerDeleteById(id, message);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleCancelAdmin = () => {
+        setModalAdmin(false);
+        setMessage('')
+    }
+
+    const handleSubmitDeleteAdmin = (id, message, action) => {
+        setModalAdmin(false);
+        window.location.reload();
+        action(id, getMessageJson(message));
+    }
+
+    const handleSubmitHideAdmin = (id, userId, message, action) => {
+        setModalHideAdmin(false);
+        window.location.reload();
+        action(id, userId, getMessageJson(message));
+    }
+    
+    const powerHideById = async (id, userId, message) => {
+        console.log(message);
+        try {
+            const response = await AdminService.powerHideById(id, userId, message);
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const powerUnHideById = async (id, userId ,message) => {
+        try {
+            const response = await AdminService.powerUnHideById(id, userId, message);
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() =>  {
         fetchData();
     }, [])
@@ -166,6 +222,61 @@ const AdvertPage = () => {
                     <div>{advert?.location.description}</div>
                 </div>
                 <div className={cl.itemAdvertInfo}>
+                    {admin?
+                    <div>
+                        <div style={{
+                            marginBottom: '20px',
+                        }}>
+                            <Button
+                             style={{color: 'black', backgroundColor: 'white'}}
+                             onClick={
+                                () => setModalHideAdmin(true)}
+                            >
+                            {advert?.isHiddenByAdmin ?
+                            <div>Разграничить доступ</div>
+                            :
+                            <div>Ограничить доступ</div>
+                            }  
+                            </Button>
+
+                            <Modal
+                                visible={modalHideAdmin}
+                                setVisible={setModalHideAdmin}
+                            >
+                            <NotifyUser
+                             handleCancel={() => handleCancelAdmin()}
+                             handleSubmit={() => handleSubmitHideAdmin(id, advert?.userId,
+                                getMessageJson(), advert?.isHiddenByAdmin ? powerUnHideById : powerHideById)
+                             }
+                             text={'Админ панель: Укажите причину действия'}
+                             message={message}
+                             setMessage={setMessage}
+                            />
+                            </Modal>
+
+                        </div>
+                        <div>
+                            <Button onClick={() => setModalAdmin(true)}>
+                            Удалить
+                            </Button>
+
+                            <Modal
+                                visible={modalAdmin}
+                                setVisible={setModalAdmin}
+                            >
+                            <NotifyUser
+                             handleCancel={() => handleCancelAdmin()}
+                             handleSubmit={() => handleSubmitDeleteAdmin(id, getMessageJson(),powerDelete)}
+                             text={'Админ панель: Укажите причину удаления'}
+                             message={message}
+                             setMessage={setMessage}
+                            />
+                            </Modal>
+                        </div>
+                    </div>
+                    :
+                    <></>
+                    }
                 </div>
                 <div className={cl.itemUserInfo}>
                     <Image width='100' height='100' src={NoAvatar} alt="no-avatar" />
@@ -197,10 +308,10 @@ const AdvertPage = () => {
                     >
                       <Confirm
                         handleCancel={() => setConfirmModal(false)}
-                        handleItem={deleteAdvert}
+                        handleItem={handleDelete}
                         message='Вы точно хотите удалить объявление?'
                         link={'/'}
-                        />
+                      />
                     </Modal>
                 </div>
                 :
