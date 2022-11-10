@@ -4,26 +4,57 @@ import { useAuth } from '../../components/hook/useAuth';
 import { toJS } from 'mobx';
 import { isAdmin } from '../../utils/AdminUtil';
 import Hr from '../../components/ui/hr/Hr';
+import UserService from '../../service/UserService';
+import UserElement from './UserElement';
+import AdminPanelUsers from './AdminPanelUsers';
 
 const AdminPanel = () => {
 
   const nav = useNavigate();
   const {store} = useAuth();
 
+  const [isUsers, setIsUsers] = useState(true);
   const [users, setUsers] = useState([]);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await UserService.fetchUsers();
+      setUsers(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const isUserAdmin = () => {
     return store.isAuth && isAdmin(toJS(store?.user?.roles));
   }
 
   const handleCheck = () => {
-    if(!isUserAdmin()) nav('/'); 
+    if(!isUserAdmin()) 
+      nav('/'); 
+    else
+      fetchUsers();
+  }
+
+  const handlePage = (e, bool) => {
+    e.preventDefault();
+    setIsUsers(bool);
   }
 
   useEffect(() =>{
     const timer = setTimeout(() => handleCheck(), 50);
     return () => clearTimeout(timer);
   })
+
+  const linkStyle = {
+    boxShadow: '0 0 15px 4px rgba(0,0,0,0.05)',
+    padding: '10px 300px',
+    borderRadius: "10px"
+  }
+
+  const style = {
+    marginLeft: 'auto', marginRight: 'auto',
+  }
 
   return (
     <div style={{
@@ -34,15 +65,27 @@ const AdminPanel = () => {
       marginRight: 'auto',
     }}>
 
-
-      <div style={{fontSize: '30px'}}>
+      <div style={{fontSize: '30px', marginBottom: '50px'}}>
         Панель администрирования
+        <Hr/>
       </div>
-      <Hr/>
 
+      <div style={{
+        display: 'flex', gap: '1rem',
+        marginLeft: 'auto', marginRight: 'auto'
+      }}>
+        <div style={style}><a style={linkStyle} onClick={(e) => handlePage(e,true)} href='!#'>Пользователи</a></div>
+        <div style={style}><a style={linkStyle} onClick={(e) => handlePage(e,false)} href='!#'>Типы</a></div>
+      </div>
+
+      {isUsers ?
       <div>
-
+        <AdminPanelUsers users={users} meId={store?.user?.id}/>
       </div>
+      :
+      <></>
+      }
+
 
     </div>
   )

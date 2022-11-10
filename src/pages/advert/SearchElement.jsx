@@ -115,7 +115,6 @@ const SearchElement = ({title, brandHandler, subHandler, locationHandler,
   return (
     <div style={{
       marginTop: '25px',
-      // boxShadow: '0 0 16px rgb(109 109 109 / 25%)',
       paddingBottom: '30px',  
     }}>
       <div style={{

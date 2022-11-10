@@ -24,4 +24,12 @@ export default class AdminService {
         return $api.post(`${API_URL}/api/admin/advert/delete/${advertId}`, message)
     }
 
+    static async banUser(id: string, message: Message) : Promise<void> {
+        return $api.post(`${API_URL}/api/admin/users/ban/${id}`,message);    
+    }
+
+    static async unBanUser(id: string, message: Message) : Promise<void> {
+        return $api.post(`${API_URL}/api/admin/users/unban/${id}`,message);    
+    }
+
 }
