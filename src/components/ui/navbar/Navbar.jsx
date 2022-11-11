@@ -36,7 +36,9 @@ const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
     }
 
     const handleSubmit = (e) => {
-        nav('/adverts/create');
+        if(!isAuth) setLoginModal(true);
+        else 
+            nav('/adverts/create');
     }
 
     const navbar = {
@@ -49,7 +51,7 @@ const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
     }
 
     const linksArea = {
-        width: '65%',
+        width: '70%',
         margin: '0 auto',
         textAlign : 'center',
         display : 'flex',
@@ -63,7 +65,7 @@ const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
 
     const buttons = {
         display: 'flex',
-        margin: '25px 10px',
+        margin: '25px 20px',
     }
 
   return (
@@ -94,7 +96,6 @@ const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
             </div>
             
             <div style={{display: 'inline-block'}}>
-
             {isAuth
             ?
             <div >
@@ -109,10 +110,17 @@ const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
                     />
                 </Modal>
 
-                <div style={{margin: '-5px'}}>
+                <div style={{margin: '-5px', display: 'flex', gap: '1rem'}}>
                 <Dropdown>
                     <Dropdown.Toggle variant="white" id="dropdown-basic">
-                        <Image src={menu}/>
+                        <div style={{display: 'flex', gap: '1rem'}}>
+                        {hasNewNotifications ?
+                        <div style={{color: 'red'}}>{hasNewNotifications}</div>
+                        :
+                        <></>
+                        }
+                        <Image src={menu}/> 
+                        </div>
                     </Dropdown.Toggle>
                 
                     <Dropdown.Menu>
@@ -170,7 +178,6 @@ const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
                 </div>
             }
             </div>
-
         </div>
       </div>
     </div>

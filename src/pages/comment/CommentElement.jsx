@@ -82,7 +82,7 @@ const CommentElement = ({comment, userId}) => {
              {comment.description}
             </div>
             <div>
-                {(userId == comment.createdBy || userId == comment.to)
+                {(userId == comment.createdBy)
                 ?
                 <div
                  style={{

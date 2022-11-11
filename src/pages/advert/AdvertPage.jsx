@@ -14,7 +14,7 @@ import Hr from '../../components/ui/hr/Hr'
 import map from '../../utils/ImageUtil'
 import Dot from '../../components/ui/dot/Dot'
 import ImageSlider from '../../components/ui/slider/Slider'
-import SearchedAdverts from './SearchedAdverts'
+import SearchedAdverts from './search/SearchedAdverts'
 import Confirm from '../../components/ui/confirm/Confirm'
 import Modal from '../../components/ui/modal/Modal'
 import { useNavigate } from 'react-router-dom'
@@ -22,7 +22,6 @@ import { isAdmin } from '../../utils/AdminUtil'
 import { toJS } from 'mobx'
 import AdminService from '../../service/AdminService'
 import NotifyUser from '../admin/users/NotifyUser'
-import { act } from '@testing-library/react'
 
 const AdvertPage = () => {
 
@@ -46,7 +45,6 @@ const AdvertPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [advertsPerPage] = useState(3);
 
-
     const indexOfLastAdvert = currentPage * advertsPerPage;
     const indexOfFirstAdvert = indexOfLastAdvert - advertsPerPage;
     const currentAdverts = similar.slice(indexOfFirstAdvert, indexOfLastAdvert);
@@ -54,10 +52,6 @@ const AdvertPage = () => {
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
         return pageNumber;
-    }
-
-    const deleteAdvert = async () => {
-        handleDelete();
     }
     
     async function handleDelete() {
@@ -143,6 +137,7 @@ const AdvertPage = () => {
 
     const handleCancelAdmin = () => {
         setModalAdmin(false);
+        setModalHideAdmin(false);
         setMessage('')
     }
 
@@ -180,6 +175,10 @@ const AdvertPage = () => {
     useEffect(() =>  {
         fetchData();
     }, [])
+
+    const deleteA = (advert) => {
+        setSimilar(similar.filter((e) => e !== advert));
+    }
 
     return (
         <div style={{
@@ -221,8 +220,8 @@ const AdvertPage = () => {
                     <Hr/>
                     <div>{advert?.location.description}</div>
                 </div>
+                {admin?
                 <div className={cl.itemAdvertInfo}>
-                    {admin?
                     <div>
                         <div style={{
                             marginBottom: '20px',
@@ -274,10 +273,10 @@ const AdvertPage = () => {
                             </Modal>
                         </div>
                     </div>
-                    :
-                    <></>
-                    }
                 </div>
+                :
+                <></>
+                }
                 <div className={cl.itemUserInfo}>
                     <Image width='100' height='100' src={NoAvatar} alt="no-avatar" />
                     <div className={cl.itemName}>{user?.info?.name}</div>
@@ -316,35 +315,44 @@ const AdvertPage = () => {
                 </div>
                 :
                 <></>}
-
             </div>
         </div>
 
         <div>
-            <div style={{
-                marginBottom: '40px',
-            }}>
+            {similar.length <= 1 
+            ?
+            <></>
+            :
+            <div>
                 <div style={{
-                    fontSize: '36px',
-                }}>Похожие объявления</div>
-                <Hr/>
-                <div style={{
-                    color: '#959494',
-                }}>Посмотрите некоторые из лучших предложений</div>
-            </div>
+                    marginBottom: '40px',
+                }}>
+                    <div style={{
+                        fontSize: '36px',
+                    }}>Похожие объявления</div>
+                    <Hr/>
+                    <div style={{
+                        color: '#959494',
+                    }}>Посмотрите некоторые из лучших предложений</div>
+                </div>
 
-            <SearchedAdverts
-                currentAdverts={currentAdverts}
-                advertsPerPage={advertsPerPage}
-                adverts={similar}
-                paginate={paginate}
-                style={{
-                margin: 'auto',
-                maxWidth: '1000px',
-                }}
-                isPageable
-            />
+                <SearchedAdverts
+                    currentAdverts={currentAdverts}
+                    advertsPerPage={advertsPerPage}
+                    adverts={similar}
+                    paginate={paginate}
+                    style={{
+                        margin: 'auto',
+                        maxWidth: '1000px',
+                    }}
+                    isPageable
+                    refusedAdvert={advert}
+                />
+            </div>
+            }
         </div>
+
+
         </div>
     )
 }

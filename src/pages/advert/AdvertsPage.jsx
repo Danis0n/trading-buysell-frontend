@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react'
 import AdvertService from '../../service/AdvertService';
 import cl from '../../styles/advert/AdvertsPage.module.css'
 import Hr from '../../components/ui/hr/Hr';
-import SearchedAdverts from './SearchedAdverts';
+import SearchedAdverts from './search/SearchedAdverts';
 import Coffe from '../../images/icons/coffe.jpg';
 import Dropdown from 'react-bootstrap/esm/Dropdown'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SearchElement from './SearchElement';
+import SearchElement from './search/SearchElement';
 import Input from '../../components/ui/input/Input';
 import Button from '../../components/ui/button/Button';
 

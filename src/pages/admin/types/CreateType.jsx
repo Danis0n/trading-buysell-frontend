@@ -3,7 +3,7 @@ import Input from '../../../components/ui/input/Input'
 import Button from '../../../components/ui/button/Button'
 import AdminService from '../../../service/AdminService'
 import Hr from '../../../components/ui/hr/Hr'
-import SmartSelect from '../../advert/SmartSelect'
+import SmartSelect from '../../../components/SmartSelect'
 
 const CreateType = ({setModal, titleType}) => {
     

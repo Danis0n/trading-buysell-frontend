@@ -9,7 +9,7 @@ import NoAvatar from '../../images/no-avatar.png'
 import Phone from '../../images/icons/phone.svg'
 import Calendar from '../../images/icons/calendar.svg'
 import Image from '../../components/ui/img/Image';
-import SearchedAdverts from '../advert/SearchedAdverts';
+import SearchedAdverts from '../advert/search/SearchedAdverts';
 import Hr from '../../components/ui/hr/Hr';
 import { useNavigate } from 'react-router-dom';
 
@@ -199,7 +199,7 @@ const UserPage = () => {
                         }
                     </div>
                     <div>
-                        <Comments id={id} userId={store?.user?.id} />
+                        <Comments id={id} userId={store?.user?.id}/>
                     </div>
                 </div>
             </div>

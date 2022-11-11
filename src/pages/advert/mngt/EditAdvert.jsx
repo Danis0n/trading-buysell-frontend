@@ -1,20 +1,20 @@
 import React, {useState, useCallback, useEffect} from 'react'
-import AdvertService from '../../service/AdvertService';
+import AdvertService from '../../../service/AdvertService';
 import { useDropzone } from 'react-dropzone';
 import { useParams } from 'react-router-dom';
-import { getFile } from '../../utils/FileUtil';
-import cl from '../../styles/advert/CreateAdvert.module.css'
-import Image from '../../components/ui/img/Image';
-import Button from '../../components/ui/button/Button';
-import Hr from '../../components/ui/hr/Hr';
-import Textarea from '../../components/ui/textarea/Textarea';
-import SmartInput from './SmartInput';
+import { getFile } from '../../../utils/FileUtil';
+import cl from '../../../styles/advert/CreateAdvert.module.css'
+import Image from '../../../components/ui/img/Image';
+import Button from '../../../components/ui/button/Button';
+import Hr from '../../../components/ui/hr/Hr';
+import Textarea from '../../../components/ui/textarea/Textarea';
+import SmartInput from '../../../components/SmartInput';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../components/hook/useAuth';
-import Confirm from '../../components/ui/confirm/Confirm';
-import Modal from '../../components/ui/modal/Modal';
-import superImage from '../../utils/Image';
-import SmartSelect from './SmartSelect';
+import { useAuth } from '../../../components/hook/useAuth';
+import Confirm from '../../../components/ui/confirm/Confirm';
+import Modal from '../../../components/ui/modal/Modal';
+import superImage from '../../../utils/Image';
+import SmartSelect from '../../../components/SmartSelect';
 
 
 const EditAdvert = () => {

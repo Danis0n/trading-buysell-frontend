@@ -1,5 +1,5 @@
 import React from 'react'
-import Select from '../../components/ui/select/Select';
+import Select from './ui/select/Select';
 
 const SmartSelect = ({array, style, value, defaultValue, set, defaultName}) => {
   return (

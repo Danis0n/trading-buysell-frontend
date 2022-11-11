@@ -1,5 +1,5 @@
 import React from 'react'
-import Input from '../../components/ui/input/Input'
+import Input from './ui/input/Input'
 
 const SmartInput = ({title, styleInput, set, value, placeholder, inputType}) => {
 

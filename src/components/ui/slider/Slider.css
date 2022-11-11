@@ -78,8 +78,10 @@
   border: 3px solid #f1f1f1;
   margin: 0 5px;
   background: #f1f1f1;
+  opacity: 20%;
 }
 .dot:hover{
+  opacity: 70%;
   cursor: pointer;
 }
 .dot.active {

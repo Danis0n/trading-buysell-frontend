@@ -1,20 +1,18 @@
 import React, {useCallback, useState, useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
-import Image from '../../components/ui/img/Image';
-import Button from '../../components/ui/button/Button'
-import Input from '../../components/ui/input/Input';
-import Select from '../../components/ui/select/Select';
-import Textarea from '../../components/ui/textarea/Textarea';
-import AdvertService from '../../service/AdvertService';
-import cl from '../../styles/advert/CreateAdvert.module.css'
-import Hr from '../../components/ui/hr/Hr';
-import { useAuth } from '../../components/hook/useAuth';
-import LoginForm from '../../components/ui/login/LoginForm';
-import Modal from '../../components/ui/modal/Modal';
-import superImage from '../../utils/Image';
+import Image from '../../../components/ui/img/Image';
+import Button from '../../../components/ui/button/Button'
+import Textarea from '../../../components/ui/textarea/Textarea';
+import AdvertService from '../../../service/AdvertService';
+import cl from '../../../styles/advert/CreateAdvert.module.css'
+import Hr from '../../../components/ui/hr/Hr';
+import { useAuth } from '../../../components/hook/useAuth';
+import LoginForm from '../../../components/ui/login/LoginForm';
+import Modal from '../../../components/ui/modal/Modal';
+import superImage from '../../../utils/Image';
 import { useNavigate } from 'react-router-dom';
-import SmartInput from './SmartInput';
-import SmartSelect from './SmartSelect';
+import SmartInput from '../../../components/SmartInput';
+import SmartSelect from '../../../components/SmartSelect';
 
 
 const CreateAdvert = ({isAuth}) => {

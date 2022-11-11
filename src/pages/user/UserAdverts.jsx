@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { useAuth } from '../../components/hook/useAuth'
 import AdvertService from '../../service/AdvertService'
-import SearchedAdverts from '../advert/SearchedAdverts'
+import SearchedAdverts from '../advert/search/SearchedAdverts'
 
 const UserAdverts = () => {
 

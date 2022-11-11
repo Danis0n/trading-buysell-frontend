@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
-import Input from '../../components/ui/input/Input'
+import Input from './ui/input/Input'
 
 const CheckboxFilter = ({array, nameArray, handler}) => {
 
   const [isEnter, setIsEnter] = useState(false);
+
+  const [state, setstate] = useState(false);
 
   const handleEnter = () => {
     setIsEnter(true);
@@ -35,8 +37,8 @@ const CheckboxFilter = ({array, nameArray, handler}) => {
             cursor: isEnter ? 'pointer' : '',
             borderRadius: '20px',
            }}
-           type='checkbox' 
-           disabled={!nameArray.includes(element.name)} 
+           type='checkbox'
+           disabled={nameArray.length == 1 ? true : (!nameArray.includes(element.name))} 
            onChange={()=> handler(element.name)}
           />
           <div>

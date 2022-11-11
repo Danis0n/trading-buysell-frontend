@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import Hr from '../../components/ui/hr/Hr';
-import AdvertService from '../../service/AdvertService';
-import CheckboxFilter from './CheckboxFilter';
+import Hr from '../../../components/ui/hr/Hr';
+import AdvertService from '../../../service/AdvertService';
+import CheckboxFilter from '../../../components/CheckboxFilter';
 
 const SearchElement = ({title, brandHandler, subHandler, locationHandler,
    mainHandler, brandAvailables, subAvailables, mainAvailables, locationAvailables}) => {
