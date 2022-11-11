@@ -253,15 +253,20 @@ const CreateAdvert = ({isAuth}) => {
       }
       </div>
 
-      <div style={{display: 'flex', gap: '5rem'}}>
+      <div style={{display: 'flex', gap: '3rem'}}>
+        <div style={{display: 'flex', gap: '1.5rem'}}>
+        <div className={cl.itemTitle}>
+            Цена *
+        </div>
         <SmartInput
           styleInput={style}
-          title={'Цена *'}
+          title={''}
           inputType={'number'}
           set={setPrice}
           value={price}
           placeholder={'50 - 10.000.000'}
-        />
+          />
+        </div>
         <div style={{display : 'flex', gap: '4rem'}}>
           <div className={cl.itemTitle}>
             Адрес *

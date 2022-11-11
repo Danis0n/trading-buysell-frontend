@@ -176,7 +176,7 @@ const EditAdvert = () => {
         display: 'table',
         boxShadow: '0 0 15px 4px rgba(0,0,0,0.05)'
       }}>
-        <div style={{display: 'flex', gap: "3rem"}}>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
           <SmartInput
             styleInput={style}
             title={'Название *'}
