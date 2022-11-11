@@ -12,3 +12,9 @@ export interface Type {
     brandType: string[];
     location: string[];
 }
+
+export interface TypeRequest {
+    type: string;
+    name: string;
+    description: string;
+}

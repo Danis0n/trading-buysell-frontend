@@ -5,8 +5,8 @@ import { toJS } from 'mobx';
 import { isAdmin } from '../../utils/AdminUtil';
 import Hr from '../../components/ui/hr/Hr';
 import UserService from '../../service/UserService';
-import UserElement from './users/UserElement';
 import AdminPanelUsers from './users/AdminPanelUsers';
+import Types from './types/Types';
 
 const AdminPanel = () => {
 
@@ -83,7 +83,7 @@ const AdminPanel = () => {
         <AdminPanelUsers users={users} meId={store?.user?.id}/>
       </div>
       :
-      <></>
+      <Types/>
       }
 
 

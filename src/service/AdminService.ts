@@ -1,5 +1,6 @@
 import $api, {API_URL} from "../components/http"
 import Message from "../model/Message"
+import { TypeRequest } from "../model/SearchRequest"
 
 
 export default class AdminService {
@@ -30,6 +31,10 @@ export default class AdminService {
 
     static async unBanUser(id: string, message: Message) : Promise<void> {
         return $api.post(`${API_URL}/api/admin/users/unban/${id}`,message);    
+    }
+
+    static async addNewType(id: string, request: TypeRequest) : Promise<void> {
+        return $api.post(`${API_URL}/api/admin/types/add/${id}`,request)
     }
 
 }
