@@ -176,10 +176,6 @@ const AdvertPage = () => {
         fetchData();
     }, [])
 
-    const deleteA = (advert) => {
-        setSimilar(similar.filter((e) => e !== advert));
-    }
-
     return (
         <div style={{
             display: 'table',
@@ -292,8 +288,14 @@ const AdvertPage = () => {
 
                 {advert?.userId === store.user.id
                 ?
-                <div className={cl.itemControl}>
-                    <div style={{display: 'inline-block'}}>
+                <div style={{
+                    width: '70%',
+                    margin: '0 auto',
+                    textAlign : 'center',
+                    display : 'flex',
+                    justifyContent : 'space-between',
+                }}>
+                    <div style={{marginTop: '5px'}}>
                       <CustomLink to='edit'>Изменить</CustomLink>
                     </div>
                     

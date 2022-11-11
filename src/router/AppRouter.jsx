@@ -55,9 +55,9 @@ const AppRouter = () => {
                 <Route path='*' element={<NotFoundPage/>}/>
                 <Route path='forbidden' element={<ForbiddenPage/>}/>
                 <Route path='adverts' element={<AdvertsPage/>}/>
-                <Route path='adverts/:id' element={<AdvertPage/>}/>
-                <Route path='adverts/:id/edit' element={<EditAdvert/>}/>
-                <Route path='adverts/create' element={<CreateAdvert/>}/>
+                <Route path='advert/:id' element={<AdvertPage/>}/>
+                <Route path='advert/:id/edit' element={<EditAdvert/>}/>
+                <Route path='advert/create' element={<CreateAdvert/>}/>
                 <Route path='register' element={<RegisterUser/>}/>
                 <Route path='user/:id' element={<UserPage/>}/>
                 <Route path='user/:id/adverts' element={<UserAdverts/>}/>

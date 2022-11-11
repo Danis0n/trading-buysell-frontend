@@ -87,7 +87,7 @@ const AdvertAdminElement = ({advert}) => {
             gap: '1.5rem',
         }}>
             <div style={{marginLeft: 'auto'}}>
-            <CustomLink to={`/adverts/${advert.id}`}>
+            <CustomLink to={`/advert/${advert.id}`}>
             | Название: {advert.title} |
             </CustomLink>
             </div>

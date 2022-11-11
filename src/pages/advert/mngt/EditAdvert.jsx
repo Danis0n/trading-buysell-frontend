@@ -64,7 +64,7 @@ const EditAdvert = () => {
 
     if(inputCheck()){
       sendDataRequest()
-      navigate(`/adverts/${id}`);
+      navigate(`/advert/${id}`);
     }
   }
 

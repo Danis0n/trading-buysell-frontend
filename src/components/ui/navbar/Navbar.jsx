@@ -38,7 +38,7 @@ const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
     const handleSubmit = (e) => {
         if(!isAuth) setLoginModal(true);
         else 
-            nav('/adverts/create');
+            nav('/advert/create');
     }
 
     const navbar = {

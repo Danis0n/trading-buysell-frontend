@@ -35,16 +35,17 @@ const AdminPanel = () => {
     else
       fetchUsers();
   }
+  
+  useEffect(() =>{
+    const timer = setTimeout(() => handleCheck(), 50);
+    return () => clearTimeout(timer);
+  })
 
   const handlePage = (e, bool) => {
     e.preventDefault();
     setIsUsers(bool);
   }
 
-  useEffect(() =>{
-    const timer = setTimeout(() => handleCheck(), 50);
-    return () => clearTimeout(timer);
-  })
 
   const linkStyle = {
     boxShadow: '0 0 15px 4px rgba(0,0,0,0.05)',

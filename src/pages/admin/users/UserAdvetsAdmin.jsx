@@ -2,9 +2,16 @@ import React, {useState, useEffect} from 'react'
 import { useSearchParams } from 'react-router-dom'
 import AdvertService from '../../../service/AdvertService';
 import AdvertAdminElement from './AdvertAdminElement';
+import { useAuth } from '../../../components/hook/useAuth';
+import { isAdmin } from '../../../utils/AdminUtil';
+import { toJS } from 'mobx';
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const UserAdvetsAdmin = () => {
 
+  const nav = useNavigate();
+  const {store} = useAuth();
   const [id,setId] = useSearchParams();
   const [userId, setUserId] = useState(id.get('user'));
   const [adverts, setAdverts] = useState([])
@@ -18,9 +25,23 @@ const UserAdvetsAdmin = () => {
     }
   }
 
-  useEffect(() => {
+  const isUserAdmin = () => {
+    return store.isAuth && isAdmin(toJS(store?.user?.roles));
+  }
+
+  const handleCheck = () => {
+    if(!isUserAdmin()) 
+      nav('/'); 
+  }
+  
+  useEffect(() =>{
+    const timer = setTimeout(() => handleCheck(), 50);
     fetchAdverts(userId)
-  }, [])
+    return () => clearTimeout(timer);
+  })
+
+  // useEffect(() => {
+  // }, [])
   
   return (
     <div style={{

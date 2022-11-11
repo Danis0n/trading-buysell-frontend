@@ -28,17 +28,19 @@ export default class Store {
         return this.isAuth
     }
 
-    async login(username: string, password: string){
-        this.setLoading(true);
+    async login(username: string, password: string) : Promise <any>{
+        // this.setLoading(true);
         try {
             const response = await AuthService.login(username,password);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user)
+            return response;
         } catch (error) {
             console.log(error);
+            return error
         } finally{
-            this.setLoading(false);
+            this.setLoading(false)
         }
     }
     

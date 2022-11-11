@@ -13,7 +13,7 @@ import Button from '../../components/ui/button/Button'
 const AdvertElement = ({advert, isCreator}) => {
 
   const [isHover, setIsHover] = useState(false);
-  const linkToAdvert = `/adverts/${advert.id}`
+  const linkToAdvert = `/advert/${advert.id}`
 
   const [confirmModal, setConfirmModal] = useState(false)
 

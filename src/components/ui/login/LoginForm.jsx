@@ -10,24 +10,37 @@ import Hr from '../hr/Hr';
 
 const LoginForm = ({handleLogin}) => {
 
+  const {store} = useAuth();
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [isAllowed, setIsAllowed] = useState(true)
-  const {store} = useAuth();
 
   const login = () => {
 
+    let log;
+
     if(username == '' || password == ''){
-      setIsAllowed(false);
+      log = false
     }
-    else{
-      store.login(username,password);
+    else {
+      log = true;
     }
 
+    if(log) {
+      const response = store.login(username,password).then(function(result){
+        if(!!result.name) 
+          setIsAllowed(false)   
+        else {
+          setIsAllowed(true);
+          window.location.reload();
+        }
+      })
+    }
   }
 
   const errorMsg = {
-    width: '250px',
+    // margin
+    width: '290px',
     color: 'red',
     fontSize: '20px', 
     position: 'absolute'
@@ -77,7 +90,7 @@ const LoginForm = ({handleLogin}) => {
       {!isAllowed
       ?
       <div style={errorMsg}>
-        Пожалуйста, введите данные корректно!
+        Неверный логин и/или пароль
       </div>
       :
       <></>
