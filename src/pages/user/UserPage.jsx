@@ -168,7 +168,12 @@ const UserPage = () => {
                         Последние объявления
                         <Hr/>
                     </div>
-
+                    {adverts.length === 0 ?
+                    <div style={{fontSize: '30px', marginTop: '30px'}}>
+                    Упс.. Пусто
+                    </div>
+                    :
+                    <div>
                     <SearchedAdverts
                         currentAdverts={currentAdverts}
                         advertsPerPage={advertsPerPage}
@@ -179,7 +184,11 @@ const UserPage = () => {
                             maxWidth: '1000px',
                         }}
                         isPageable
-                    />
+                        />
+                    </div>
+
+                    }
+
                 </div>
 
                 <div>

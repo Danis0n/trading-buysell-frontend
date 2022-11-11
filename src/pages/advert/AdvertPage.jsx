@@ -289,7 +289,7 @@ const AdvertPage = () => {
                 {advert?.userId === store.user.id
                 ?
                 <div style={{
-                    width: '70%',
+                    width: '90%',
                     margin: '0 auto',
                     textAlign : 'center',
                     display : 'flex',

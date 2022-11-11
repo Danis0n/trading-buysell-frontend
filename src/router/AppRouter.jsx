@@ -8,11 +8,11 @@ import CreateAdvert from '../pages/advert/mngt/CreateAdvert';
 import EditAdvert from '../pages/advert/mngt/EditAdvert';
 import RegisterUser from '../pages/user/registration/RegisterUser';
 import UserPage from '../pages/user/UserPage';
-import AboutPage from "../pages/AboutPage";
-import NotFoundPage from "../pages/NotFoundPage";
+import AboutPage from "../pages/service/AboutPage";
+import NotFoundPage from "../pages/service/NotFoundPage";
 import {AnimatePresence} from 'framer-motion'
 import UserSettings from "../pages/user/UserSettings";
-import ForbiddenPage from "../pages/ForbiddenPage";
+import ForbiddenPage from "../pages/service/ForbiddenPage";
 import UserAdverts from "../pages/user/UserAdverts";
 import AdminPanel from "../pages/admin/AdminPanel";
 import { Navigate } from "react-router-dom";

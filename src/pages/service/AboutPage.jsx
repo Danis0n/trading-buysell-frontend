@@ -1,9 +1,9 @@
 import React from 'react'
-import cl from '../styles/about/About.module.css'
-import Hr from '../components/ui/hr/Hr'
-import Input from '../components/ui/input/Input'
-import Textarea from '../components/ui/textarea/Textarea'
-import Button from '../components/ui/button/Button'
+import cl from '../../styles/about/About.module.css'
+import Hr from '../../components/ui/hr/Hr'
+import Input from '../../components/ui/input/Input'
+import Textarea from '../../components/ui/textarea/Textarea'
+import Button from '../../components/ui/button/Button'
 
 const AboutPage = () => {
 

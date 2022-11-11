@@ -148,6 +148,16 @@ const CreateAdvert = ({isAuth}) => {
     }
   }
 
+  const handleCheck = () => {
+    if(!store.isAuth) 
+      nav('/'); 
+  }
+  
+  useEffect(() =>{
+    const timer = setTimeout(() => handleCheck(), 50);
+    return () => clearTimeout(timer);
+  })
+
   useEffect(() => {
     getLocations();
   }, [])

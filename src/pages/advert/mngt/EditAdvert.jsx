@@ -276,7 +276,7 @@ const EditAdvert = () => {
            style={{
             color: 'black', backgroundColor: 'white'
            }} 
-           onClick={() => navigate(`/adverts/${id}`)}
+           onClick={() => navigate(`/advert/${id}`)}
           >
             Отмена
           </Button>
@@ -289,7 +289,7 @@ const EditAdvert = () => {
           <Confirm
            handleCancel={() => setConfirmModal(false)}
            handleItem={handleSubmit}
-           link={`/adverts/${id}`}
+           link={`/advert/${id}`}
            message='Вы уверены в следующих изменениях?'/>
         </Modal>
 

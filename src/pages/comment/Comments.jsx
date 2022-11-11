@@ -30,13 +30,24 @@ const Comments = ({id, userId}) => {
         <div style={{
             marginBottom: '50px',
         }}>
-            {comments?.map((comment) => {
-                return (
-                    <div key={comment.id}>
-                        <CommentElement comment={comment} userId={userId}/>
-                    </div>
-                )
-            })}
+            {comments.length === 0 ?
+            <div style={{fontSize: '30px', marginTop: '30px'}}>
+                Упс.. Пусто
+            </div>
+            :
+            <div>
+                {comments?.map((comment) => {
+                    return (
+                        <div key={comment.id}>
+                            <CommentElement comment={comment} userId={userId}/>
+                        </div>
+                    )
+                })}
+            </div>
+
+            }
+
+
 
             <br/>
         </div>
