@@ -10,6 +10,7 @@ const RegisterUser = () => {
 
     const {store} = useAuth();
     const [isValid, setIsValid] = useState(true);
+    const [apiErrorMessage, setApiErrorMessage] = useState('')
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -17,21 +18,21 @@ const RegisterUser = () => {
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
 
-    const register = async (name, username, password, email, phone) => {
+    const register = async (data) => {
         try {
-            const response = await store.register(name,username,password,email,phone);
-            if(response.data === API_EMAIL_NOT_VALID ||
-               response.data === API_USERNAME_NOT_VALID) {
-              setIsValid(false);
-            }
-            else {
-              setIsValid(true);
-            }
+            const response = await store.register(data);
             console.log(response);
+            if(response.data == 'Okay')
+              await store.login(username,password);
+
+            setApiErrorMessage(response)
+            console.log(response.data);
         } catch (error) {
             console.log(error);
         }
     }
+
+
 
     const checkParams = () => {
       if(name.length >= 5 &&
@@ -39,14 +40,28 @@ const RegisterUser = () => {
           password.length >= 8 &&
           password === confirmPassword &&
           email.length >= 11
-        ) return true;
+        ) {
+          return true;
+        } 
       return false;
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(checkParams())
-          register(name, username, password, email, phone);
+        if(checkParams()){
+
+          const data = new FormData();
+          data.append('name', name);
+          data.append('username', username);
+          data.append('password', password);
+          data.append('phone', phone);
+          data.append('email', email);
+          console.log(data);
+          register(data);
+        }
+        else{
+          setIsValid(false);
+        }
     }
 
     if(store.isLoading){

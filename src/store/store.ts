@@ -29,7 +29,6 @@ export default class Store {
     }
 
     async login(username: string, password: string) : Promise <any>{
-        // this.setLoading(true);
         try {
             const response = await AuthService.login(username,password);
             localStorage.setItem('token', response.data.accessToken);
@@ -44,13 +43,17 @@ export default class Store {
         }
     }
     
-    // TODO : refactor this! & check it on backend
-    async register(name: string, username: string,
-         password: string, email: string, phone: string ) {
+    async register(data: FormData) : Promise <any> {
         this.setLoading(true);
         try {
-            const response = await AuthService.register(name,username,password,email,phone);
-            console.log(response);
+            const response = await AuthService.register(data);
+            if(response.data == 'email is not valid') {
+                return 'email is not valid';
+            }
+            if(response.data == 'username is not valid') {
+                return 'username is not valid';
+            }
+            return response;
         } catch (error) {
             console.log(error);
         }finally{
@@ -75,6 +78,7 @@ export default class Store {
     async checkAuth() {
         this.setLoading(true);
         try {
+            console.log(localStorage.getItem('token'));
             const response = await AuthService.checkAuth();
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);

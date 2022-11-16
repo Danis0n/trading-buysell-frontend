@@ -275,7 +275,7 @@ const EditAdvert = () => {
           <Button
            style={{
             color: 'black', backgroundColor: 'white'
-           }} 
+           }}
            onClick={() => navigate(`/advert/${id}`)}
           >
             Отмена
