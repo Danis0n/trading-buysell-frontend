@@ -1,13 +1,14 @@
 import React, {useState} from 'react'
 import cl from '../../../styles/registration/RegisterUser.module.css'
 import { useAuth } from '../../../components/hook/useAuth'
-import { API_EMAIL_NOT_VALID, API_USERNAME_NOT_VALID } from '../../../components/http'
 import Input from '../../../components/ui/input/Input'
 import Button from '../../../components/ui/button/Button'
 import Hr from '../../../components/ui/hr/Hr'
+import { useNavigate } from 'react-router-dom'
 
 const RegisterUser = () => {
 
+    const nav = useNavigate();
     const {store} = useAuth();
     const [isValid, setIsValid] = useState(true);
     const [apiErrorMessage, setApiErrorMessage] = useState('')
@@ -18,32 +19,66 @@ const RegisterUser = () => {
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
 
+    const [phoneError, setPhoneError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+    const [emailError, setEmailError] = useState('')
+    const [usernameError, setUsernameError] = useState('')
+    const [nameError, setNameError] = useState('')
+
     const register = async (data) => {
         try {
             const response = await store.register(data);
             console.log(response);
-            if(response.data == 'Okay')
+            if(response.data == 'Okay') {
               await store.login(username,password);
+              nav('/');
+            }
 
             setApiErrorMessage(response)
-            console.log(response.data);
         } catch (error) {
             console.log(error);
         }
     }
 
-
-
     const checkParams = () => {
-      if(name.length >= 5 &&
-          username.length >= 8 &&
-          password.length >= 8 &&
-          password === confirmPassword &&
-          email.length >= 11
-        ) {
-          return true;
-        } 
-      return false;
+      let state = true;
+
+      if(name.length > 5 && name.length < 20)
+        setNameError('')
+      else {
+        setNameError('Имя должно состоять из 5-20 символов')
+        state = false;
+      }
+
+      if(password.length >= 8 && password.length <= 20 && confirmPassword == password )
+        setPasswordError('')
+      else {
+        setPasswordError('Пароли должны быть одинаковы и состоять из 8-20 символов')
+        state = false;
+      }
+
+      if(username.length >= 8 && username.length <= 20)
+        setUsernameError('')
+      else {
+        setUsernameError('Логин должен состоять из 8-20 символов')
+        state = false;
+      }
+      
+      if(email.length > 5)
+        setEmailError('')
+      else {
+        setEmailError('Почта не валидна')
+        state = false;
+      }
+      
+      if(phone.length == 11)
+        setPhoneError('')
+      else {
+        setPhoneError('Номер на валиден')
+        state = false;
+      }
+
+      return state;
     }
 
     const handleSubmit = async (e) => {
@@ -56,7 +91,6 @@ const RegisterUser = () => {
           data.append('password', password);
           data.append('phone', phone);
           data.append('email', email);
-          console.log(data);
           register(data);
         }
         else{
@@ -87,6 +121,7 @@ const RegisterUser = () => {
 
       <div className={cl.registerForm}>
 
+        <div>{nameError}</div>
         <Input
           style={style}
           type='text'
@@ -95,6 +130,7 @@ const RegisterUser = () => {
           onChange={e => setName(e.target.value)}
         />
 
+        <div>{usernameError}</div>
         <Input
           style={style}
           type='text'
@@ -103,6 +139,7 @@ const RegisterUser = () => {
           onChange={e => setUsername(e.target.value)}
         />
 
+        <div>{passwordError}</div>
         <Input
           style={style}
           type='password'
@@ -119,6 +156,7 @@ const RegisterUser = () => {
           onChange={e => setConfirmPassword(e.target.value)}
         />
 
+        <div>{emailError}</div>
         <Input
           style={style}
           type='text'
@@ -127,6 +165,7 @@ const RegisterUser = () => {
           onChange={e => setEmail(e.target.value)}
         />
 
+        <div>{phoneError}</div>
         <Input
           style={style}
           type='number'
