@@ -71,7 +71,6 @@ const CreateAdvert = ({isAuth}) => {
           return formData.append('files',file.file);
         })
 
-
         let response
         try {
           response = await AdvertService.create(formData);
@@ -88,6 +87,7 @@ const CreateAdvert = ({isAuth}) => {
 
   const onDrop = useCallback(acceptedFiles => {
     const Files = acceptedFiles;
+    console.log(Files);
     Files.map((file) => {
       setSelectedImages(
         (previousImages) => previousImages.concat(new superImage(file,URL.createObjectURL(file)))

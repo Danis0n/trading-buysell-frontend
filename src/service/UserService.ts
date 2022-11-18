@@ -27,5 +27,13 @@ export default class UserService {
     static async saveUserPhone(data: FormData, id: string) : Promise<AxiosResponse<string>> {
         return $api.put<string>(`${API_URL}/api/users/${id}/phone/save`,data);
     }
+
+    static async saveAvatar(data: FormData, id: string) : Promise<AxiosResponse<string>> {
+        return $api.post(`${API_URL}/api/users/${id}/image/save`, data);
+    }
+
+    static async deleteAvatar(id: string) : Promise<AxiosResponse<boolean>> {
+        return $api.delete(`${API_URL}/api/users/${id}/image/delete`);
+    }
     
 }

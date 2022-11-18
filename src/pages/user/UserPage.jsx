@@ -96,7 +96,11 @@ const UserPage = () => {
                             display: 'table-cell',
                             verticalAlign: 'top',
                         }}>
-                            <Image src={NoAvatar} width='130px' alt={'profile_pic'}/>
+                            {user?.image ? 
+                                <Image src={user?.image?.url} width='200px' alt={'profile_pic'}/>
+                                :
+                                <Image src={NoAvatar} width='130px' alt={'profile_pic'}/>
+                            }
                         </div>
 
                         <div

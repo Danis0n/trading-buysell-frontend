@@ -4,7 +4,7 @@ export const pageTitleText = {
 }
 
 export const wrapper = {
-    height: '800px',
+    height: '1200px',
     marginTop: '20px',
     display: 'table',
     marginLeft: 'auto',

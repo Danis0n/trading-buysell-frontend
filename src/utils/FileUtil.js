@@ -1,6 +1,7 @@
 import superImage from "./Image";
 
 export const getFile = async (image) => {
+  if(!image) return;
   const file =  await fetch(image.url)
   .then(r => r.blob())
   .then(blobFile => new superImage(

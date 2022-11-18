@@ -78,7 +78,6 @@ export default class Store {
     async checkAuth() {
         this.setLoading(true);
         try {
-            console.log(localStorage.getItem('token'));
             const response = await AuthService.checkAuth();
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
