@@ -42,7 +42,7 @@ const Layout = ({isAuth}) => {
 
   return (
     <>
-    <Navbar isAuth={isAuth} isAdmin={isUserAdmin()} hasNewNotifications={unViewed}/>
+    <Navbar isAuth={isAuth} isEnable={store?.user?.enabled} isAdmin={isUserAdmin()} hasNewNotifications={unViewed}/>
       <motion.div
         initial="hidden"
         animate="enter"

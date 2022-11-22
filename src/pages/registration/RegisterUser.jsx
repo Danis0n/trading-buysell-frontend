@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-import cl from '../../../styles/registration/RegisterUser.module.css'
-import { useAuth } from '../../../components/hook/useAuth'
-import Input from '../../../components/ui/input/Input'
-import Button from '../../../components/ui/button/Button'
-import Hr from '../../../components/ui/hr/Hr'
+import cl from '../../styles/registration/RegisterUser.module.css'
+import { useAuth } from '../../components/hook/useAuth'
+import Input from '../../components/ui/input/Input'
+import Button from '../../components/ui/button/Button'
+import Hr from '../../components/ui/hr/Hr'
 import { useNavigate } from 'react-router-dom'
 
 const RegisterUser = () => {
@@ -26,18 +26,17 @@ const RegisterUser = () => {
     const [nameError, setNameError] = useState('')
 
     const register = async (data) => {
-        try {
-            const response = await store.register(data);
-            console.log(response);
-            if(response.data == 'Okay') {
-              await store.login(username,password);
-              nav('/');
-            }
-
-            setApiErrorMessage(response)
-        } catch (error) {
-            console.log(error);
-        }
+      try {
+          const response = await store.register(data);
+          console.log(response);
+          if(response.data == 'Okay') {
+            await store.login(username,password);
+            nav(`/register/confirm?email=${email}`);
+          }
+          setApiErrorMessage(response)
+      } catch (error) {
+          console.log(error);
+      }
     }
 
     const checkParams = () => {
@@ -77,14 +76,12 @@ const RegisterUser = () => {
         setPhoneError('Номер на валиден')
         state = false;
       }
-
       return state;
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(checkParams()){
-
           const data = new FormData();
           data.append('name', name);
           data.append('username', username);

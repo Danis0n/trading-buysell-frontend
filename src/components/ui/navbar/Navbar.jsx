@@ -12,11 +12,12 @@ import menu from '../../../images/icons/menu.png'
 import Image from '../img/Image'
 import user from '../../../images/icons/user.png'
 
-const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
+const Navbar = ({isAuth, isEnable, isAdmin, hasNewNotifications}) => {
 
     const {store} = useAuth();
     const [userId, setUserId] = useState(store?.user?.id)
     const [loginModal, setLoginModal] = useState(false)
+    const [mailConfirmModal, setMailConfirmModal] = useState(false)
     const [exitModal, setExitModal] = useState(false)
     const nav = useNavigate();
 
@@ -79,7 +80,6 @@ const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
         <div style={catalog}>
           <CustomLink to='/'>Главная</CustomLink>
         </div>
-
         <div style={catalog}>
           <CustomLink to='/about'>Контакты</CustomLink>
         </div>
@@ -88,12 +88,39 @@ const Navbar = ({isAuth, isAdmin, hasNewNotifications}) => {
         </div>
 
         <div style={buttons}>
-            <div
-             style={{
-             marginRight : '20px',
-            }}>
-                <Button onClick={handleSubmit}>Добавить объявление</Button>
-            </div>
+            {isAuth && isEnable?
+                <div style={{ marginRight : '20px' }}>
+                    <Button onClick={handleSubmit}>Добавить объявление</Button>
+                </div>
+            :
+                <div>
+                {!isEnable && isAuth?
+                    <div style={{ marginRight : '20px' }}>
+                        <Button style={{ backgroundColor: 'grey' }} onClick={() => setMailConfirmModal(true)}>
+                            Добавить объявление
+                        </Button>
+                        <Modal
+                            visible={mailConfirmModal}
+                            setVisible={setMailConfirmModal}
+                        >
+                            <div>
+                                <div style={{fontSize: '25px', marginBottom: '10px'}}>
+                                    Создание объявления доступно только после подтверждения эл. почты
+                                </div>
+                                <div>
+                                    Письмо не действительно? <a
+                                     style={{textDecoration: 'none'}}
+                                     href={`/user/${userId}/settings`}
+                                    >Настройки</a>
+                                </div>
+                            </div>
+                        </Modal>
+                    </div>
+                :
+                    <></>
+                }
+                </div>
+            }
             
             <div style={{display: 'inline-block'}}>
             {isAuth

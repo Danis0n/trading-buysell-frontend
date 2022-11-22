@@ -6,7 +6,7 @@ import AdvertsPage from '../pages/advert/AdvertsPage';
 import AdvertPage from '../pages/advert/AdvertPage';
 import CreateAdvert from '../pages/advert/mngt/CreateAdvert';
 import EditAdvert from '../pages/advert/mngt/EditAdvert';
-import RegisterUser from '../pages/user/registration/RegisterUser';
+import RegisterUser from '../pages/registration/RegisterUser';
 import UserPage from '../pages/user/UserPage';
 import AboutPage from "../pages/service/AboutPage";
 import NotFoundPage from "../pages/service/NotFoundPage";
@@ -26,6 +26,9 @@ import BadToken from "../pages/password/BadToken";
 import MailSend from "../pages/password/MailSend";
 import PasswordUpdateSuccess from "../pages/password/PasswordUpdateSuccess";
 import UserAdvetsAdmin from "../pages/admin/users/UserAdvetsAdmin";
+import RegistrationEmailConfirm from "../pages/registration/RegistrationEmailConfirm";
+import RegisterSuccess from "../pages/registration/RegisterSuccess";
+import RegisterBadToken from "../pages/registration/RegisterBadToken";
 
 const ProtectedRoute = ({
     isAllowed,
@@ -46,7 +49,6 @@ const AppRouter = () => {
         return <div>Loading</div>
     }
 
-
     return (
         <AnimatePresence>
         <Routes location={location} key={location.pathname}>
@@ -59,6 +61,9 @@ const AppRouter = () => {
                 <Route path='advert/:id/edit' element={<EditAdvert/>}/>
                 <Route path='advert/create' element={<CreateAdvert/>}/>
                 <Route path='register' element={<RegisterUser/>}/>
+                <Route path='register/confirm' element={<RegistrationEmailConfirm/>}/>
+                <Route path='register/token/badtoken' element={<RegisterBadToken/>}/>
+                <Route path='register/success' element={<RegisterSuccess/>}/>
                 <Route path='user/:id' element={<UserPage/>}/>
                 <Route path='user/:id/adverts' element={<UserAdverts/>}/>
                 <Route path='user/:id/settings' element={<UserSettings/>}/>
