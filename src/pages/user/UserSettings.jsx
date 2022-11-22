@@ -6,6 +6,7 @@ import Button from '../../components/ui/button/Button';
 import Input from '../../components/ui/input/Input';
 import { useAuth } from '../../components/hook/useAuth';
 import UserService from '../../service/UserService';
+import AuthService from '../../service/AuthService';
 import superImage from '../../utils/Image';
 import { useDropzone } from 'react-dropzone';
 import Image from '../../components/ui/img/Image';
@@ -54,7 +55,7 @@ const UserSettings = () => {
   const [nameMessage, setNameMessage] = useState(false);
   const [emailMessage, setEmailMessage] = useState(false)
   const [phoneMessage, setPhoneMessage] = useState(false)
-  const [isValid, setIsValid] = useState(true);
+  const [isTokenSent, setIsTokenSent] = useState(false);
 
   const form = {
     textAlign: 'center',
@@ -63,6 +64,22 @@ const UserSettings = () => {
     width: '1000px',
     height: 'auto',
     boxShadow: '0 0 15px 4px rgba(0,0,0,0.05)',
+  }
+
+  const updateAccountToken = async () => {
+    try {
+      const response = await AuthService.updateToken();
+
+      if(response.data == "Okay")
+        setIsTokenSent(true);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleUpdateAccountToken = () => {
+    updateAccountToken();
   }
 
   const handleCheck = () => {
@@ -393,9 +410,7 @@ const UserSettings = () => {
             </div>
         </div>
 
-        <div style={{
-          // border: '2px solid black', padding: '10px',
-        }}>
+        <div style={{marginBottom: '50px'}}>
           <div style={{
             marginBottom: '10px'
           }}>
@@ -411,6 +426,30 @@ const UserSettings = () => {
             </Button>
           </div>
         </div>  
+        
+        {store?.user?.enabled ?
+        <></>
+        :
+        <div style={{marginBottom: '20px'}}>
+          <div style={{
+            marginBottom: '10px'
+          }}>
+            Подтвердить эл. почту
+          </div>
+
+          <div>
+            <Button onClick={() => handleUpdateAccountToken()}>
+              Отправить повторное письмо
+            </Button>
+          </div>
+        </div>  
+        }
+        {isTokenSent ?
+        <div style={{color: 'grey'}}>Новое письмо было отправлено</div>
+        :
+        <></>
+
+        }
 
       </div>
 

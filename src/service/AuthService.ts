@@ -8,6 +8,10 @@ export default class AuthService {
         return axios.post(`${API_URL}/api/register`,data);
     }
 
+    static async updateToken() : Promise<AxiosResponse<any>> {
+        return $api.get(`${API_URL}/api/new/token`);
+    } 
+
     static async login(username: string, password: string): Promise<AxiosResponse<AuthResponse>> {
         return $api.post('/api/login',{username, password});
     }

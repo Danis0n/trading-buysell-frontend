@@ -12,7 +12,7 @@ import menu from '../../../images/icons/menu.png'
 import Image from '../img/Image'
 import user from '../../../images/icons/user.png'
 
-const Navbar = ({isAuth, isEnable, isAdmin, hasNewNotifications}) => {
+const Navbar = ({isAuth, isEnable, isLocked, isAdmin, hasNewNotifications}) => {
 
     const {store} = useAuth();
     const [userId, setUserId] = useState(store?.user?.id)
@@ -88,7 +88,7 @@ const Navbar = ({isAuth, isEnable, isAdmin, hasNewNotifications}) => {
         </div>
 
         <div style={buttons}>
-            {isAuth && isEnable?
+            {isAuth && isEnable && !isLocked ? 
                 <div style={{ marginRight : '20px' }}>
                     <Button onClick={handleSubmit}>Добавить объявление</Button>
                 </div>
@@ -117,7 +117,15 @@ const Navbar = ({isAuth, isEnable, isAdmin, hasNewNotifications}) => {
                         </Modal>
                     </div>
                 :
-                    <></>
+                    <div>
+                        {isAuth && isLocked ?
+                        <div>
+                            <Button>Пользователь заблокирован</Button>
+                        </div>
+                        :
+                        <></>
+                        }
+                    </div>
                 }
                 </div>
             }

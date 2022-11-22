@@ -205,7 +205,7 @@ const UserPage = () => {
                     </div>
 
                     <div>
-                        {store?.isAuth && store?.user?.id != id ?
+                        {store?.isAuth && store?.user?.id != id && store?.user?.enabled && !store?.user?.locked ?
                             <CreateComment id={id} myId={store?.user?.id}/>
                         :   
                         <></>
