@@ -22,7 +22,7 @@ const CheckboxFilter = ({array, nameArray, handler}) => {
         boxShadow: '0 0 15px 4px rgba(0,0,0,0.05)',
         borderRadius: '10px'
     }}>
-        {array.map((element) => (
+        {array.map((element, index) => (
         <div
          key={element.name} 
          style={{
@@ -32,6 +32,7 @@ const CheckboxFilter = ({array, nameArray, handler}) => {
           <input
            onMouseEnter={handleEnter}
            onMouseLeave={handleLeave}
+           id={index + nameArray}
            style={{
             marginRight: '10px',
             cursor: isEnter ? 'pointer' : '',
@@ -41,9 +42,14 @@ const CheckboxFilter = ({array, nameArray, handler}) => {
            disabled={nameArray.length == 1 ? true : (!nameArray.includes(element.name))} 
            onChange={()=> handler(element.name)}
           />
-          <div>
-          {element.description}
-          </div>
+          <label
+           style={{
+            cursor: isEnter ? 'pointer' : '',
+           }}
+           onMouseEnter={handleEnter} 
+           onMouseLeave={handleLeave} 
+           for={index + nameArray}
+          >{element.description}</label>
         </div>
       ))}
     </div>

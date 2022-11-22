@@ -217,15 +217,15 @@ const AdvertsPage = () => {
                             <></>
                             :
                             <SearchElement
-                            title={titleType} 
-                            mainHandler={toggleMain}
-                            subHandler={toggleSub}
-                            brandHandler={toggleBrand}
-                            locationHandler={toggleLocation}
-                            brandAvailables={brandAvailables}
-                            subAvailables={subAvailables}
-                            mainAvailables={mainAvailables}
-                            locationAvailables={locationAvailables}
+                                title={titleType} 
+                                mainHandler={toggleMain}
+                                subHandler={toggleSub}
+                                brandHandler={toggleBrand}
+                                locationHandler={toggleLocation}
+                                brandAvailables={brandAvailables}
+                                subAvailables={subAvailables}
+                                mainAvailables={mainAvailables}
+                                locationAvailables={locationAvailables}
                             />
                             }
                         </div>
