@@ -53,6 +53,7 @@ const UserSettings = () => {
   const [passwordMessage, setPasswordMessage] = useState(false);
   const [nameMessage, setNameMessage] = useState(false);
   const [emailMessage, setEmailMessage] = useState(false)
+  const [phoneMessage, setPhoneMessage] = useState(false)
   const [isValid, setIsValid] = useState(true);
 
   const form = {
@@ -100,6 +101,10 @@ const UserSettings = () => {
 
     if(!isEmail){
       setEmailMessage(true);
+    }
+
+    if(!isPhone){
+      setPhoneMessage(true);
     }
 
     if(isValid) {
@@ -237,6 +242,11 @@ const UserSettings = () => {
             marginBottom: '50px'
           }}>
           
+          {nameMessage ?
+          <div style={{color: 'red'}}>Неверный формат</div>
+          :
+          <></>
+          }
           <div style={{
             marginBottom: '30px'
           }}>
@@ -251,6 +261,11 @@ const UserSettings = () => {
             />
           </div>
 
+          {phoneMessage ?
+          <div style={{color: 'red'}}>Неверный формат тел.</div>
+          :
+          <></>
+          }
           <div style={{
             marginBottom: '30px'
           }}>
@@ -264,7 +279,12 @@ const UserSettings = () => {
               placeholder={oldPhone}
             />
           </div>
-
+          
+          {emailMessage ?
+          <div style={{color: 'red'}}>Неверный формат почты</div>
+          :
+          <></>
+          }
           <div style={{
             marginBottom: '30px'
           }}>
@@ -278,9 +298,13 @@ const UserSettings = () => {
               placeholder={oldEmail}
             />
           </div>
-
           </div>
         
+          {passwordMessage ?
+          <div style={{color: 'red'}}>Пароль должен состоять из 8-20 символов</div>
+          :
+          <></>
+          }
         <div style={{
           marginBottom: '30px'
         }}>
@@ -356,7 +380,7 @@ const UserSettings = () => {
           }
         </div>
 
-        <div style={{marginBottom: '50px'}} {...getRootProps()}>
+        <div style={{marginBottom: '150px'}} {...getRootProps()}>
           <input {...getInputProps()}/>
           <div style={{border: '2px solid black', padding: '10px'}}>
           {
@@ -370,7 +394,7 @@ const UserSettings = () => {
         </div>
 
         <div style={{
-          border: '2px solid black', padding: '10px',
+          // border: '2px solid black', padding: '10px',
         }}>
           <div style={{
             marginBottom: '10px'
